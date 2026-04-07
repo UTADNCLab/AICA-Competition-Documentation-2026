@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>What Is Provided</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="page-wrap">
+    <main class="portal-card">
+      <header class="hero hero-no-banner">
+        <div class="hero-content">
+          <p class="hero-kicker">IEEE SMC 2026 • Quanser • UTA</p>
+          <h1>What Is Provided</h1>
+        </div>
+      </header>
+      <section class="content markdown-body">
+        <h1 id="what-is-provided">What Is Provided</h1>
+<p>This page gives a simple overview of the main files provided for the competition and explains how they work together.</p>
+<hr />
+<h2 id="overview">Overview</h2>
+<p>The competition package includes files for spawning the scenario, starting the vehicle stack, running the mission logic, and developing the team solution.</p>
+<p>In general:</p>
+<ul>
+<li>The organizers provide the scenario setup and backend mission logic  </li>
+<li>Teams mainly work on the <strong>navigator</strong> files to implement their solution  </li>
+<li>Some files must run in the background for scoring, package handling, pickup, and transfer logic  </li>
+</ul>
+<hr />
+<h2 id="important-before-you-start">Important Before You Start</h2>
+<p>Before using this guide, ensure that:</p>
+<ul>
+<li>All required software is installed  </li>
+<li>Your system meets the hardware requirements  </li>
+<li>The full setup process has been completed  </li>
+</ul>
+<p>For complete setup instructions, refer to: <a href="../00_Portal/AICA_COMPETITION_GUIDE_BLOCK_A.html#system-and-software-setup">System and Software Setup</a></p>
+<p>This page is a <strong>quick overview guide</strong>.<br />
+For detailed steps, refer to the <a href="../01_Core_Guides/Execution_Guide.html">Operational Guide</a>.</p>
+<hr />
+<h2 id="1-spawn-files">1) Spawn Files</h2>
+<p>Spawn files are provided in both <strong>Python (.py)</strong> and <strong>MATLAB (.m)</strong>.</p>
+<p>These files:</p>
+<ul>
+<li>spawn the vehicles in QLabs  </li>
+<li>load the scenario setup  </li>
+<li>place vehicles and packages at the required starting positions  </li>
+<li>start the required RT model  </li>
+</ul>
+<p>These files only set up the environment. They do <strong>not</strong> execute the mission logic.</p>
+<hr />
+<h2 id="2-bat-files-startup-files">2) BAT Files / Startup Files</h2>
+<p>Two types of BAT files are provided:</p>
+<h3 id="complete-automation-bat">Complete Automation BAT</h3>
+<p>A fully automated BAT file is also provided.</p>
+<p>This file will:</p>
+<ul>
+<li>open QLabs  </li>
+<li>load the required map  </li>
+<li>run the spawn file  </li>
+<li>start the virtual stack  </li>
+<li>launch the navigator files  </li>
+<li>begin execution based on the selected mode (manual or autonomous)  </li>
+</ul>
+<p>This provides a one-step way to run the full system.</p>
+<hr />
+<h2 id="3-navigator-files">3) Navigator Files</h2>
+<p>The main files teams will modify are the navigator files.</p>
+<p>Separate navigator files are provided for both vehicles and both environments:</p>
+<ul>
+<li><strong>MATLAB / Simulink</strong></li>
+<li><code>navigator_car.slx</code></li>
+<li>
+<p><code>navigator_drone.slx</code></p>
+</li>
+<li>
+<p><strong>Python</strong></p>
+</li>
+<li><code>navigator_car.py</code></li>
+<li><code>navigator_drone.py</code></li>
+</ul>
+<p>These files control the actual movement and behavior of the vehicles.</p>
+<p>They are used to implement:</p>
+<ul>
+<li>manual or autonomous movement  </li>
+<li>route following  </li>
+<li>delivery strategy  </li>
+<li>coordination between QCar2 and QDrone2  </li>
+</ul>
+<h3 id="notes">Notes</h3>
+<ul>
+<li>The <strong>Python version</strong> supports both manual and autonomous operation  </li>
+<li>The <strong>MATLAB / Simulink version</strong> is focused on autonomous control  </li>
+<li>If manual control is required, <strong>Python is recommended</strong>  </li>
+</ul>
+<p>Once started, the vehicles operate based on the selected mode and implemented logic.</p>
+<hr />
+<h2 id="4-game-file">4) Game File</h2>
+<p>The main backend mission file is:</p>
+<ul>
+<li><strong><code>game.py</code></strong></li>
+</ul>
+<p>This file handles the core scenario logic and must be running during execution.</p>
+<p>It is responsible for:</p>
+<ul>
+<li>pickup timing  </li>
+<li>transfer timing  </li>
+<li>delivery timing  </li>
+<li>package handling  </li>
+<li>intention/command execution  </li>
+<li>scenario progress  </li>
+<li>scoring display in the QLabs window  </li>
+</ul>
+<h3 id="important">Important</h3>
+<ul>
+<li>This file should <strong>not be modified</strong>  </li>
+<li>It must run together with the navigator files for correct system behavior  </li>
+</ul>
+<p>Without this file:</p>
+<ul>
+<li>packages will not function correctly  </li>
+<li>transfers may fail  </li>
+<li>deliveries will not be tracked  </li>
+<li>scoring will not be displayed  </li>
+</ul>
+<hr />
+<h2 id="5-what-teams-need-to-modify">5) What Teams Need to Modify</h2>
+<p>Teams should mainly focus on the navigator files.</p>
+<p>This is where teams develop their solution, including:</p>
+<ul>
+<li>path planning  </li>
+<li>vehicle control  </li>
+<li>mission logic  </li>
+<li>coordination strategy  </li>
+<li>pickup, transfer, and delivery behavior  </li>
+</ul>
+<p>Once the system is running correctly, development should focus on improving the navigator logic.</p>
+<hr />
+<h2 id="6-summary">6) Summary</h2>
+<p>In simple terms:</p>
+<ul>
+<li><strong>Spawn files</strong> → set up the scenario  </li>
+<li><strong>BAT files</strong> → start and automate execution  </li>
+<li><strong>Navigator files</strong> → where teams build their solution  </li>
+<li><strong><code>game.py</code></strong> → handles backend logic and scoring  </li>
+</ul>
+<hr />
+<h3 id="back-to">Back to:</h3>
+<p><a href="../04_Resources/All_Competition_Resources.html">All Competition Resources</a></p>
+<p><a href="../00_Portal/AICA_PORTAL.html">AICA Portal</a></p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

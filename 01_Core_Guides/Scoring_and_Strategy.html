@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scoring and Strategy</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="page-wrap">
+    <main class="portal-card">
+      <header class="hero hero-no-banner">
+        <div class="hero-content">
+          <p class="hero-kicker">IEEE SMC 2026 • Quanser • UTA</p>
+          <h1>Scoring and Strategy</h1>
+        </div>
+      </header>
+      <section class="content markdown-body">
+        <h1 id="scoring-and-strategy">Scoring and Strategy</h1>
+<p>This page explains the scoring logic and key strategy considerations for the competition.</p>
+<hr />
+<h2 id="1-scoring-concept">1) Scoring Concept</h2>
+<p>The competition score is based on mission time at the moment each delivery is completed.</p>
+<h3 id="scoring-formula">Scoring Formula</h3>
+<ul>
+<li><strong>Standard delivery score = 1000 − current mission time</strong></li>
+<li><strong>Bonus delivery score = 1000 − current mission time + floor-based bonus</strong></li>
+<li><strong>Total Score = Sum of all delivery scores</strong></li>
+</ul>
+<h3 id="floor-based-bonus">Floor-Based Bonus</h3>
+<p>Some drone delivery locations provide additional bonus points based on floor level.</p>
+<p>A higher floor corresponds to a higher bonus.</p>
+<p><strong>Example bonus values:</strong></p>
+<ul>
+<li><strong>Floor 4 → +400</strong></li>
+<li><strong>Floor 3 → +300</strong></li>
+<li><strong>Floor 2 → +200</strong></li>
+</ul>
+<blockquote>
+<p>Note: Always follow the latest official release if scoring parameters are updated.</p>
+</blockquote>
+<hr />
+<h2 id="2-impact-of-delivery-methods">2) Impact of Delivery Methods</h2>
+<h3 id="standard-delivery">Standard Delivery</h3>
+<ul>
+<li>Standard deliveries score based on mission time only  </li>
+<li>Faster completion results in a higher score contribution  </li>
+</ul>
+<h3 id="bonus-drone-delivery">Bonus Drone Delivery</h3>
+<ul>
+<li>Certain drone delivery locations provide additional bonus points  </li>
+<li>Higher-floor delivery locations provide larger bonuses  </li>
+<li>These locations can significantly increase total score if reached efficiently  </li>
+</ul>
+<hr />
+<h2 id="3-strategy-trade-offs">3) Strategy Trade-Offs</h2>
+<p>Teams should consider:</p>
+<ul>
+<li>Speed vs coordination overhead  </li>
+<li>Transfer benefit vs transfer dwell cost  </li>
+<li>Standard delivery vs higher-floor bonus delivery opportunities  </li>
+<li>Simplicity vs score-optimized strategies  </li>
+</ul>
+<hr />
+<h2 id="4-strategy-evaluation">4) Strategy Evaluation</h2>
+<p>Teams are encouraged to compare different approaches, such as:</p>
+<ul>
+<li>Car-only baseline  </li>
+<li>Drone-priority delivery  </li>
+<li>Hybrid strategy with transfers  </li>
+<li>Bonus-focused drone strategy  </li>
+</ul>
+<p>Evaluate based on:</p>
+<ul>
+<li>Total score  </li>
+<li>Mission completion time  </li>
+<li>Reliability across repeated runs  </li>
+<li>Efficiency of coordination between QCar2 and QDrone2  </li>
+</ul>
+<hr />
+<h2 id="5-practical-recommendations">5) Practical Recommendations</h2>
+<ul>
+<li>Complete deliveries as early as possible to maximize score  </li>
+<li>Use higher-floor bonus delivery locations when they improve total mission efficiency  </li>
+<li>Avoid unnecessary delays during pickup, drop, and transfer operations  </li>
+<li>Minimize idle hover and stop time  </li>
+<li>Use clear and deterministic action logic  </li>
+</ul>
+<hr />
+<p>Back to: </p>
+<p><a href="../01_Core_Guides/Virtual_Stage_Competiton_Guide.html">Virtual Stage Competition Guide</a></p>
+<p><a href="../00_Portal/AICA_PORTAL.html">AICA Home Portal</a></p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

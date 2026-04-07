@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Development Guide</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="page-wrap">
+    <main class="portal-card">
+      <header class="hero hero-no-banner">
+        <div class="hero-content">
+          <p class="hero-kicker">IEEE SMC 2026 • Quanser • UTA</p>
+          <h1>Development Guide</h1>
+        </div>
+      </header>
+      <section class="content markdown-body">
+        <h1 id="development-guide">Development Guide</h1>
+<p>This guide shows a simple way to build your system for the virtual stage.</p>
+<hr />
+<h2 id="1-how-to-start">1. How to Start</h2>
+<ol>
+<li>Decide what the car and drone will do  </li>
+<li>Plan routes using the provided map and nodes  </li>
+<li>Add logic for pickup, transfer, and delivery  </li>
+<li>Run the full mission in simulation  </li>
+<li>Improve speed and reliability  </li>
+</ol>
+<hr />
+<h2 id="2-basic-system-structure">2. Basic System Structure</h2>
+<p>You can organize your system like this:</p>
+<ul>
+<li>Mission logic (what to do next)  </li>
+<li>Car controller (QCar2 movement)  </li>
+<li>Drone controller (QDrone2 movement)  </li>
+<li>Transfer logic (car ↔ drone interaction)  </li>
+<li>Simple logging (time, score, errors)  </li>
+</ul>
+<hr />
+<h2 id="3-what-your-system-should-show">3. What Your System Should Show</h2>
+<p>Your final system should:</p>
+<ul>
+<li>Start and run the mission correctly  </li>
+<li>Complete at least one full delivery cycle  </li>
+<li>Move smoothly (no unstable behavior) </li>
+</ul>
+<hr />
+<h2 id="4-what-you-should-test">4. What You Should Test</h2>
+<p>Try different approaches:</p>
+<ul>
+<li>Only using the car  </li>
+<li>Using drone for window delivery  </li>
+<li>Using both with transfers  </li>
+</ul>
+<p>Check:</p>
+<ul>
+<li>Total time  </li>
+<li>Score  </li>
+</ul>
+<hr />
+<h3 id="back-to">Back to:</h3>
+<p><a href="../04_Resources/All_Competition_Resources.html">All Competition Resources</a>  </p>
+<p><a href="../00_Portal/AICA_PORTAL.html">AICA Portal</a></p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

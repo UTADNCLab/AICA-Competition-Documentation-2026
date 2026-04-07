@@ -1,0 +1,168 @@
+from pathlib import Path
+import markdown
+import re
+import html as html_lib
+
+MD_EXT = ".md"
+
+def slugify(text: str) -> str:
+    s = text.strip().lower()
+    s = re.sub(r"[^\w\s-]", "", s)
+    s = re.sub(r"\s+", "-", s)
+    s = re.sub(r"-{2,}", "-", s)
+    return s.strip("-")
+
+
+def title_from_markdown(md_text: str, fallback: str) -> str:
+    for line in md_text.splitlines():
+        line = line.strip()
+        if line.startswith("#"):
+            return line.lstrip("#").strip()
+    return fallback
+
+
+def normalize_internal_href(href: str, source_md: Path) -> str:
+    href = href.strip()
+    if not href:
+        return href
+
+    if href.startswith(("http://", "https://", "mailto:", "#")):
+        return href
+
+    anchor = ""
+    if "#" in href:
+        href, anchor = href.split("#", 1)
+        anchor = "#" + anchor
+
+    if href == "":
+        return anchor if anchor else href
+
+    if href.endswith(".md"):
+        href = href[:-3] + ".html"
+
+    target = (source_md.parent / href).resolve()
+    repo_root = Path(".").resolve()
+
+    try:
+        rel = target.relative_to(repo_root).as_posix()
+        return rel + anchor
+    except Exception:
+        clean = href.lstrip("./")
+        return clean + anchor
+
+
+def rewrite_links_for_output(html: str, source_md: Path, output_path: Path) -> str:
+    def repl(match):
+        prefix, url, suffix = match.groups()
+
+        if url.startswith(("http://", "https://", "mailto:")):
+            return f'{prefix}{url}{suffix}'
+
+        if url.startswith("#"):
+            return f'{prefix}{slugify(url[1:]) and "#" + slugify(url[1:])}{suffix}'
+
+        normalized = normalize_internal_href(url, source_md)
+
+        if "#" in normalized:
+            base, frag = normalized.split("#", 1)
+            normalized = f"{base}#{slugify(frag)}"
+
+        if output_path.parent == Path("."):
+            final = normalized
+        else:
+            final = Path(normalized.split("#", 1)[0]).as_posix()
+            depth = len(output_path.parent.parts)
+            final = "../" * depth + final
+            if "#" in normalized:
+                final = final + "#" + normalized.split("#", 1)[1]
+
+        return f'{prefix}{final}{suffix}'
+
+    return re.sub(r'(href=")([^"]*)(")', repl, html)
+
+
+def css_href_for(output_path: Path) -> str:
+    if output_path.parent == Path("."):
+        return "styles.css"
+    return "../styles.css"
+
+
+def add_heading_ids(content_html: str) -> str:
+    def repl(m):
+        tag = m.group(1)
+        inner = m.group(2)
+        text = re.sub(r"<[^>]+>", "", inner).strip()
+        hid = slugify(text)
+        if not hid:
+            return m.group(0)
+        return f'<{tag} id="{hid}">{inner}</{tag}>'
+    return re.sub(r"<(h[1-6])>(.*?)</\1>", repl, content_html, flags=re.IGNORECASE | re.DOTALL)
+
+def strip_first_h1(content_html: str, page_title: str) -> str:
+    esc = re.escape(html_lib.escape(page_title))
+    pattern = re.compile(rf'^\s*<h1>\s*{esc}\s*</h1>\s*', re.IGNORECASE)
+    return re.sub(pattern, "", content_html, count=1)
+
+def render_page(content_html: str, page_title: str, css_href: str) -> str:
+    content_html = add_heading_ids(content_html)
+    content_html = strip_first_h1(content_html, page_title)
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{page_title}</title>
+  <link rel="stylesheet" href="{css_href}" />
+</head>
+<body>
+  <div class="page-wrap">
+    <main class="portal-card">
+      <header class="hero hero-no-banner">
+        <div class="hero-content">
+          <p class="hero-kicker">IEEE SMC 2026 • Quanser • UTA</p>
+          <h1>{page_title}</h1>
+        </div>
+      </header>
+      <section class="content markdown-body">
+        {content_html}
+      </section>
+    </main>
+  </div>
+</body>
+</html>
+"""
+
+
+def convert_markdown_file(md_path: Path):
+    rel = md_path.as_posix()
+    out_path = md_path.with_suffix(".html")
+    md_text = md_path.read_text(encoding="utf-8")
+    page_title = title_from_markdown(md_text, md_path.stem)
+
+    raw_html = markdown.markdown(md_text, extensions=["tables", "fenced_code"])
+    body_html = rewrite_links_for_output(raw_html, md_path, out_path)
+    css_href = css_href_for(out_path)
+    final_html = render_page(body_html, page_title, css_href)
+
+    out_path.write_text(final_html, encoding="utf-8")
+    print(f"generated: {rel} -> {out_path.as_posix()}")
+
+
+def generate_all():
+    root = Path(".")
+    md_files = [p for p in root.rglob(f"*{MD_EXT}") if ".git" not in p.parts]
+    for md_file in md_files:
+        convert_markdown_file(md_file)
+
+    # Mirror portal as root index.html
+    portal_md = Path("00_Portal/AICA_PORTAL.md")
+    if portal_md.exists():
+        index_html = Path("index.html")
+        portal_html = portal_md.with_suffix(".html")
+        if portal_html.exists():
+            index_html.write_text(portal_html.read_text(encoding="utf-8"), encoding="utf-8")
+            print("generated: index.html from 00_Portal/AICA_PORTAL.html")
+
+
+if __name__ == "__main__":
+    generate_all()

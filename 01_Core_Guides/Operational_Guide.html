@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Operational Guide</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="page-wrap">
+    <main class="portal-card">
+      <header class="hero hero-no-banner">
+        <div class="hero-content">
+          <p class="hero-kicker">IEEE SMC 2026 • Quanser • UTA</p>
+          <h1>Operational Guide</h1>
+        </div>
+      </header>
+      <section class="content markdown-body">
+        <h1 id="operational-guide">Operational Guide</h1>
+<p>This guide explains how to run the AICA virtual stage and defines the operational conditions that must be satisfied during execution. It combines system startup, navigator usage, pickup/drop/transfer behavior, runtime checks, and mission constraints into one practical document.</p>
+<hr />
+<h2 id="navigation">Navigation</h2>
+<ul>
+<li><a href="#1-system-execution-flow">System Execution Flow</a></li>
+<li><a href="#2-before-you-start">Before You Start</a></li>
+<li><a href="#3-automated-system-startup">Automated System Startup</a></li>
+<li><a href="#4-run-the-game-file-mandatory">Run the Game File (Mandatory)</a></li>
+<li><a href="#5-navigator-information">Navigator Information</a></li>
+<li><a href="#6-manual-control-details">Manual Control Details</a></li>
+<li><a href="#7-action-key-mapping-and-intention-mapping">Action Key Mapping and Intention Mapping</a></li>
+<li><a href="#8-pickup-operation-and-conditions">Pickup Operation and Conditions</a></li>
+<li><a href="#9-delivery-operation-and-conditions">Delivery Operation and Conditions</a></li>
+<li><a href="#10-transfer-operation-and-conditions">Transfer Operation and Conditions</a></li>
+<li><a href="#11-mission-timing-and-completion">Mission Timing and Completion</a></li>
+<li><a href="#12-runtime-validation-checklist">Runtime Validation Checklist</a></li>
+<li><a href="#13-common-errors-and-notes">Common Errors and Notes</a></li>
+<li><a href="#14-files-reference">Files Reference</a></li>
+<li>Path planning voxel Map autonmous control working will be added with the final files.</li>
+</ul>
+<hr />
+<h2 id="1-system-execution-flow">1) System Execution Flow</h2>
+<p>The overall execution flow is:  Need to discuss with Porf Koru and add here </p>
+<p>In simple terms:</p>
+<ul>
+<li><strong><code>spawn_competition.py</code></strong> runs once at the beginning to prepare the simulation environment  </li>
+<li><strong>QLabs</strong> loads the required map and acts as the shared simulation environment  </li>
+<li><strong>Navigator Drone → Flight Stack Drone → RT Model Drone</strong> controls the drone and updates it in QLabs  </li>
+<li><strong>Navigator Car → Drive Stack Car → RT Model Car</strong> controls the car and updates it in QLabs  </li>
+<li><strong><code>game.py</code></strong> runs alongside QLabs and handles pickup logic, transfer timing, package behavior, and scoring  </li>
+<li>Together, these components run continuously until the mission is completed  </li>
+</ul>
+<hr />
+<h2 id="2-before-you-start">2) Before You Start</h2>
+<p>Before running the system, make sure:</p>
+<ul>
+<li>all required software is installed  </li>
+<li>your system meets the competition hardware requirements  </li>
+<li>the required QLabs environment is available  </li>
+<li>all competition files are placed in the correct folder  </li>
+<li>the software setup steps have already been completed  </li>
+</ul>
+<p>For setup details, refer to:</p>
+<ul>
+<li><a href="../00_Portal/AICA_COMPETITION_GUIDE.html#system-and-software-setup">System and Software Setup</a></li>
+<li><a href="../01_Core_Guides/What_Is_Provided.html">What Is Provided</a></li>
+</ul>
+<h3 id="workflow-choice">Workflow Choice</h3>
+<p>Teams may use the provided <strong>MATLAB / Simulink</strong> files, the provided <strong>Python</strong> files, or a combination of both, depending on their preferred development workflow. It is not necessary to use only one environment. Teams may run part of their solution in MATLAB / Simulink and part in Python, provided the full system is configured correctly.</p>
+<hr />
+<h3 id="scenario-configuration">Scenario Configuration</h3>
+<p>To change the spawn position of QCar2 and QDrone2 : Edit <code>spawn_location.txt</code> . This file controls the initial spawn location used in QLabs.</p>
+<h2 id="3-automated-system-startup">3) Automated System Startup</h2>
+<p>A complete BAT launcher is provided for one-click startup.</p>
+<p>Example: <code>launch_full_stack.bat</code></p>
+<p>This file is intended to:</p>
+<ol>
+<li>open QLabs  </li>
+<li>load the required competition map  </li>
+<li>spawn QCar2 and QDrone2 (Execute the spawn file) </li>
+<li>start the RT models  </li>
+<li>arm both vehicles  (Start the Stack files for Qcar2 and Qdrone2)</li>
+<li>command QDrone2 takeoff to hover altitude  </li>
+<li>run the selected navigator files or models  </li>
+<li>begin execution based on the selected mode  </li>
+</ol>
+<h3 id="important">Important</h3>
+<ul>
+<li>This launcher is intended to run the full startup workflow automatically, including the selected navigator files or models.</li>
+<li>It may be configured to use either <strong>MATLAB / Simulink</strong> or <strong>Python</strong>, depending on the version selected in the file.</li>
+<li>If you want to use the <strong>Python</strong> navigator files, make sure the Python commands are enabled in the BAT file.</li>
+<li>If you want to use the <strong>MATLAB / Simulink</strong> navigator files, make sure the MATLAB commands are enabled in the BAT file.</li>
+<li>By default, one version may be enabled and the other may be commented out or you can start the navigator models seperately by commenting out both version in BAT file.</li>
+<li>Teams should review and update the BAT file as needed before running.</li>
+</ul>
+<hr />
+<h2 id="4-run-the-game-file-mandatory">4) Run the Game File (Mandatory)</h2>
+<p>Run:</p>
+<pre><code>python game.py
+</code></pre>
+<p>This file is required for the scenario to work properly.</p>
+<p>It handles:</p>
+<ul>
+<li>pickup timing  </li>
+<li>transfer timing  </li>
+<li>delivery timing  </li>
+<li>package movement and visualization in QLabs  </li>
+<li>intention-based scenario logic  </li>
+<li>score display in the QLabs window  </li>
+</ul>
+<h4 id="important">Important</h4>
+<p>Without <code>game.py</code>:</p>
+<ul>
+<li>package pickup will not work correctly  </li>
+<li>transfer operations will fail  </li>
+<li>deliveries will not be tracked correctly  </li>
+<li>scoring will not update  </li>
+</ul>
+<hr />
+<h2 id="5-navigator-information">5) Navigator Information</h2>
+<h4 id="performance-note-commenting-out-unnecessary-video-subsystems-can-improve-runtime-performance-and-reduce-computing-resource-requirements">Performance Note: Commenting out unnecessary video subsystems can improve runtime performance and reduce computing resource requirements.</h4>
+<h3 id="51-qdrone2-navigator">5.1 QDrone2 Navigator</h3>
+<p>The QDrone navigator supports:</p>
+<ul>
+<li>waypoint-based autonomous control  </li>
+<li>manual control  </li>
+<li>control mode switching  </li>
+<li>intention mode switching  </li>
+<li>camera stream (enabled as needed; disabled by default in the provided code and model)  </li>
+</ul>
+<h4 id="note">Note:</h4>
+<ul>
+<li><strong>Manual control is available only in Python</strong></li>
+<li><strong>MATLAB / Simulink does not support manual control in the provided navigator files</strong></li>
+</ul>
+<h4 id="qdrone2-inputs">QDrone2 Inputs</h4>
+<p>Users can provide:</p>
+<ul>
+<li>waypoints for autonomous control  </li>
+<li>manual control commands  </li>
+<li>autonomous or manual control mode  </li>
+<li>autonomous or manual intention mode  </li>
+</ul>
+<h4 id="qdrone2-intention-list">QDrone2 Intention List</h4>
+<ul>
+<li>Nothing  </li>
+<li>Pickup Small  </li>
+<li>Drop  </li>
+<li>Transfer from Car  </li>
+<li>Transfer to Car  </li>
+</ul>
+<hr />
+<h3 id="52-qcar2-navigator">5.2 QCar2 Navigator</h3>
+<p>The QCar navigator supports:</p>
+<ul>
+<li>node-based trajectory selection  </li>
+<li>manual control  </li>
+<li>velocity selection  </li>
+<li>action commands  </li>
+<li>camera stream (enabled as needed; disabled by default in the provided code and model)  </li>
+</ul>
+<h4 id="note">Note:</h4>
+<ul>
+<li><strong>Manual control is available only in Python</strong></li>
+<li><strong>MATLAB / Simulink does not support manual control in the provided navigator files</strong></li>
+</ul>
+<h4 id="qcar2-inputs">QCar2 Inputs</h4>
+<p>Users can provide:</p>
+<ul>
+<li>start node  </li>
+<li>end node  </li>
+<li>velocity  </li>
+<li>manual control commands  </li>
+<li>action commands  </li>
+</ul>
+<h4 id="qcar2-intention-list">QCar2 Intention List</h4>
+<ul>
+<li>Nothing  </li>
+<li>Pickup Small  </li>
+<li>Pickup Large  </li>
+<li>Drop  </li>
+<li>Transfer from Drone  </li>
+<li>Transfer to Drone  </li>
+</ul>
+<hr />
+<h2 id="6-manual-control-details">6) Manual Control Details</h2>
+<h3 id="61-qcar2-manual-control">6.1 QCar2 Manual Control</h3>
+<p>QCar2 open-loop control uses two main inputs:</p>
+<ul>
+<li><strong>Velocity</strong></li>
+<li><strong>Steering</strong></li>
+</ul>
+<h4 id="velocity-input">Velocity Input</h4>
+<ul>
+<li><code>-1</code> = full backward speed  </li>
+<li><code>0</code> = stop  </li>
+<li><code>1</code> = full forward speed  </li>
+</ul>
+<p>Here, <code>1</code> corresponds to about <strong>13 m/s</strong>.</p>
+<h4 id="steering-input">Steering Input</h4>
+<ul>
+<li>steering range: <code>[-0.6, 0.6]</code></li>
+</ul>
+<h4 id="keyboard-controls">Keyboard Controls</h4>
+<ul>
+<li><strong>Up Arrow</strong> → velocity = <code>1</code>  </li>
+<li><strong>Down Arrow</strong> → velocity = <code>-1</code>  </li>
+<li><strong>No key pressed</strong> → velocity = <code>0</code>  </li>
+<li><strong>Left Arrow</strong> → steering = <code>-0.5</code>  </li>
+<li><strong>Right Arrow</strong> → steering = <code>0.5</code>  </li>
+<li><strong>M</strong> → mode switch (Manual to Auto or Auto to Manual)  </li>
+</ul>
+<h4 id="manual-mode-summary-for-qcar2">Manual Mode Summary for QCar2</h4>
+<p>Arrows:</p>
+<ul>
+<li>Up / Down → forward / backward  </li>
+<li>Left / Right → steer left / right  </li>
+</ul>
+<hr />
+<h3 id="62-qcar2-autonomous-control">6.2 QCar2 Autonomous Control</h3>
+<p>In autonomous mode, the car uses:</p>
+<ul>
+<li>start node  </li>
+<li>end node  </li>
+<li>desired velocity  </li>
+</ul>
+<p>The controller then computes:</p>
+<ul>
+<li>steering commands  </li>
+<li>velocity commands  </li>
+</ul>
+<p>This is based on the selected planner and controller, such as node-based planning with Pure Pursuit tracking.</p>
+<hr />
+<h3 id="63-qdrone2-manual-control">6.3 QDrone2 Manual Control</h3>
+<p>QDrone2 manual mode uses the following default keyboard controls:</p>
+<ul>
+<li><strong>W / S</strong> → pitch forward / backward  </li>
+<li><strong>A / D</strong> → roll left / right  </li>
+<li><strong>E / Q</strong> → altitude up / down  </li>
+<li><strong>Z / X</strong> → yaw left / right  </li>
+<li><strong>M</strong> → mode switch (Manual to Auto or Auto to Manual)  </li>
+</ul>
+<h4 id="default-motion-rates">Default Motion Rates</h4>
+<ul>
+<li>Pitch: about <strong>0.5 m/s</strong>  </li>
+<li>Roll: about <strong>0.5 m/s</strong>  </li>
+<li>Altitude: about <strong>0.5 m/s</strong>  </li>
+<li>Yaw: about <strong>π/6 rad/s</strong>  </li>
+</ul>
+<p>Maximum drone speed is about <strong>2.5 m/s</strong>.</p>
+<hr />
+<h2 id="7-action-key-mapping-and-intention-mapping">7) Action Key Mapping and Intention Mapping</h2>
+<h3 id="71-python-action-keys-for-qdrone2">7.1 Python Action Keys for QDrone2</h3>
+<p>Default QDrone2 keys in Python:</p>
+<ul>
+<li><code>6</code> → Pickup  </li>
+<li><code>7</code> → Drop  </li>
+<li><code>8</code> → Transfer from Car  </li>
+<li><code>9</code> → Transfer to Car  </li>
+<li><code>0</code> → Nothing / Reset intention  </li>
+</ul>
+<p>For QCar2, the same <code>0</code> key is used for resetting intention to Nothing.</p>
+<hr />
+<h3 id="72-matlab-simulink-intention-mapping">7.2 MATLAB / Simulink Intention Mapping</h3>
+<p>In MATLAB / Simulink, intentions are set by changing the numeric constant going into the intention input.</p>
+<p>This means:</p>
+<ul>
+<li>you do <strong>not</strong> press keyboard keys in the same way as Python  </li>
+<li>instead, you manually set the desired numeric intention value in the model when running  </li>
+</ul>
+<h4 id="important-clarification">Important Clarification</h4>
+<p>The Python keys and the MATLAB intention values are mapped to the same internal values used by <code>game.py</code>.</p>
+<p>For example:</p>
+<ul>
+<li>pressing <code>6</code> in Python may correspond to intention value <code>1</code> in MATLAB  </li>
+<li>even though the visible key number is different, <code>game.py</code> interprets them as the same action  </li>
+</ul>
+<h4 id="important">Important</h4>
+<p>Do not confuse <strong>keyboard key number</strong> with <strong>internal intention value</strong></p>
+<p>The behavior is the same in <code>game.py</code>. Only the way you trigger the intention differs between Python and MATLAB / Simulink.</p>
+<hr />
+<h3 id="vehicle-speed-limits">Vehicle Speed Limits</h3>
+<ul>
+<li><strong>QCar2</strong> must not exceed the maximum speed of <strong>13 m/s</strong> in the scenario  </li>
+<li><strong>QDrone2</strong> must not exceed the maximum speed of <strong>2.5 m/s</strong> in the scenario  </li>
+<li>Teams may operate below the maximum speed limits for stability, safety, or strategy  </li>
+</ul>
+<hr />
+<h2 id="8-pickup-operation-and-conditions">8) Pickup Operation and Conditions</h2>
+<h3 id="81-drone-pickup">8.1 Drone Pickup</h3>
+<p>If the drone is spawned near the depot or moved near a package:</p>
+<ol>
+<li>move the drone <strong>1 m</strong> above the small package  </li>
+<li>press the assigned pickup key  </li>
+<li>the timer starts in <code>game.py</code>  </li>
+<li>once the timer reaches <strong>3 seconds</strong>, the package attaches to the drone  </li>
+</ol>
+<h4 id="drone-carry-capacity-at-a-time">Drone Carry Capacity at a time</h4>
+<p>QDrone2 can carry: <strong>1 small package only</strong></p>
+<h4 id="constraint">Constraint</h4>
+<p>A drone pickup is valid only when:</p>
+<ul>
+<li>QDrone2 remains at the required pickup position  </li>
+<li>QDrone2 maintains the hover of 1 m above the location.</li>
+<li>the pickup condition is held for the full <strong>3 seconds</strong></li>
+</ul>
+<hr />
+<h3 id="82-car-pickup">8.2 Car Pickup</h3>
+<p>For the car:</p>
+<ol>
+<li>stop the car near the pickup depot  </li>
+<li>press the assigned pickup key  </li>
+<li>the timer starts in <code>game.py</code>  </li>
+</ol>
+<p>The same pickup logic applies.</p>
+<h4 id="car-carry-capacity-at-a-time">Car Carry Capacity at a time</h4>
+<p>QCar2 can carry: <strong>2 small packages</strong>, or  <strong>1 large package</strong></p>
+<h4 id="constraint">Constraint</h4>
+<p>A car pickup is valid only when:</p>
+<ul>
+<li>QCar2 remains stationary at the pickup location  </li>
+<li>the pickup condition is maintained for the full <strong>3 seconds</strong></li>
+</ul>
+<hr />
+<h2 id="9-delivery-operation-and-conditions">9) Delivery Operation and Conditions</h2>
+<h3 id="91-drone-delivery">9.1 Drone Delivery</h3>
+<p>To deliver using the drone:</p>
+<ol>
+<li>move the drone above the drop-off location  </li>
+<li>hover in the required position  </li>
+<li>press the assigned drop-off intention key  </li>
+<li>the timer begins in <code>game.py</code>  </li>
+<li>once the required time is completed, the package is dropped at the location  </li>
+</ol>
+<h4 id="constraint">Constraint</h4>
+<p>A drone drop is valid only when:</p>
+<ul>
+<li>QDrone2 remains in the required delivery position  </li>
+<li>the required hover of <strong>1 m</strong> above the drop off location is maintained  </li>
+<li>the condition is held for the full <strong>3 seconds</strong></li>
+</ul>
+<h4 id="window-delivery-drone-only">Window Delivery (Drone Only)</h4>
+<ul>
+<li>Only <strong>QDrone2</strong> may perform window deliveries</li>
+</ul>
+<hr />
+<h3 id="92-car-delivery">9.2 Car Delivery</h3>
+<p>For the car:</p>
+<ol>
+<li>move the car to the drop-off location  </li>
+<li>stop at the required position  </li>
+<li>press the assigned drop-off intention  </li>
+<li>once the timer completes in <code>game.py</code>, the package is dropped near the road or drop-off pad  </li>
+</ol>
+<h4 id="constraint">Constraint</h4>
+<p>A car drop is valid only when:</p>
+<ul>
+<li>QCar2 stops and holds at the drop location  </li>
+<li>the hold condition is maintained for the full <strong>3 seconds</strong></li>
+</ul>
+<h4 id="common-drop-delivery">Common Drop Delivery</h4>
+<ul>
+<li>QCar2 or QDrone2 may perform a common drop depending on the scenario rules</li>
+</ul>
+<hr />
+<h2 id="10-transfer-operation-and-conditions">10) Transfer Operation and Conditions</h2>
+<p>Transfer can happen in both directions:</p>
+<ul>
+<li><strong>Car → Drone</strong></li>
+<li><strong>Drone → Car</strong></li>
+</ul>
+<p>Both vehicles must use the correct intention values.</p>
+<hr />
+<h3 id="101-car-to-drone-transfer">10.1 Car to Drone Transfer</h3>
+<p>To transfer from car to drone:</p>
+<ol>
+<li>stop the car at the desired transfer location  </li>
+<li>move the drone directly above the car  </li>
+<li>make sure the drone is hovering about <strong>1 meter above the car</strong></li>
+</ol>
+<p>Now set intentions:</p>
+<ul>
+<li>car intention = <strong>Transfer to Drone</strong></li>
+<li>drone intention = <strong>Transfer from Car</strong></li>
+</ul>
+<h4 id="constraint">Constraint</h4>
+<p>A car-to-drone transfer is valid only when:</p>
+<ul>
+<li>QCar2 is stationary  </li>
+<li>QDrone2 is positioned directly above QCar2  </li>
+<li>QDrone2 maintains the <strong>1 m above the car </strong>alititude</li>
+<li>both vehicles have the correct intention values set  </li>
+<li>the transfer configuration is maintained for the full <strong>3 seconds</strong></li>
+</ul>
+<h4 id="important">Important</h4>
+<p>Transfer will only work if:</p>
+<ul>
+<li>both vehicles are in the correct position  </li>
+<li>both intention values are correctly set  </li>
+</ul>
+<p>If only one side is set, transfer will <strong>not</strong> occur.</p>
+<h4 id="transfer-completion">Transfer Completion</h4>
+<ul>
+<li>the timer begins in <code>game.py</code>  </li>
+<li>after <strong>3 seconds</strong>, the package transfers from the car to the drone  </li>
+</ul>
+<p>Then both vehicles can continue moving based on your design.</p>
+<hr />
+<h3 id="102-drone-to-car-transfer">10.2 Drone to Car Transfer</h3>
+<p>To transfer from drone to car:</p>
+<ol>
+<li>stop the car at the desired location  </li>
+<li>hover the drone above the car  </li>
+<li>keep the drone about <strong>1 meter above the car</strong></li>
+</ol>
+<p>Now set intentions:</p>
+<ul>
+<li>drone intention = <strong>Transfer to Car</strong></li>
+<li>car intention = <strong>Transfer from Drone</strong></li>
+</ul>
+<h4 id="constraint">Constraint</h4>
+<p>A drone-to-car transfer is valid only when:</p>
+<ul>
+<li>QCar2 is stationary  </li>
+<li>QDrone2 is positioned directly above QCar2  </li>
+<li>QDrone2 maintains the required transfer altitude  </li>
+<li>both vehicles have the correct intention values set  </li>
+<li>the transfer configuration is maintained for the full <strong>3 seconds</strong></li>
+</ul>
+<h4 id="transfer-completion">Transfer Completion</h4>
+<ul>
+<li><code>game.py</code> starts the timer  </li>
+<li>after <strong>3 seconds</strong>, the package transfers from the drone to the car  </li>
+</ul>
+<p>Then both vehicles can continue moving.</p>
+<hr />
+<h2 id="11-mission-timing-and-completion">11) Mission Timing and Completion</h2>
+<ul>
+<li>Mission time begins at the official mission start  </li>
+<li>The mission objective is to minimize total completion time  </li>
+<li>If required deliveries are not completed, the mission is considered incomplete  </li>
+</ul>
+<p>A delivery is considered complete only after the scenario logic confirms a valid delivery event.</p>
+<h3 id="important">Important</h3>
+<ul>
+<li><code>game.py</code> manages pickup timing, transfer timing, delivery timing, and scoring</li>
+<li>Teams should verify package completion behavior during runtime</li>
+</ul>
+<hr />
+<h2 id="12-runtime-validation-checklist">12) Runtime Validation Checklist</h2>
+<p>Before running a full mission, verify the following:</p>
+<ul>
+<li>both vehicles are spawned  </li>
+<li>both vehicles are armed  </li>
+<li>drone has taken off and is hovering stably  </li>
+<li>the virtual stack is running  </li>
+<li>the navigator files are running  </li>
+<li><code>game.py</code> is running  </li>
+<li>pickup actions are working  </li>
+<li>drop actions are working  </li>
+<li>transfer actions are working  </li>
+<li>score display is visible in QLabs  </li>
+</ul>
+<hr />
+<h2 id="13-common-errors-and-notes">13) Common Errors and Notes</h2>
+<hr />
+<h3 id="transfer-requires-both-sides">Transfer Requires Both Sides</h3>
+<p>For transfer to work:</p>
+<ul>
+<li>both vehicles must be positioned correctly  </li>
+<li>both intention values must be set correctly  </li>
+</ul>
+<p>If one is missing, transfer will fail.</p>
+<hr />
+<h3 id="gamepy-must-always-be-running"><code>game.py</code> Must Always Be Running</h3>
+<p>Without <code>game.py</code>:</p>
+<ul>
+<li>package timing will not work  </li>
+<li>scoring will not update  </li>
+<li>package movement will not be shown correctly  </li>
+</ul>
+<hr />
+<h2 id="14-files-reference">14) Files Reference</h2>
+<h3 id="main-file-types">Main File Types</h3>
+<p>The competition package includes the following types of files:</p>
+<ul>
+<li><strong>spawn files</strong> → set up the vehicles and scenario  </li>
+<li><strong>BAT files</strong> → start the stack and automate execution  </li>
+<li><strong>navigator files</strong> → these are the main files teams run and modify for MATLAB / Simulink or Python operation</li>
+<li><strong><code>game.py</code></strong> → backend mission logic and scoring  </li>
+</ul>
+<h3 id="file-structure">File Structure</h3>
+<pre><code>Competition_Folder\
+    spawn_competition.m
+    spawn_competition.py
+    Navigator.slx
+    navigator.py
+    navigator_QCar2.slx
+    navigator_QCar2_python.py
+    launch_full_stack.bat
+    spawn_location.txt
+    PATH PLANNING FILES
+    VOXEL MAP FILES 
+    game.py
+</code></pre>
+<hr />
+<h4 id="back-to">Back to:</h4>
+<p><a href="../01_Core_Guides/Virtual_Stage_Competiton_Guide.html">Virtual Stage Competition Guide</a></p>
+<p><a href="../00_Portal/AICA_PORTAL.html">AICA Home Portal</a></p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
