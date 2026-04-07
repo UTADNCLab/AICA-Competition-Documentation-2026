@@ -6,7 +6,7 @@ import markdown
 ROOT = Path(__file__).parent.resolve()
 
 EXCLUDE = {"TODO.md"}
-STYLE_PATH_FROM_ROOT = "styles.css"
+STYLE_PATH_FROM_ROOT = "/styles.css"
 
 def slugify(text: str) -> str:
     text = text.strip().lower()
@@ -80,8 +80,7 @@ def build_one(md_path: Path):
 
     title = first_heading(raw, rel_md.stem)
 
-    depth = len(rel_out.parts) - 1
-    rel_css = "/".join([".."] * depth + [STYLE_PATH_FROM_ROOT]) if depth > 0 else STYLE_PATH_FROM_ROOT
+    rel_css = STYLE_PATH_FROM_ROOT
 
     final_html = page_template(title, body, rel_css, str(rel_md).replace("\\", "/"))
     out_path.write_text(final_html, encoding="utf-8")
