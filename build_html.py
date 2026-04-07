@@ -5,6 +5,7 @@ import html as html_lib
 
 MD_EXT = ".md"
 
+
 def slugify(text: str) -> str:
     s = text.strip().lower()
     s = re.sub(r"[^\w\s-]", "", s)
@@ -59,7 +60,8 @@ def rewrite_links_for_output(html: str, source_md: Path, output_path: Path) -> s
             return f'{prefix}{url}{suffix}'
 
         if url.startswith("#"):
-            return f'{prefix}{slugify(url[1:]) and "#" + slugify(url[1:])}{suffix}'
+            anchor_text = url[1:]
+            return f'{prefix}#{slugify(anchor_text)}{suffix}'
 
         normalized = normalize_internal_href(url, source_md)
 
@@ -70,9 +72,9 @@ def rewrite_links_for_output(html: str, source_md: Path, output_path: Path) -> s
         if output_path.parent == Path("."):
             final = normalized
         else:
-            final = Path(normalized.split("#", 1)[0]).as_posix()
+            base = Path(normalized.split("#", 1)[0]).as_posix()
             depth = len(output_path.parent.parts)
-            final = "../" * depth + final
+            final = "../" * depth + base
             if "#" in normalized:
                 final = final + "#" + normalized.split("#", 1)[1]
 
@@ -97,16 +99,38 @@ def add_heading_ids(content_html: str) -> str:
         if not hid:
             return m.group(0)
         return f'<{tag} id="{hid}">{inner}</{tag}>'
+
     return re.sub(r"<(h[1-6])>(.*?)</\1>", repl, content_html, flags=re.IGNORECASE | re.DOTALL)
 
+
 def strip_first_h1(content_html: str, page_title: str) -> str:
-    esc = re.escape(html_lib.escape(page_title))
-    pattern = re.compile(rf'^\s*<h1>\s*{esc}\s*</h1>\s*', re.IGNORECASE)
-    return re.sub(pattern, "", content_html, count=1)
+    """
+    Remove the first H1 from markdown body if it matches the page title.
+    Works whether the H1 has an id attribute or not.
+    """
+    normalized_title = re.sub(r"\s+", " ", html_lib.escape(page_title).strip())
+    pattern = re.compile(
+        r'^\s*<h1(?:\s+[^>]*)?>\s*(.*?)\s*</h1>\s*',
+        re.IGNORECASE | re.DOTALL
+    )
+
+    match = pattern.match(content_html)
+    if not match:
+        return content_html
+
+    h1_inner = re.sub(r"<[^>]+>", "", match.group(1)).strip()
+    h1_inner = re.sub(r"\s+", " ", h1_inner)
+
+    if h1_inner == normalized_title:
+        return content_html[match.end():]
+
+    return content_html
+
 
 def render_page(content_html: str, page_title: str, css_href: str) -> str:
     content_html = add_heading_ids(content_html)
     content_html = strip_first_h1(content_html, page_title)
+
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -152,6 +176,7 @@ def convert_markdown_file(md_path: Path):
 def generate_all():
     root = Path(".")
     md_files = [p for p in root.rglob(f"*{MD_EXT}") if ".git" not in p.parts]
+
     for md_file in md_files:
         convert_markdown_file(md_file)
 
