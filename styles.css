@@ -207,3 +207,7 @@ body {
   border: 1px solid rgba(78, 105, 158, 0.5);
   background: #060d21;
 }
+
+.markdown-body img.img-small {
+  width: min(100%, 520px);
+}

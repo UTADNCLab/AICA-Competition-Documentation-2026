@@ -86,7 +86,7 @@ C:\Users\<YourUsername>\Documents\Quanser\
 - Download: [MATLAB for Windows](https://www.mathworks.com/downloads/)
 - In MATLAB, install **Quanser Interactive Labs for MATLAB** via Add-On Explorer.
 
-![MATLAB Get Add-On Explorer](../images/Matlab_Get_Add_on.png)
+<img src="../images/Matlab_Get_Add_on.png" class="img-small" alt="MATLAB Get Add-On Explorer">
 
 ![Quanser Interactive Labs for MATLAB](../images/Quanser_Interactive_lab_for_matlab_.png)
 
