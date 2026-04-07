@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtual Stage Competition Guide</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="page-wrap">
+    <main class="portal-card">
+      <header class="hero hero-no-banner">
+        <div class="hero-content">
+          <p class="hero-kicker">IEEE SMC 2026 • Quanser • UTA</p>
+          <h1>Virtual Stage Competition Guide</h1>
+          <p class="hero-sub">Rendered from: 01_Core_Guides/Virtual_Stage_Competiton_Guide.md</p>
+        </div>
+      </header>
+      <section class="content markdown-content">
+        <h1 id="virtual-stage-competition-guide">Virtual Stage Competition Guide</h1>
+<p>Welcome to Virtual Stage (Stage 1) of the IEEE SMC AI-Powered Collaborative Autonomy Challenge (AICA).<br />
+This guide explains what teams should prepare for virtual-stage evaluation.</p>
+<hr />
+<h2 id="navigation">Navigation</h2>
+<ul>
+<li><a href="#1-virtual-stage-objective">Virtual Stage Objective</a></li>
+<li><a href="#2-virtual-stage-detailed-scenario">Virtual Stage Detailed Scenario</a></li>
+<li><a href="#3-core-principles-for-multimodal-delivery">Core Principles for Multimodal Delivery</a></li>
+<li><a href="#4-operational-guide">Operational Guide</a></li>
+<li><a href="#5-scoring-and-ranking">Scoring and Ranking</a></li>
+<li><a href="#6-resources">Resources</a></li>
+</ul>
+<hr />
+<h2 id="1-virtual-stage-objective">1) Virtual Stage Objective</h2>
+<p>The objective of the Virtual Stage is to demonstrate your system’s ability to complete delivery missions in the QLabs simulation environment.</p>
+<p>Your submission should clearly demonstrate:</p>
+<ul>
+<li>End-to-end mission completion  </li>
+<li>Efficient routing and navigation using provided maps and paths  </li>
+<li>Stable control and correct action sequencing  </li>
+<li>Effective coordination between QCar2 and QDrone2  </li>
+</ul>
+<p>For full submission details, see: <a href="../02_Participation/Submission_Guide.html">Virtual Stage Submission Guide</a></p>
+<p>This stage evaluates mission completion, system reliability, and coordination performance.</p>
+<hr />
+<h2 id="2-virtual-stage-detailed-scenario">2) Virtual Stage Detailed Scenario</h2>
+<p>For the complete scenario description, see: <a href="../01_Core_Guides/Virtual_Stage_Detailed_Scenario.html">Virtual Stage Detailed Scenario</a></p>
+<hr />
+<h3 id="key-scenario-elements">Key Scenario Elements</h3>
+<ul>
+<li>Central depot pickups for packages  <ul>
+<li><strong>QCar2</strong> can carry: 2 small packages or 1 large package  </li>
+<li><strong>QDrone2</strong> can carry: 1 small package only  </li>
+</ul>
+</li>
+<li>Coordination between QCar2 and QDrone2  </li>
+<li>Vehicle-to-vehicle transfers  </li>
+<li>Window delivery vs common drop </li>
+<li>Delivery completion requirements  </li>
+</ul>
+<blockquote>
+<p>This section provides a high-level overview. Refer to the detailed scenario page for full rules and configurations.</p>
+</blockquote>
+<hr />
+<h2 id="3-core-principles-for-multimodal-delivery">3) Core Principles for Multimodal Delivery</h2>
+<h3 id="planning-and-decision-making">Planning and Decision-Making</h3>
+<ul>
+<li>Use the provided maps and routes to plan efficient paths and delivery strategies  </li>
+<li>Select appropriate actions based on mission state (pickup, transfer, delivery)  </li>
+<li>Ensure correct sequencing of actions for complete mission execution  </li>
+</ul>
+<h3 id="control-systems">Control Systems</h3>
+<ul>
+<li>Execute stable steering, velocity control, stopping, and hover behavior  </li>
+<li>Ensure smooth and reliable motion during navigation and task execution  </li>
+<li>QCar2 must follow lane-based navigation and remain within road boundaries  </li>
+</ul>
+<h3 id="localization-and-navigation">Localization and Navigation</h3>
+<ul>
+<li>Use available position data to follow planned routes accurately  </li>
+<li>Maintain lane discipline and avoid invalid shortcuts outside defined paths  </li>
+<li>Adapt navigation based on mission progress and task requirements  </li>
+</ul>
+<h3 id="multi-agent-coordination">Multi-Agent Coordination</h3>
+<ul>
+<li>Coordinate QCar2 and QDrone2 actions for pickup, transfer, and delivery  </li>
+<li>Manage timing and interaction between vehicles for efficient mission execution  </li>
+</ul>
+<h3 id="mission-completion-and-efficiency">Mission Completion and Efficiency</h3>
+<ul>
+<li>Ensure all deliveries are completed successfully  </li>
+<li>Optimize overall mission time and execution efficiency  </li>
+</ul>
+<hr />
+<h2 id="4-operational-guide">4) Operational Guide</h2>
+<p>The Operational Guide includes both the step-by-step mission workflow and the operational constraints for valid pickup, transfer, delivery, and mission execution.  </p>
+<p><a href="../01_Core_Guides/Operational_Guide.html">Operational Guide</a></p>
+<hr />
+<h2 id="5-scoring-and-ranking">5) Scoring and Ranking</h2>
+<p>This section defines how team performance is scored and how rankings are determined in the Virtual Stage.</p>
+<h3 id="scoring-method">Scoring Method</h3>
+<ul>
+<li>The mission clock starts at the official mission start  </li>
+<li>A delivery is counted when the delivery is successfully completed according to the scenario logic  </li>
+</ul>
+<p><strong>Scoring formula:</strong></p>
+<ul>
+<li><strong>Delivery score = 1000 − current mission time + floor-based bonus</strong></li>
+<li><strong>Total Score = Sum of all delivery scores</strong></li>
+</ul>
+<h4 id="not-all-deliveries-receive-a-bonus-only-window-deliveries-by-qdrone2-are-eligible-for-a-floor-based-bonus-and-the-bonus-increases-with-the-target-floor-level">Not all deliveries receive a bonus. Only <strong>window deliveries by QDrone2</strong> are eligible for a floor-based bonus, and the bonus increases with the target floor level.</h4>
+<p><strong>Example floor-based bonus logic:</strong></p>
+<ul>
+<li>Floor 4 → <strong>+400</strong></li>
+<li>Floor 3 → <strong>+300</strong></li>
+<li>Floor 2 → <strong>+200</strong></li>
+</ul>
+<p>Higher scores correspond to faster delivery completion and more valuable delivery choices.</p>
+<h3 id="ranking">Ranking</h3>
+<ul>
+<li>Teams are ranked based on their total score  </li>
+<li>The team with the highest total score ranks first  </li>
+</ul>
+<p>For a detailed explanation of scoring behavior and recommended strategies, see: <a href="../01_Core_Guides/Scoring_and_Strategy.html">Scoring and Strategy</a></p>
+<hr />
+<h2 id="6-resources">6) Resources</h2>
+<p><a href="../04_Resources/All_Competition_Resources.html">All Competition Resources</a></p>
+<hr />
+<h4 id="back-to">Back to:</h4>
+<p><a href="../01_Core_Guides/Competition_Objective.html">Competition Objective</a></p>
+<p><a href="../00_Portal/AICA_PORTAL.html">AICA Home Portal</a></p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
