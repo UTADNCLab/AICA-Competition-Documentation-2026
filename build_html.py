@@ -82,9 +82,10 @@ def rewrite_links_for_output(html: str, source_md: Path, output_path: Path) -> s
 
 
 def css_href_for(output_path: Path) -> str:
-    if output_path.parent == Path("."):
+    depth = len(output_path.parent.parts)
+    if depth == 0:
         return "styles.css"
-    return "../styles.css"
+    return "../" * depth + "styles.css"
 
 
 def add_heading_ids(content_html: str) -> str:
