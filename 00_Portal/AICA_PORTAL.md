@@ -30,7 +30,7 @@ AICA focuses on collaborative autonomous delivery using:
 - [Timeline](../04_Resources/Timeline.md)
 - [Registration](../02_Participation/Registration.md)
 - [Submission Guide](../02_Participation/Submission_Guide.md)
-- [System and Software Setup](../03_Setup/Software_Setup_Instructions.md)
+- [System and Software Setup](../03_Setup/System_and_Software_setup.md)
 - [Contact us](mailto:2026aicacompetitioncontact@gmail.com)
 
 ---
