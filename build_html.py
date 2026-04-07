@@ -173,6 +173,26 @@ def convert_markdown_file(md_path: Path):
     print(f"generated: {rel} -> {out_path.as_posix()}")
 
 
+def generate_root_index_from_portal():
+    """
+    Generate root index.html directly from 00_Portal/AICA_PORTAL.md
+    so root-relative links and styles are correct.
+    """
+    portal_md = Path("00_Portal/AICA_PORTAL.md")
+    if not portal_md.exists():
+        return
+
+    md_text = portal_md.read_text(encoding="utf-8")
+    page_title = title_from_markdown(md_text, portal_md.stem)
+
+    raw_html = markdown.markdown(md_text, extensions=["tables", "fenced_code"])
+    body_html = rewrite_links_for_output(raw_html, portal_md, Path("index.html"))
+    final_html = render_page(body_html, page_title, "styles.css")
+
+    Path("index.html").write_text(final_html, encoding="utf-8")
+    print("generated: index.html from 00_Portal/AICA_PORTAL.md")
+
+
 def generate_all():
     root = Path(".")
     md_files = [p for p in root.rglob(f"*{MD_EXT}") if ".git" not in p.parts]
@@ -180,14 +200,8 @@ def generate_all():
     for md_file in md_files:
         convert_markdown_file(md_file)
 
-    # Mirror portal as root index.html
-    portal_md = Path("00_Portal/AICA_PORTAL.md")
-    if portal_md.exists():
-        index_html = Path("index.html")
-        portal_html = portal_md.with_suffix(".html")
-        if portal_html.exists():
-            index_html.write_text(portal_html.read_text(encoding="utf-8"), encoding="utf-8")
-            print("generated: index.html from 00_Portal/AICA_PORTAL.html")
+    # Generate root homepage directly from portal markdown
+    generate_root_index_from_portal()
 
 
 if __name__ == "__main__":
