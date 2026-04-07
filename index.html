@@ -1,143 +1,10 @@
-from pathlib import Path
-import markdown
-import re
-import html as html_lib
-
-MD_EXT = ".md"
-
-
-def slugify(text: str) -> str:
-    s = text.strip().lower()
-    s = re.sub(r"[^\w\s-]", "", s)
-    s = re.sub(r"\s+", "-", s)
-    s = re.sub(r"-{2,}", "-", s)
-    return s.strip("-")
-
-
-def title_from_markdown(md_text: str, fallback: str) -> str:
-    for line in md_text.splitlines():
-        line = line.strip()
-        if line.startswith("#"):
-            return line.lstrip("#").strip()
-    return fallback
-
-
-def normalize_internal_href(href: str, source_md: Path) -> str:
-    href = href.strip()
-    if not href:
-        return href
-
-    if href.startswith(("http://", "https://", "mailto:", "#")):
-        return href
-
-    anchor = ""
-    if "#" in href:
-        href, anchor = href.split("#", 1)
-        anchor = "#" + anchor
-
-    if href == "":
-        return anchor if anchor else href
-
-    if href.endswith(".md"):
-        href = href[:-3] + ".html"
-
-    target = (source_md.parent / href).resolve()
-    repo_root = Path(".").resolve()
-
-    try:
-        rel = target.relative_to(repo_root).as_posix()
-        return rel + anchor
-    except Exception:
-        clean = href.lstrip("./")
-        return clean + anchor
-
-
-def rewrite_links_for_output(html: str, source_md: Path, output_path: Path) -> str:
-    def repl(match):
-        prefix, url, suffix = match.groups()
-
-        if url.startswith(("http://", "https://", "mailto:")):
-            return f'{prefix}{url}{suffix}'
-
-        if url.startswith("#"):
-            anchor_text = url[1:]
-            return f'{prefix}#{slugify(anchor_text)}{suffix}'
-
-        normalized = normalize_internal_href(url, source_md)
-
-        if "#" in normalized:
-            base, frag = normalized.split("#", 1)
-            normalized = f"{base}#{slugify(frag)}"
-
-        if output_path.parent == Path("."):
-            final = normalized
-        else:
-            base = Path(normalized.split("#", 1)[0]).as_posix()
-            depth = len(output_path.parent.parts)
-            final = "../" * depth + base
-            if "#" in normalized:
-                final = final + "#" + normalized.split("#", 1)[1]
-
-        return f'{prefix}{final}{suffix}'
-
-    return re.sub(r'(href=")([^"]*)(")', repl, html)
-
-
-def css_href_for(output_path: Path) -> str:
-    depth = len(output_path.parent.parts)
-    if depth == 0:
-        return "styles.css"
-    return "../" * depth + "styles.css"
-
-
-def add_heading_ids(content_html: str) -> str:
-    def repl(m):
-        tag = m.group(1)
-        inner = m.group(2)
-        text = re.sub(r"<[^>]+>", "", inner).strip()
-        hid = slugify(text)
-        if not hid:
-            return m.group(0)
-        return f'<{tag} id="{hid}">{inner}</{tag}>'
-
-    return re.sub(r"<(h[1-6])>(.*?)</\1>", repl, content_html, flags=re.IGNORECASE | re.DOTALL)
-
-
-def strip_first_h1(content_html: str, page_title: str) -> str:
-    """
-    Remove the first H1 from markdown body if it matches the page title.
-    Works whether the H1 has an id attribute or not.
-    """
-    normalized_title = re.sub(r"\s+", " ", html_lib.escape(page_title).strip())
-    pattern = re.compile(
-        r'^\s*<h1(?:\s+[^>]*)?>\s*(.*?)\s*</h1>\s*',
-        re.IGNORECASE | re.DOTALL
-    )
-
-    match = pattern.match(content_html)
-    if not match:
-        return content_html
-
-    h1_inner = re.sub(r"<[^>]+>", "", match.group(1)).strip()
-    h1_inner = re.sub(r"\s+", " ", h1_inner)
-
-    if h1_inner == normalized_title:
-        return content_html[match.end():]
-
-    return content_html
-
-
-def render_page(content_html: str, page_title: str, css_href: str) -> str:
-    content_html = add_heading_ids(content_html)
-    content_html = strip_first_h1(content_html, page_title)
-
-    return f"""<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{page_title}</title>
-  <link rel="stylesheet" href="{css_href}" />
+  <title>IEEE SMC AI-Powered Collaborative Autonomy Challenge (AICA) Home Portal</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="page-wrap">
@@ -145,64 +12,43 @@ def render_page(content_html: str, page_title: str, css_href: str) -> str:
       <header class="hero hero-no-banner">
         <div class="hero-content">
           <p class="hero-kicker">IEEE SMC 2026 • Quanser • UTA</p>
-          <h1>{page_title}</h1>
+          <h1>IEEE SMC AI-Powered Collaborative Autonomy Challenge (AICA) Home Portal</h1>
         </div>
       </header>
       <section class="content markdown-body">
-        {content_html}
+        <h3 id="welcome-to-the-ieee-smc-ai-powered-collaborative-autonomy-challenge-aica">Welcome to the IEEE SMC AI-Powered Collaborative Autonomy Challenge (AICA).</h3>
+<p>This competition is organized as part of the <strong>IEEE SMC 2026 Conference</strong>, in collaboration with <strong>Quanser</strong> and <strong>The University of Texas at Arlington (UTA)</strong>. We sincerely acknowledge and thank all supporting partners, organizers, and contributors for enabling this initiative.</p>
+<h2 id="overview">Overview</h2>
+<p>The <strong>IEEE SMC AI-Powered Collaborative Autonomy Challenge (AICA)</strong> is a competition focused on developing autonomous algorithms for collaborative delivery using heterogeneous systems.</p>
+<p>The competition is conducted in <strong>two stages</strong>:</p>
+<ul>
+<li>
+<p><strong>Virtual Stage</strong> – Teams develop, implement, and test their solutions in Quanser’s QLabs simulation environment based on the provided virtual stage scenario, and submit a video link demonstrating complete mission execution and system performance.</p>
+</li>
+<li>
+<p><strong>In-Person Stage</strong> – The <strong>Top 3 teams</strong>, based on virtual-stage results, will be invited to compete at the <strong>IEEE SMC 2026 Conference (October 4–7, Seattle, Washington)</strong>. In this stage, teams will execute and demonstrate their solutions in the same QLabs simulation environment based on the In-person Stage scenario.</p>
+</li>
+</ul>
+<p>Teams are required to design and implement coordination strategies between ground and aerial vehicles to complete delivery missions efficiently under realistic constraints.</p>
+<p>AICA focuses on collaborative autonomous delivery using:</p>
+<ul>
+<li><strong>QCar2</strong> (ground vehicle)  </li>
+<li><strong>QDrone2</strong> (aerial vehicle)</li>
+</ul>
+<hr />
+<h2 id="content">Content</h2>
+<ul>
+<li><a href="01_Core_Guides/Competition_Objective.html">Competition Objective</a></li>
+<li><a href="01_Core_Guides/Announcements.html">Announcements</a></li>
+<li><a href="04_Resources/Timeline.html">Timeline</a></li>
+<li><a href="02_Participation/Registration.html">Registration</a></li>
+<li><a href="02_Participation/Submission_Guide.html">Submission Guide</a></li>
+<li><a href="03_Setup/Software_Setup_Instructions.html">System and Software Setup</a></li>
+<li><a href="mailto:2026aicacompetitioncontact@gmail.com">Contact us</a></li>
+</ul>
+<hr />
       </section>
     </main>
   </div>
 </body>
 </html>
-"""
-
-
-def convert_markdown_file(md_path: Path):
-    rel = md_path.as_posix()
-    out_path = md_path.with_suffix(".html")
-    md_text = md_path.read_text(encoding="utf-8")
-    page_title = title_from_markdown(md_text, md_path.stem)
-
-    raw_html = markdown.markdown(md_text, extensions=["tables", "fenced_code"])
-    body_html = rewrite_links_for_output(raw_html, md_path, out_path)
-    css_href = css_href_for(out_path)
-    final_html = render_page(body_html, page_title, css_href)
-
-    out_path.write_text(final_html, encoding="utf-8")
-    print(f"generated: {rel} -> {out_path.as_posix()}")
-
-
-def generate_root_index_from_portal():
-    """
-    Generate root index.html directly from 00_Portal/AICA_PORTAL.md
-    so root-relative links and styles are correct.
-    """
-    portal_md = Path("00_Portal/AICA_PORTAL.md")
-    if not portal_md.exists():
-        return
-
-    md_text = portal_md.read_text(encoding="utf-8")
-    page_title = title_from_markdown(md_text, portal_md.stem)
-
-    raw_html = markdown.markdown(md_text, extensions=["tables", "fenced_code"])
-    body_html = rewrite_links_for_output(raw_html, portal_md, Path("index.html"))
-    final_html = render_page(body_html, page_title, "styles.css")
-
-    Path("index.html").write_text(final_html, encoding="utf-8")
-    print("generated: index.html from 00_Portal/AICA_PORTAL.md")
-
-
-def generate_all():
-    root = Path(".")
-    md_files = [p for p in root.rglob(f"*{MD_EXT}") if ".git" not in p.parts]
-
-    for md_file in md_files:
-        convert_markdown_file(md_file)
-
-    # Generate root homepage directly from portal markdown
-    generate_root_index_from_portal()
-
-
-if __name__ == "__main__":
-    generate_all()
