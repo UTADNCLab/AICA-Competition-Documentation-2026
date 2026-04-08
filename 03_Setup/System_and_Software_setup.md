@@ -1,6 +1,8 @@
-# Hardware Requirements
+# System and Software Setup
 
-This page defines the recommended hardware baseline and software setup for the teams.
+## Hardware Requirements
+
+Recommended hardware specifications for participating teams.
 
 
 | Tier | CPU | RAM | GPU |
@@ -11,9 +13,9 @@ This page defines the recommended hardware baseline and software setup for the t
 
 ---
 
-# Software Setup & Installation
+## Software Setup & Installation
 
-This page provides the AICA-specific software setup steps required before running the competition files.
+Required software installation and configuration before running the AICA competition files.
 
 If you are using both **MATLAB / Simulink** and **Python**, follow both sections below.  
 If you are using only one workflow, follow the corresponding section only.
@@ -187,13 +189,6 @@ configure_matlab.bat
 - Run both files when using both Python + MATLAB
 
 > Restart your system after running setup scripts before continuing.
-
----
-
-### Back to [ AICA Portal](../00_Portal/AICA_PORTAL.md)
-
-
-
 
 ---
 
