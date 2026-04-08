@@ -1,4 +1,4 @@
-# Home Portal
+# IEEE SMC AI-Powered Collaborative Autonomy Challenge (AICA) Home Portal
 
 ### Welcome to the IEEE SMC AI-Powered Collaborative Autonomy Challenge (AICA).
 This competition is organized as part of the **IEEE SMC 2026 Conference**, in collaboration with **Quanser** and **The University of Texas at Arlington (UTA)**. We sincerely acknowledge and thank all supporting partners, organizers, and contributors for enabling this initiative.

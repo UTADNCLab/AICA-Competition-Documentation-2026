@@ -47,14 +47,16 @@ body {
     linear-gradient(180deg, #0d1a3b 0%, #0a1430 100%);
 }
 
-.hero-no-banner {
-  min-height: 130px;
-  display: grid;
-  align-items: center;
+.hero-banner {
+  display: block;
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-bottom: 2px solid var(--line-accent);
 }
 
 .hero-content {
-  padding: 24px 30px;
+  padding: 20px 30px 24px;
 }
 
 .hero-kicker {

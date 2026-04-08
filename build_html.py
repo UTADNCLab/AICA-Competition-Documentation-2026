@@ -131,6 +131,10 @@ def render_page(content_html: str, page_title: str, css_href: str) -> str:
     content_html = add_heading_ids(content_html)
     content_html = strip_first_h1(content_html, page_title)
 
+    banner_href = css_href_for(Path("index.html")) if css_href == "styles.css" else "../" * css_href.count("../") + "images/Banner.png"
+    if css_href == "styles.css":
+        banner_href = "images/Banner.png"
+
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -142,9 +146,10 @@ def render_page(content_html: str, page_title: str, css_href: str) -> str:
 <body>
   <div class="page-wrap">
     <main class="portal-card">
-      <header class="hero hero-no-banner">
+      <header class="hero">
+        <img src="{banner_href}" alt="AICA Competition Banner" class="hero-banner" />
         <div class="hero-content">
-          <p class="hero-kicker">IEEE SMC 2026 • Quanser • UTA</p>
+          <p class="hero-kicker">IEEE SMC 2026 • QUANSER • UTA</p>
           <h1>{page_title}</h1>
         </div>
       </header>
