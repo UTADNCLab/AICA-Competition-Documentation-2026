@@ -149,7 +149,6 @@ def render_page(content_html: str, page_title: str, css_href: str) -> str:
       <header class="hero">
         <img src="{banner_href}" alt="AICA Competition Banner" class="hero-banner" />
         <div class="hero-content">
-          <p class="hero-kicker">IEEE SMC 2026 • QUANSER • UTA</p>
           <h1>{page_title}</h1>
         </div>
       </header>
