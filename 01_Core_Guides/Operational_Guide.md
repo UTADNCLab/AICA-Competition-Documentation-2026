@@ -590,4 +590,4 @@ The competition package includes the following types of files:
 
 [Virtual Stage Competition Guide](Virtual_Stage_Competiton_Guide.md)
 
-[AICA Home Portal](../AICA_PORTAL.md)
+[AICA Home Portal](../00_Portal/AICA_PORTAL.md)
