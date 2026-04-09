@@ -11,7 +11,7 @@ The competition is conducted in **two stages**:
 
 - **Virtual Stage** – Teams develop, implement, and test their solutions in Quanser’s QLabs simulation environment based on the provided virtual stage scenario, and submit a video link demonstrating complete mission execution and system performance.
 
-- **In-Person Stage** – The **Top 3 teams**, based on virtual-stage results, will be invited to compete at the **IEEE SMC 2026 Conference (October 4–7, Seattle, Washington)**. In this stage, teams will execute and demonstrate their solutions in the same QLabs simulation environment based on the In-person Stage scenario.
+- **In-Person Stage** – The **Top 3 teams**, based on virtual-stage results, will be invited to compete at the **IEEE SMC 2026 Conference (October 4–7, Bellevue, Washington)**. In this stage, teams will execute and demonstrate their solutions in the same QLabs simulation environment based on the In-person Stage scenario.
 
 Teams are required to design and implement coordination strategies between ground and aerial vehicles to complete delivery missions efficiently under realistic constraints.
 
