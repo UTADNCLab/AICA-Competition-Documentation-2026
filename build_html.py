@@ -131,9 +131,9 @@ def render_page(content_html: str, page_title: str, css_href: str) -> str:
     content_html = add_heading_ids(content_html)
     content_html = strip_first_h1(content_html, page_title)
 
-    banner_href = css_href_for(Path("index.html")) if css_href == "styles.css" else "../" * css_href.count("../") + "images/Banner.png"
+    banner_href = css_href_for(Path("index.html")) if css_href == "styles.css" else "../" * css_href.count("../") + "images/banner.png"
     if css_href == "styles.css":
-        banner_href = "images/Banner.png"
+        banner_href = "images/banner.png"
 
     return f"""<!doctype html>
 <html lang="en">
