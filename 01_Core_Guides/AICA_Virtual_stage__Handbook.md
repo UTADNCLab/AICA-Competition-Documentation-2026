@@ -24,7 +24,7 @@ The competition is conducted in two stages:
   Teams develop and validate their system using Quanser QLabs  
 
 - **In-Person Stage (Simulation-Based )**  
-  The **top 3 teams**, based on virtual-stage results, will be invited to compete at the IEEE SMC 2026 Conference (October 4–7, Seattle, Washington)
+  The **top 3 teams**, based on virtual-stage results, will be invited to compete at the IEEE SMC 2026 Conference (October 4–7, Bellevue, Washington)
 
 ---
 
