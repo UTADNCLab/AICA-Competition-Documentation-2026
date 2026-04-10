@@ -24,7 +24,7 @@ On your system, create a folder called _Quanser_ under _Documents_. This should 
 3. Clone your documentation repo:
 
 ```bash
-git clone <YOUR_AICA_DOCUMENTATION_REPO_URL> Quanser Resources
+git clone https://github.com/UTADNCLab/IEEE-SMC-AICA-Competition-2026.git Quanser Resources
 ```
 
 #### Without Git (ZIP)
@@ -52,7 +52,7 @@ A separate folder for actual competition files.
 From `C:\Users\<YourUsername>\Documents\Quanser\`, run:
 
 ```bash
-git clone <YOUR_COMPETITION_FILES_REPO_URL> 9_AICA_Competition_Files
+git clone https://github.com/UTADNCLab/IEEE-SMC-AICA-Competition-2026.git Competition_Files
 ```
 
 #### Without Git (ZIP)
@@ -72,7 +72,7 @@ C:\Users\<YourUsername>\Documents\Quanser\9_AICA_Competition_Files\
 ```text
 C:\Users\<YourUsername>\Documents\Quanser\
     0_libraries, 1_setup ..\
-    9_AICA_Competition_Files\
+    Competition_Files\
 ```
 
 > Keep separate folders .
