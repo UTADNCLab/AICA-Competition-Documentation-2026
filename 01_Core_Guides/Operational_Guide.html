@@ -20,6 +20,7 @@
 <p>It includes operational guidance for both <strong>QCar2</strong> and <strong>QDrone2</strong>.</p>
 <hr />
 <h2 id="navigation">Navigation</h2>
+<h2 id="navigation">Navigation</h2>
 <ol>
 <li><a href="#1-system-execution-flow">System Execution Flow</a></li>
 <li><a href="#2-before-you-start">Before You Start</a></li>
@@ -47,18 +48,14 @@
 <li><a href="#92-car-pickup">Car Pickup</a></li>
 <li><a href="#93-drone-delivery">Drone Delivery</a></li>
 <li><a href="#94-car-delivery">Car Delivery</a></li>
-<li><a href="#10-transfer-operation-and-conditions">Transfer Operation and Conditions</a><ul>
+<li><a href="#10-transfer-operation-and-conditions">Transfer Operation and Conditions</a></li>
 <li><a href="#101-car-to-drone-transfer">Car to Drone Transfer</a></li>
 <li><a href="#102-drone-to-car-transfer">Drone to Car Transfer</a></li>
-</ul>
-</li>
-<li><a href="#11-final-runtime-check-mission-completion-and-file-reference">Final Runtime Check, Mission Completion, and File Reference</a><ul>
+<li><a href="#11-final-runtime-check-mission-completion-and-file-reference">Final Runtime Check, Mission Completion, and File Reference</a></li>
 <li><a href="#mission-timing-and-completion">Mission Timing and Completion</a></li>
 <li><a href="#final-runtime-check">Final Runtime Check</a></li>
 <li><a href="#main-file-types">Main File Types</a></li>
 <li><a href="#file-structure">File Structure</a></li>
-</ul>
-</li>
 </ol>
 <hr />
 <h2 id="1-system-execution-flow">1) System Execution Flow</h2>
@@ -456,12 +453,9 @@
 </ul>
 <h4 id="important-clarification">Important Clarification</h4>
 <p>The Python keys and the MATLAB intention values are mapped to the same internal values used by <code>game.py</code>.</p>
-<p>For example:</p>
-<ul>
-<li>pressing <code>6</code> in Python may correspond to intention value <code>1</code> in MATLAB</li>
-</ul>
-<p>Even though the visible key number is different, <code>game.py</code> interprets them as the same action.</p>
-<p>Do not confuse <strong>keyboard key number</strong> with <strong>internal intention value</strong>. The behavior is the same in <code>game.py</code>. Only the way you trigger the intention differs between Python and MATLAB / Simulink.</p>
+<p><strong>For example</strong>: Pressing <strong><code>6</code></strong> in Python may correspond to intention value <code>1</code> in MATLAB
+  - Even though the visible key number is different, <code>game.py</code> interprets them as the same action.
+  - Do not confuse <strong>keyboard key number</strong> with <strong>internal intention value</strong>. The behavior is the same in <code>game.py</code>. Only the way you trigger the intention differs between Python and MATLAB / Simulink.</p>
 <hr />
 <h2 id="9-pickup-and-delivery-operations-and-conditions">9) Pickup and Delivery Operations and Conditions</h2>
 <p>Pickup and delivery actions are managed by <code>game.py</code> and require the vehicle to remain inside the valid region for the full action duration.</p>

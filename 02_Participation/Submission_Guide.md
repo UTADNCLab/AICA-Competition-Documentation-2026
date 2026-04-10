@@ -1,6 +1,6 @@
 # Submission Guide 
 
-## Submission Link For Virtual Stage: **LINK**
+## Submission Link For Virtual Stage: [Link](https://forms.gle/6hzAKAqrSUkrrmTa8)
 
 
 This guide defines how to prepare and record a valid final submission video for AICA virtual-stage evaluation.

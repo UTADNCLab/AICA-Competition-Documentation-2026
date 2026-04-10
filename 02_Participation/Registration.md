@@ -1,6 +1,6 @@
 # Registration
 
-To participate in AICA, register using the registration link : **[Link](Link)** 
+To participate in AICA, register using the registration link : **[Link](https://forms.gle/W94CeCCeevtWRCEn8)** 
 
 There are no participation criteria or restrictions.
 

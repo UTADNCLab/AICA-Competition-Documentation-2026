@@ -8,6 +8,8 @@ It includes operational guidance for both **QCar2** and **QDrone2**.
 
 ## Navigation
 
+## Navigation
+
 1. [System Execution Flow](#1-system-execution-flow)
 2. [Before You Start](#2-before-you-start)
    - [Open QLabs and Load the Cityscape Map Manually](#open-qlabs-and-load-the-cityscape-map-manually)
@@ -35,14 +37,13 @@ It includes operational guidance for both **QCar2** and **QDrone2**.
    - [Drone Delivery](#93-drone-delivery)
    - [Car Delivery](#94-car-delivery)
 10. [Transfer Operation and Conditions](#10-transfer-operation-and-conditions)
-      - [Car to Drone Transfer](#101-car-to-drone-transfer)
-      - [Drone to Car Transfer](#102-drone-to-car-transfer)
+   - [Car to Drone Transfer](#101-car-to-drone-transfer)
+   - [Drone to Car Transfer](#102-drone-to-car-transfer)
 11. [Final Runtime Check, Mission Completion, and File Reference](#11-final-runtime-check-mission-completion-and-file-reference)
-      - [Mission Timing and Completion](#mission-timing-and-completion)
-      - [Final Runtime Check](#final-runtime-check)
-      - [Main File Types](#main-file-types)
-      - [File Structure](#file-structure)
-
+   - [Mission Timing and Completion](#mission-timing-and-completion)
+   - [Final Runtime Check](#final-runtime-check)
+   - [Main File Types](#main-file-types)
+   - [File Structure](#file-structure)
 ---
 
 ## 1) System Execution Flow
@@ -490,13 +491,9 @@ This means:
 
 The Python keys and the MATLAB intention values are mapped to the same internal values used by `game.py`.
 
-For example:
-
-- pressing `6` in Python may correspond to intention value `1` in MATLAB
-
-Even though the visible key number is different, `game.py` interprets them as the same action.
-
-Do not confuse **keyboard key number** with **internal intention value**. The behavior is the same in `game.py`. Only the way you trigger the intention differs between Python and MATLAB / Simulink.
+**For example**: Pressing **`6`** in Python may correspond to intention value `1` in MATLAB
+  - Even though the visible key number is different, `game.py` interprets them as the same action.
+  - Do not confuse **keyboard key number** with **internal intention value**. The behavior is the same in `game.py`. Only the way you trigger the intention differs between Python and MATLAB / Simulink.
 
 
 ---
