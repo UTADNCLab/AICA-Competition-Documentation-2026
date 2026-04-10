@@ -2,46 +2,24 @@
 
 This guide explains how to run the AICA virtual stage and defines the operational conditions that must be satisfied during execution. It combines system startup, navigator usage, pickup/drop/transfer behavior, runtime checks, communication channels, and mission constraints into one practical document.
 
-It includes operational guidance for both **QCar2** and **QDrone2**.
-
 ---
 
 ## Navigation
 
-1. [System Execution Flow](#1-system-execution-flow)
-2. [Before You Start](#2-before-you-start)
-   - [Open QLabs and Load the Cityscape Map Manually](#open-qlabs-and-load-the-cityscape-map-manually)
-   - [Run the Spawn File Manually](#run-the-spawn-file-manually)
-3. [Automated System Startup](#3-automated-system-startup)
-   - [Optional Manual Setup Before Running the BAT File](#optional-manual-setup-before-running-the-bat-file)
-4. [Run the Game File (Mandatory)](#4-run-the-game-file-mandatory)
-5. [Navigator Information](#5-navigator-information)
-   - [QDrone2 Navigator](#51-qdrone2-navigator)
-   - [QDrone2 Communication Channels and Ports](#511-qdrone2-communication-channels-and-ports)
-   - [QCar2 Navigator](#52-qcar2-navigator)
-   - [QCar2 Communication Channels and Ports](#521-qcar2-communication-channels-and-ports)
-6. [Manual Control Details](#6-manual-control-details)
-   - [QCar2 Manual Control](#61-qcar2-manual-control)
-   - [QDrone2 Manual Control](#62-qdrone2-manual-control)
-7. [Autonomous Control Details](#7-autonomous-control-details)
-   - [QCar2 Autonomous Control](#71-qcar2-autonomous-control)
-   - [QDrone2 Autonomous Control](#72-qdrone2-autonomous-control)
-8. [Action Key Mapping and Intention Mapping](#8-action-key-mapping-and-intention-mapping)
-   - [Python Action Keys for QDrone2](#81-python-action-keys-for-qdrone2)
-   - [MATLAB / Simulink Intention Mapping](#82-matlab--simulink-intention-mapping)
-9. [Pickup and Delivery Operations and Conditions](#9-pickup-and-delivery-operations-and-conditions)
-   - [Drone Pickup](#91-drone-pickup)
-   - [Car Pickup](#92-car-pickup)
-   - [Drone Delivery](#93-drone-delivery)
-   - [Car Delivery](#94-car-delivery)
-10. [Transfer Operation and Conditions](#10-transfer-operation-and-conditions)
-      - [Car to Drone Transfer](#101-car-to-drone-transfer)
-      - [Drone to Car Transfer](#102-drone-to-car-transfer)
-11. [Final Runtime Check, Mission Completion, and File Reference](#11-final-runtime-check-mission-completion-and-file-reference)
-      - [Mission Timing and Completion](#mission-timing-and-completion)
-      - [Final Runtime Check](#final-runtime-check)
-      - [Main File Types](#main-file-types)
-      - [File Structure](#file-structure)
+- [System Execution Flow](#1-system-execution-flow)
+- [Before You Start](#2-before-you-start)
+- [Automated System Startup](#3-automated-system-startup)
+- [Run the Game File (Mandatory)](#4-run-the-game-file-mandatory)
+- [Navigator Information](#5-navigator-information)
+- [Manual Control Details](#6-manual-control-details)
+- [Autonomous Control Details](#7-autonomous-control-details)
+- [Action Key Mapping and Intention Mapping](#8-action-key-mapping-and-intention-mapping)
+- [Pickup and Delivery Operations and Conditions](#9-pickup-and-delivery-operations-and-conditions)
+- [Transfer Operation and Conditions](#10-transfer-operation-and-conditions)
+- [Mission Timing and Completion](#11-mission-timing-and-completion)
+- [Runtime Validation Checklist](#12-runtime-validation-checklist)
+- [Common Errors and Notes](#13-common-errors-and-notes)
+- [Files Reference](#14-files-reference)
 
 ---
 
@@ -496,8 +474,18 @@ For example:
 
 Even though the visible key number is different, `game.py` interprets them as the same action.
 
-Do not confuse **keyboard key number** with **internal intention value**. The behavior is the same in `game.py`. Only the way you trigger the intention differs between Python and MATLAB / Simulink.
+#### Important
 
+Do not confuse **keyboard key number** with **internal intention value**.
+
+The behavior is the same in `game.py`. Only the way you trigger the intention differs between Python and MATLAB / Simulink.
+
+
+### Vehicle Speed Limits
+
+- **QCar2** must not exceed the maximum speed of **13 m/s** in the scenario
+- **QDrone2** must not exceed the maximum speed of **2.5 m/s** in the scenario
+- Teams may operate below the maximum speed limits for stability, safety, or strategy
 
 ---
 
@@ -745,22 +733,22 @@ Now set intentions:
 
 ---
 
-## 11) Final Runtime Check, Mission Completion, and File Reference
+## 11) Mission Timing and Completion
 
-### Mission Timing and Completion
-
-- Mission time begins at the official mission start.
-- The mission objective is to minimize total completion time.
-- If required deliveries are not completed, the mission is considered incomplete.
+- Mission time begins at the official mission start
+- The mission objective is to minimize total completion time
+- If required deliveries are not completed, the mission is considered incomplete
 
 A delivery is considered complete only after the scenario logic confirms a valid delivery event.
 
 ### Important
 
-- `game.py` manages pickup timing, transfer timing, delivery timing, and scoring.
-- Teams should verify package completion behavior during runtime.
+- `game.py` manages pickup timing, transfer timing, delivery timing, and scoring
+- Teams should verify package completion behavior during runtime
 
-### Final Runtime Check
+---
+
+## 12) Runtime Validation Checklist
 
 Before running a full mission, verify the following:
 
@@ -774,6 +762,45 @@ Before running a full mission, verify the following:
 - drop actions are working
 - transfer actions are working
 - score display is visible in QLabs
+
+---
+
+## 13) Common Errors and Notes
+
+### Transfer Requires Both Sides
+
+For transfer to work:
+
+- both vehicles must be positioned correctly
+- both intention values must be set correctly
+
+If one is missing, transfer will fail.
+
+---
+
+### `game.py` Must Always Be Running
+
+Without `game.py`:
+
+- package timing will not work
+- scoring will not update
+- package movement will not be shown correctly
+
+---
+
+### Communication Port Consistency
+
+The documented communication port numbers should be used exactly as defined in the provided implementation.
+
+Before mission execution:
+
+- verify all required camera and stream connections are active
+- verify the expected simulator and game communication channels are running
+- disable unused camera channels when not required to improve runtime performance
+
+---
+
+## 14) Files Reference
 
 ### Main File Types
 
@@ -798,6 +825,7 @@ The competition package includes the following types of files:
         PATH PLANNING FILES
         VOXEL MAP FILES
         game.py
+
 ---
 
 #### Back to:

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Python Section of QDrone2 Communication Channels and Ports</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <div class="page-wrap">
+    <main class="portal-card">
+      <header class="hero">
+        <img src="../images/banner.png" alt="AICA Competition Banner" class="hero-banner" />
+        <div class="hero-content">
+          <h1>Python Section of QDrone2 Communication Channels and Ports</h1>
+        </div>
+      </header>
+      <section class="content markdown-body">
+        <p>if useCameras:</p>
+<pre><code>realsense = Camera3D(deviceId="0@tcpip://localhost:18986",
+                    mode='RGB&amp;DEPTH',
+                    frameWidthRGB=640,
+                    frameHeightRGB=480,
+                    frameRateRGB=frameRate,
+                    frameWidthDepth=640,
+                    frameHeightDepth=480,
+                    frameRateDepth=frameRate,
+                    readMode=0)
+
+camRight = Camera2D(cameraId="0@tcpip://localhost:18982",
+                frameWidth=640, frameHeight=480,
+                frameRate=frameRate)
+
+camBack = Camera2D(cameraId="1@tcpip://localhost:18983",
+                frameWidth=640, frameHeight=480,
+                frameRate=frameRate)
+
+camLeft = Camera2D(cameraId="2@tcpip://localhost:18984",
+                    frameWidth=640, frameHeight=480,
+                    frameRate=frameRate)
+
+camDown = Camera2D(cameraId="3@tcpip://localhost:18985",
+                frameWidth=640, frameHeight=480,
+                frameRate=frameRate)
+</code></pre>
+<p>Ports:</p>
+<pre><code>dataStream = BasicStream('tcpip://localhost:18373',
+                   agent='C', sendBufferSize=1460,
+                   receiveBuffer=np.zeros((1,16), dtype=np.float64),
+                   recvBufferSize=1460, nonBlocking=False)
+
+gameStream = BasicStream('tcpip://127.0.0.1:19001',
+                   agent='C', sendBufferSize=8,
+                   receiveBuffer=np.zeros((1,1), dtype=np.float64),
+                   recvBufferSize=24, nonBlocking=False)
+</code></pre>
+<h4 id="back-to-operational-guide">Back to: <a href="../01_Core_Guides/Operational_Guide.html">Operational Guide </a></h4>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

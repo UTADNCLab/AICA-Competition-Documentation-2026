@@ -52,7 +52,7 @@ Vehicles may operate below these limits, but must not exceed them.
 
 ### Initial Vehicle Locations
 
-Initial spawn positions of QCar2 and QDrone2 can be adjusted by competitors by editing the `spawn_position.txt` file in the competition files folder. This file is used to control the starting position of the spawned vehicle(s) in QLabs.
+Initial spawn positions of QCar2 and QDrone2 can be adjusted by competitors by editing the `spawn_location.txt` file in the competition files folder. This file is used to control the starting position of the spawned vehicle(s) in QLabs.
 
 ---
 
@@ -72,8 +72,8 @@ At mission start:
 
 A pickup is successful when:
 
-- **QCar2** remains stationary at the pickup location for **3 seconds**
-- **QDrone2** hovers at **3 meter** above the pickup location for **3 seconds**
+- **QCar2** remains within **2.0 m** of the pickup location for **3 seconds**
+- **QDrone2** remains within **2.0 m** horizontal distance and within **0.0 m to 4.0 m** vertical offset of the pickup location for **3 seconds**
 
 After the required hold time, the package is considered loaded.
 
@@ -106,8 +106,8 @@ To enable collaborative autonomy, transfer is allowed in both directions:
 A transfer is successful when:
 
 1. **QCar2** is stationary
-2. **QDrone2** is positioned directly above QCar2
-3. **QDrone2** maintains approximately **3 meter** height above the car
+2. **QDrone2** is within **2.0 m** horizontal distance of QCar2
+3. **QDrone2** remains within **0.0 m to 4.0 m** vertical offset relative to QCar2
 4. The required transfer condition is maintained for **3 seconds**
 
 After this, package ownership transfers to the receiving vehicle.
@@ -158,7 +158,7 @@ A delivery is considered complete only after the package is successfully dropped
 
 ### Window Delivery (Drone)
 
-- The drone must hover **3 meter above the window landing pad** for at least **3 seconds**
+- The drone must remain within **2.0 m** horizontal distance and within **0.0 m to 4.0 m** vertical offset of the window delivery target for at least **3 seconds**
 
 #### Example Window Delivery
 
@@ -166,8 +166,8 @@ A delivery is considered complete only after the package is successfully dropped
 
 ### Common Drop Delivery (Car or Drone)
 
-- **QCar2:** Must remain at the drop location for at least **3 seconds**
-- **QDrone2:** Must hover **3 meter above the drop-off location** for at least **3 seconds**
+- **QCar2:** Must remain within **2.0 m** of the drop location for at least **3 seconds**
+- **QDrone2:** Must remain within **2.0 m** horizontal distance and within **0.0 m to 4.0 m** vertical offset of the drop location for at least **3 seconds**
 
 #### Example Common Delivery by Car
 
@@ -177,20 +177,40 @@ A delivery is considered complete only after the package is successfully dropped
 
 ## 6) Pick up and Delivery Location
 
-- Pickup: **P**
-- Small packages: **D1, D2, D3, D4**
-- Large package: **D5**
+- Pickup Depot: **P**
+- Small package delivery locations: **D1, D2, D3, D4**
+- Large package delivery location: **D5**
 
-### Key Location Coordinates ( Will be updated based on new final locations)
+### Important Note
 
-| Location | Node | x | y |
-|---|---:|---:|---:|
-| P will be updated | 25 | -7.4888 | 11.0093 |
-| D1 | 2 | 11.2739 | -10.8465 |
-| D2 | 14 | 22.5478 | 29.6703 |
-| D3 | 20 | 0 | 44.9735 |
-| D4 | 22 | -19.8412 | 29.6703 |
-| D5 | 10 | -12.8205 | -4.5991 |
+Node numbering is different between **Python** and **MATLAB / Simulink** for QCar2.
+
+- **QCar2** uses node numbers and location coordinates
+- **QDrone2** uses location coordinates only
+- Use the **QCar2 table** for pickup and drop node selection in car routing
+- Use the **QDrone2 table** for pickup, drop, and window delivery target coordinates
+
+### QCar2 Pickup and Delivery Reference
+
+| Location | Package Type | Python Node | MATLAB / Simulink Node | Ground Location `[x y]` |
+|---|---|---:|---:|---|
+| Pickup Depot (P) | Pickup | 24 | 25 | `[-2.50305 29.6703]` |
+| Drop Location 1 (D1) | Small | 2 | 3 | `[11.2739 -10.84655]` |
+| Drop Location 2 (D2) | Small | 14 | 15 | `[22.5478 29.6703]` |
+| Drop Location 3 (D3) | Small | 20 | 21 | `[0.0 44.9735]` |
+| Drop Location 4 (D4) | Small | 22 | 23 | `[-19.84125 29.6703]` |
+| Drop Location 5 (D5) | Large | 10 | 11 | `[-12.8205 -4.5991]` |
+
+### QDrone2 Pickup and Delivery Reference
+
+| Location | Package Type | Ground Location `[x y z]` | Floor | Window Location `[x y z]` |
+|---|---|---|---:|---|
+| Pickup Depot (P) | Pickup | `[-2.50305 29.6703 0.05]` | - | None |
+| Drop Location 1 (D1) | Small | `[11.2739 -10.84655 0.05]` | 4 | `[15.1739 -18.04655 9.65]` |
+| Drop Location 2 (D2) | Small | `[22.5478 29.6703 0.05]` | 3 | `[26.0478 16.7703 9.65]` |
+| Drop Location 3 (D3) | Small | `[0.0 44.9735 0.05]` | 2 | `[1.3 46.9735 4.85]` |
+| Drop Location 4 (D4) | Small | `[-19.84125 29.6703 0.05]` | 1 | None |
+| Drop Location 5 (D5) | Large | `[-12.8205 -4.5991 0.05]` | 1 | None |
 
 
 ### Strategy Note

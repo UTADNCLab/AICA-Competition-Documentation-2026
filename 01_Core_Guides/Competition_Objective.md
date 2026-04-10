@@ -18,7 +18,8 @@ For AICA, the mission focus is coordinated multi-agent delivery using **QCar2 + 
 
 ## In-Person Stage  (To Be Announced)
 
----
+
+
 
 ### Back to [AICA Home Portal](../00_Portal/AICA_PORTAL.md)
 

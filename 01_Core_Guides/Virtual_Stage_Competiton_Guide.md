@@ -82,9 +82,7 @@ For the complete scenario description, see: [Virtual Stage Detailed Scenario](..
 
 ## 4) Operational Guide
 
-The Operational Guide includes both the step-by-step mission workflow and the operational constraints for valid pickup, transfer, delivery, and mission execution.  
-
-[Operational Guide](../01_Core_Guides/Operational_Guide.md)
+The Operational Guide provides the step-by-step mission workflow and the operational constraints for valid pickup, transfer, delivery, and mission execution for both **QCar2** and **QDrone2** in the virtual stage. [Operational Guide](../01_Core_Guides/Operational_Guide.md)
 
 ---
 

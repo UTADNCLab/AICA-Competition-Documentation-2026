@@ -17,49 +17,24 @@
       </header>
       <section class="content markdown-body">
         <p>This guide explains how to run the AICA virtual stage and defines the operational conditions that must be satisfied during execution. It combines system startup, navigator usage, pickup/drop/transfer behavior, runtime checks, communication channels, and mission constraints into one practical document.</p>
-<p>It includes operational guidance for both <strong>QCar2</strong> and <strong>QDrone2</strong>.</p>
 <hr />
 <h2 id="navigation">Navigation</h2>
-<ol>
+<ul>
 <li><a href="#1-system-execution-flow">System Execution Flow</a></li>
 <li><a href="#2-before-you-start">Before You Start</a></li>
-<li><a href="#open-qlabs-and-load-the-cityscape-map-manually">Open QLabs and Load the Cityscape Map Manually</a></li>
-<li><a href="#run-the-spawn-file-manually">Run the Spawn File Manually</a></li>
 <li><a href="#3-automated-system-startup">Automated System Startup</a></li>
-<li><a href="#optional-manual-setup-before-running-the-bat-file">Optional Manual Setup Before Running the BAT File</a></li>
 <li><a href="#4-run-the-game-file-mandatory">Run the Game File (Mandatory)</a></li>
 <li><a href="#5-navigator-information">Navigator Information</a></li>
-<li><a href="#51-qdrone2-navigator">QDrone2 Navigator</a></li>
-<li><a href="#511-qdrone2-communication-channels-and-ports">QDrone2 Communication Channels and Ports</a></li>
-<li><a href="#52-qcar2-navigator">QCar2 Navigator</a></li>
-<li><a href="#521-qcar2-communication-channels-and-ports">QCar2 Communication Channels and Ports</a></li>
 <li><a href="#6-manual-control-details">Manual Control Details</a></li>
-<li><a href="#61-qcar2-manual-control">QCar2 Manual Control</a></li>
-<li><a href="#62-qdrone2-manual-control">QDrone2 Manual Control</a></li>
 <li><a href="#7-autonomous-control-details">Autonomous Control Details</a></li>
-<li><a href="#71-qcar2-autonomous-control">QCar2 Autonomous Control</a></li>
-<li><a href="#72-qdrone2-autonomous-control">QDrone2 Autonomous Control</a></li>
 <li><a href="#8-action-key-mapping-and-intention-mapping">Action Key Mapping and Intention Mapping</a></li>
-<li><a href="#81-python-action-keys-for-qdrone2">Python Action Keys for QDrone2</a></li>
-<li><a href="#82-matlab-simulink-intention-mapping">MATLAB / Simulink Intention Mapping</a></li>
 <li><a href="#9-pickup-and-delivery-operations-and-conditions">Pickup and Delivery Operations and Conditions</a></li>
-<li><a href="#91-drone-pickup">Drone Pickup</a></li>
-<li><a href="#92-car-pickup">Car Pickup</a></li>
-<li><a href="#93-drone-delivery">Drone Delivery</a></li>
-<li><a href="#94-car-delivery">Car Delivery</a></li>
-<li><a href="#10-transfer-operation-and-conditions">Transfer Operation and Conditions</a><ul>
-<li><a href="#101-car-to-drone-transfer">Car to Drone Transfer</a></li>
-<li><a href="#102-drone-to-car-transfer">Drone to Car Transfer</a></li>
+<li><a href="#10-transfer-operation-and-conditions">Transfer Operation and Conditions</a></li>
+<li><a href="#11-mission-timing-and-completion">Mission Timing and Completion</a></li>
+<li><a href="#12-runtime-validation-checklist">Runtime Validation Checklist</a></li>
+<li><a href="#13-common-errors-and-notes">Common Errors and Notes</a></li>
+<li><a href="#14-files-reference">Files Reference</a></li>
 </ul>
-</li>
-<li><a href="#11-final-runtime-check-mission-completion-and-file-reference">Final Runtime Check, Mission Completion, and File Reference</a><ul>
-<li><a href="#mission-timing-and-completion">Mission Timing and Completion</a></li>
-<li><a href="#final-runtime-check">Final Runtime Check</a></li>
-<li><a href="#main-file-types">Main File Types</a></li>
-<li><a href="#file-structure">File Structure</a></li>
-</ul>
-</li>
-</ol>
 <hr />
 <h2 id="1-system-execution-flow">1) System Execution Flow</h2>
 <p>The overall execution flow is:</p>
@@ -461,7 +436,15 @@
 <li>pressing <code>6</code> in Python may correspond to intention value <code>1</code> in MATLAB</li>
 </ul>
 <p>Even though the visible key number is different, <code>game.py</code> interprets them as the same action.</p>
-<p>Do not confuse <strong>keyboard key number</strong> with <strong>internal intention value</strong>. The behavior is the same in <code>game.py</code>. Only the way you trigger the intention differs between Python and MATLAB / Simulink.</p>
+<h4 id="important">Important</h4>
+<p>Do not confuse <strong>keyboard key number</strong> with <strong>internal intention value</strong>.</p>
+<p>The behavior is the same in <code>game.py</code>. Only the way you trigger the intention differs between Python and MATLAB / Simulink.</p>
+<h3 id="vehicle-speed-limits">Vehicle Speed Limits</h3>
+<ul>
+<li><strong>QCar2</strong> must not exceed the maximum speed of <strong>13 m/s</strong> in the scenario</li>
+<li><strong>QDrone2</strong> must not exceed the maximum speed of <strong>2.5 m/s</strong> in the scenario</li>
+<li>Teams may operate below the maximum speed limits for stability, safety, or strategy</li>
+</ul>
 <hr />
 <h2 id="9-pickup-and-delivery-operations-and-conditions">9) Pickup and Delivery Operations and Conditions</h2>
 <p>Pickup and delivery actions are managed by <code>game.py</code> and require the vehicle to remain inside the valid region for the full action duration.</p>
@@ -659,20 +642,20 @@ LOC_PICK = pickup/target location
 <li>after <strong>3 seconds</strong>, the package transfers from the drone to the car</li>
 </ul>
 <hr />
-<h2 id="11-final-runtime-check-mission-completion-and-file-reference">11) Final Runtime Check, Mission Completion, and File Reference</h2>
-<h3 id="mission-timing-and-completion">Mission Timing and Completion</h3>
+<h2 id="11-mission-timing-and-completion">11) Mission Timing and Completion</h2>
 <ul>
-<li>Mission time begins at the official mission start.</li>
-<li>The mission objective is to minimize total completion time.</li>
-<li>If required deliveries are not completed, the mission is considered incomplete.</li>
+<li>Mission time begins at the official mission start</li>
+<li>The mission objective is to minimize total completion time</li>
+<li>If required deliveries are not completed, the mission is considered incomplete</li>
 </ul>
 <p>A delivery is considered complete only after the scenario logic confirms a valid delivery event.</p>
 <h3 id="important">Important</h3>
 <ul>
-<li><code>game.py</code> manages pickup timing, transfer timing, delivery timing, and scoring.</li>
-<li>Teams should verify package completion behavior during runtime.</li>
+<li><code>game.py</code> manages pickup timing, transfer timing, delivery timing, and scoring</li>
+<li>Teams should verify package completion behavior during runtime</li>
 </ul>
-<h3 id="final-runtime-check">Final Runtime Check</h3>
+<hr />
+<h2 id="12-runtime-validation-checklist">12) Runtime Validation Checklist</h2>
 <p>Before running a full mission, verify the following:</p>
 <ul>
 <li>both vehicles are spawned</li>
@@ -686,6 +669,34 @@ LOC_PICK = pickup/target location
 <li>transfer actions are working</li>
 <li>score display is visible in QLabs</li>
 </ul>
+<hr />
+<h2 id="13-common-errors-and-notes">13) Common Errors and Notes</h2>
+<h3 id="transfer-requires-both-sides">Transfer Requires Both Sides</h3>
+<p>For transfer to work:</p>
+<ul>
+<li>both vehicles must be positioned correctly</li>
+<li>both intention values must be set correctly</li>
+</ul>
+<p>If one is missing, transfer will fail.</p>
+<hr />
+<h3 id="gamepy-must-always-be-running"><code>game.py</code> Must Always Be Running</h3>
+<p>Without <code>game.py</code>:</p>
+<ul>
+<li>package timing will not work</li>
+<li>scoring will not update</li>
+<li>package movement will not be shown correctly</li>
+</ul>
+<hr />
+<h3 id="communication-port-consistency">Communication Port Consistency</h3>
+<p>The documented communication port numbers should be used exactly as defined in the provided implementation.</p>
+<p>Before mission execution:</p>
+<ul>
+<li>verify all required camera and stream connections are active</li>
+<li>verify the expected simulator and game communication channels are running</li>
+<li>disable unused camera channels when not required to improve runtime performance</li>
+</ul>
+<hr />
+<h2 id="14-files-reference">14) Files Reference</h2>
 <h3 id="main-file-types">Main File Types</h3>
 <p>The competition package includes the following types of files:</p>
 <ul>
