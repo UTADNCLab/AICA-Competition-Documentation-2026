@@ -52,7 +52,7 @@ A separate folder for actual competition files.
 From `C:\Users\<YourUsername>\Documents\Quanser\`, run:
 
 ```bash
-git clone https://github.com/UTADNCLab/IEEE-SMC-AICA-Competition-2026.git Competition_Files
+`https://github.com/UTADNCLab/IEEE-SMC-AICA-Competition-2026/tree/main/AICA_Competition_Files`
 ```
 
 #### Without Git (ZIP)
@@ -72,7 +72,7 @@ C:\Users\<YourUsername>\Documents\Quanser\9_AICA_Competition_Files\
 ```text
 C:\Users\<YourUsername>\Documents\Quanser\
     0_libraries, 1_setup ..\
-    Competition_Files\
+    AICA_Competition_Files\
 ```
 
 > Keep separate folders .
