@@ -24,7 +24,7 @@
 <li><a href="#1-system-execution-flow">System Execution Flow</a></li>
 <li><a href="#2-before-you-start">Before You Start</a><ul>
 <li><a href="#open-qlabs-and-load-the-cityscape-map-manually">Open QLabs and Load the Cityscape Map Manually</a></li>
-<li><a href="#run-the-spawn-file-manually">Run the Spawn File Manually</a></li>
+<li><a href="#run-the-setup-environment-file-manually">Run the Setup Environment File Manually</a></li>
 </ul>
 </li>
 <li><a href="#3-automated-system-startup">Automated System Startup</a><ul>
@@ -107,12 +107,12 @@
 <h3 id="important">Important</h3>
 <ul>
 <li>The virtual stage is designed to run in the <strong>Cityscape</strong> map.</li>
-<li>Make sure the Cityscape map is loaded before spawning QCar2 and QDrone2.</li>
+<li>Make sure the Cityscape map is loaded before running the setup environment files for QCar2 and QDrone2.</li>
 <li>If the wrong map is open, the spawn locations, nodes, and delivery locations will not match the competition scenario.</li>
 <li>Always confirm the correct map is loaded before running <code>setup_env.py</code> or <code>setup_env.m</code>.</li>
 </ul>
-<h3 id="run-the-spawn-file-manually">Run the Spawn File Manually</h3>
-<p>If you do not want the BAT file to handle vehicle spawning, you can run the spawn file manually after loading the Cityscape map.</p>
+<h3 id="run-the-setup-environment-file-manually">Run the Setup Environment File Manually</h3>
+<p>If you do not want the BAT file to handle teh set up of vehicles, you can run the <code>setup environment</code> file manually after loading the Cityscape map.</p>
 <p>Run one of the following depending on your workflow:</p>
 <ul>
 <li><strong>Python:</strong> <code>python setup_env.py</code></li>
@@ -122,8 +122,8 @@
 <h3 id="important">Important</h3>
 <ul>
 <li>Make sure QLabs is already open and the <strong>Cityscape</strong> map is loaded before running the spawn file.</li>
-<li>The spawn file should be run only after the correct map is fully loaded.</li>
-<li>If vehicles are already spawned, avoid running the spawn file again unless you want to reset the scenario.</li>
+<li>The setup environment file should be run only after the correct map is fully loaded.</li>
+<li>If vehicles are already spawned, avoid running the setup environment file again unless you want to reset the scenario.</li>
 </ul>
 <hr />
 <h2 id="3-automated-system-startup">3) Automated System Startup</h2>
@@ -150,7 +150,7 @@
 <ul>
 <li>comment out the QLabs launch command if QLabs is already open</li>
 <li>comment out the map-loading step if the <strong>Cityscape</strong> map is already loaded</li>
-<li>comment out the spawn step if <code>setup_env.py</code> or <code>setup_env.m</code> has already been run manually</li>
+<li>comment out the setup environment step if <code>setup_env.py</code> or <code>setup_env.m</code> has already been run manually</li>
 </ul>
 <h3 id="important">Important</h3>
 <ul>
@@ -520,7 +520,7 @@
 <li>the condition must be maintained for the full <strong>3 seconds</strong></li>
 </ul>
 <h4 id="operational-description">Operational Description</h4>
-<p>If the QDrone2 is spawned near the depot or moved near a package:</p>
+<p>If the QDrone2 is spawned near the central pickup or moved near a package:</p>
 <ol>
 <li>move the QDrone2 into the valid pickup region</li>
 <li>press the assigned pickup key</li>
@@ -535,10 +535,12 @@
 <pre><code class="language-python">np.hypot(dx, dy) &lt;= 2.0 and 0.0 &lt;= dz &lt;= 4.0
 
 </code></pre>
-<p>where:
-- <code>dx</code> = difference in x-position between QDrone2 and the target location
-- <code>dy</code> = difference in y-position between QDrone2 and the target location
-- <code>dz</code> = difference in z-position between QDrone2 and the target location</p>
+<p>where:</p>
+<ul>
+<li><code>dx</code> = difference in x-position between QDrone2 and the target location</li>
+<li><code>dy</code> = difference in y-position between QDrone2 and the target location</li>
+<li><code>dz</code> = difference in z-position between QDrone2 and the target location</li>
+</ul>
 <h3 id="92-qcar2-pickup">9.2 QCar2 Pickup</h3>
 <h4 id="exact-distance-requirement">Exact Distance Requirement</h4>
 <p>A QCar2 pickup is valid when all of the following are satisfied relative to the pickup location:</p>
@@ -565,9 +567,11 @@
 <h4 id="actual-condition-check">Actual Condition Check</h4>
 <pre><code class="language-python">np.linalg.norm(loc_car - LOC_PICK) &lt; 2.0
 </code></pre>
-<p>where:
-- <code>loc_car</code> = QCar2 current position
-- <code>LOC_PICK</code> = target location</p>
+<p>where:</p>
+<ul>
+<li><code>loc_car</code> = QCar2 current position</li>
+<li><code>LOC_PICK</code> = target location</li>
+</ul>
 <h3 id="93-qdrone2-delivery">9.3 QDrone2 Delivery</h3>
 <h4 id="exact-distance-requirement">Exact Distance Requirement</h4>
 <p>A QDrone2 delivery is valid when all of the following are satisfied relative to the drop location:</p>

@@ -11,7 +11,7 @@ It includes operational guidance for both **QCar2** and **QDrone2**.
 1. [System Execution Flow](#1-system-execution-flow)
 2. [Before You Start](#2-before-you-start)
       - [Open QLabs and Load the Cityscape Map Manually](#open-qlabs-and-load-the-cityscape-map-manually)
-      - [Run the Spawn File Manually](#run-the-spawn-file-manually)
+      - [Run the Setup Environment File Manually](#run-the-setup-environment-file-manually)
 3. [Automated System Startup](#3-automated-system-startup)
       - [Optional Manual Setup Before Running the BAT File](#optional-manual-setup-before-running-the-bat-file)
 4. [Run the Game File (Mandatory)](#4-run-the-game-file-mandatory)
@@ -81,13 +81,13 @@ For setup details, refer to: [System and Software Setup](../00_Portal/AICA_COMPE
 ### Important
 
 - The virtual stage is designed to run in the **Cityscape** map.
-- Make sure the Cityscape map is loaded before spawning QCar2 and QDrone2.
+- Make sure the Cityscape map is loaded before running the setup environment files for QCar2 and QDrone2.
 - If the wrong map is open, the spawn locations, nodes, and delivery locations will not match the competition scenario.
 - Always confirm the correct map is loaded before running `setup_env.py` or `setup_env.m`.
 
-### Run the Spawn File Manually
+### Run the Setup Environment File Manually
 
-If you do not want the BAT file to handle vehicle spawning, you can run the spawn file manually after loading the Cityscape map.
+If you do not want the BAT file to handle teh set up of vehicles, you can run the `setup environment` file manually after loading the Cityscape map.
 
 Run one of the following depending on your workflow:
 
@@ -99,8 +99,8 @@ This step spawns **QCar2** and **QDrone2** in the QLabs environment using the co
 ### Important
 
 - Make sure QLabs is already open and the **Cityscape** map is loaded before running the spawn file.
-- The spawn file should be run only after the correct map is fully loaded.
-- If vehicles are already spawned, avoid running the spawn file again unless you want to reset the scenario.
+- The setup environment file should be run only after the correct map is fully loaded.
+- If vehicles are already spawned, avoid running the setup environment file again unless you want to reset the scenario.
 
 ---
 
@@ -131,7 +131,7 @@ Examples:
 
 - comment out the QLabs launch command if QLabs is already open
 - comment out the map-loading step if the **Cityscape** map is already loaded
-- comment out the spawn step if `setup_env.py` or `setup_env.m` has already been run manually
+- comment out the setup environment step if `setup_env.py` or `setup_env.m` has already been run manually
 
 ### Important
 
@@ -556,7 +556,7 @@ A QDrone2 pickup is valid when all of the following are satisfied relative to th
 
 #### Operational Description
 
-If the QDrone2 is spawned near the depot or moved near a package:
+If the QDrone2 is spawned near the central pickup or moved near a package:
 
 1. move the QDrone2 into the valid pickup region
 2. press the assigned pickup key
@@ -579,9 +579,10 @@ np.hypot(dx, dy) <= 2.0 and 0.0 <= dz <= 4.0
 ```
 
 where:
-- `dx` = difference in x-position between QDrone2 and the target location
-- `dy` = difference in y-position between QDrone2 and the target location
-- `dz` = difference in z-position between QDrone2 and the target location
+
+  - `dx` = difference in x-position between QDrone2 and the target location
+  - `dy` = difference in y-position between QDrone2 and the target location
+  - `dz` = difference in z-position between QDrone2 and the target location
 
 
 
@@ -622,8 +623,9 @@ np.linalg.norm(loc_car - LOC_PICK) < 2.0
 ```
 
 where:
-- `loc_car` = QCar2 current position
-- `LOC_PICK` = target location
+
+  - `loc_car` = QCar2 current position
+  - `LOC_PICK` = target location
 
 ### 9.3 QDrone2 Delivery
 

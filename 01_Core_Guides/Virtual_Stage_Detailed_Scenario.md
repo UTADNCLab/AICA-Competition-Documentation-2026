@@ -121,7 +121,6 @@ Each delivery has two options.
 ### A) Window Delivery (QDrone2 Only)
 
 - Delivery is performed directly to the apartment window
-- Only **QDrone2** can perform window delivery
 - This delivery mode provides bonus points and can result in a higher score.
 
 
