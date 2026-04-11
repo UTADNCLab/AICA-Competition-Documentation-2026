@@ -1,7 +1,4 @@
 # AICA Virtual Stage Handbook 
-## IEEE SMC 2026 AI-Powered Collaborative Autonomy Challenge
-
----
 
 ## Overview
 
@@ -13,6 +10,7 @@ Teams demonstrate their ability to complete deliveries from the **Central Pickup
 - **QDrone2** (aerial vehicle)
 
 Teams are free to use **QCar2**, **QDrone2**, or both vehicles together as part of their delivery strategy.
+
 ---
 
 ## Competition Structure
@@ -33,8 +31,6 @@ Teams are expected to implement and demonstrate a delivery strategy in the Quans
 
 Your system should:
 
-- plan and execute delivery routes  
-- control **QCar2** and **QDrone2** stably  
 - perform correct pickup and delivery actions  
 - optionally use transfer if it supports your strategy  
 - demonstrate successful delivery capability in the provided scenario  

@@ -14,7 +14,7 @@ It includes operational guidance for both **QCar2** and **QDrone2**.
       - [Run the Setup Environment File Manually](#run-the-setup-environment-file-manually)
 3. [Automated System Startup](#3-automated-system-startup)
       - [Optional Manual Setup Before Running the BAT File](#optional-manual-setup-before-running-the-bat-file)
-4. [Run the Game File (Mandatory)](#4-run-the-game-file-mandatory)
+4. [Run the Game File (Mandatory - Do not modify)](#4-run-the-game-file-mandatory--do-not-modify)
 5. [Navigator Information](#5-navigator-information)
       - [QDrone2 Navigator](#51-qdrone2-navigator)
       - [QDrone2 Communication Channels and Ports](#511-qdrone2-communication-channels-and-ports)
