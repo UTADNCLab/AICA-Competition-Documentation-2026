@@ -1,6 +1,6 @@
 # Operational Guide
 
-This guide explains how to run the AICA virtual stage and defines the operational conditions that must be satisfied during execution. It combines system startup, navigator usage, pickup/drop/transfer behavior, runtime checks, communication channels, and mission constraints into one practical document.
+This guide explains how to run the AICA virtual stage and defines the operational conditions that must be satisfied during execution. It combines system startup, navigator usage, pickup/drop/transfer behavior, runtime checks, communication channels, and mission constraints.
 
 It includes operational guidance for both **QCar2** and **QDrone2**.
 

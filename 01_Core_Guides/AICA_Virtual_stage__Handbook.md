@@ -5,15 +5,14 @@
 
 ## Overview
 
-The AI-Powered Collaborative Autonomy Challenge (AICA) is a robotics competition focused on developing autonomous algorithms for collaborative delivery using heterogeneous systems.
+The **IEEE SMC AI-Powered Collaborative Autonomy Challenge (AICA)** focuses on implementing a delivery scenario in the Quanser Interactive Labs (**QLabs**) simulation environment.
 
-Teams will design and demonstrate coordination between:
+Teams demonstrate their ability to complete deliveries from the **Central Pickup** location to the required delivery locations using:
 
-- **QCar2** (ground vehicle)  
-- **QDrone2** (aerial vehicle)  
+- **QCar2** (ground vehicle)
+- **QDrone2** (aerial vehicle)
 
-The goal is to complete delivery missions efficiently using planning, control, and coordination strategies.
-
+Teams are free to use **QCar2**, **QDrone2**, or both vehicles together as part of their delivery strategy.
 ---
 
 ## Competition Structure
@@ -21,35 +20,24 @@ The goal is to complete delivery missions efficiently using planning, control, a
 The competition is conducted in two stages:
 
 - **Virtual Stage (Simulation-Based)**  
-  Teams develop and validate their system using Quanser QLabs  
+  Teams develop and validate their system using Quanser Interactive Labs (QLabs)  
 
-- **In-Person Stage (Simulation-Based )**  
-  The **top 3 teams**, based on virtual-stage results, will be invited to compete at the IEEE SMC 2026 Conference (October 4–7, Bellevue, Washington)
-
----
-
-## Objective
-
-Complete all deliveries in the **minimum total mission time** while following all operational constraints.
-
-Performance depends on:
-
-- Efficient routing and planning  
-- Correct pickup, transfer, and delivery actions  
-- Stable control and execution  
-- Effective coordination between vehicles  
+- **Conference Stage (Simulation-Based )**  
+  The **top teams**, based on virtual-stage results, will be invited to compete at the IEEE SMC 2026 Conference (October 4–7, Bellevue, Washington)
 
 ---
 
 ## What You Need to Do
 
+Teams are expected to implement and demonstrate a delivery strategy in the Quanser Interactive Labs (**QLabs**) simulation environment.
+
 Your system should:
 
-- Plan routes using provided maps and nodes  
-- Execute stable control for both vehicles  
-- Follow lane-based navigation for QCar2  
-- Coordinate QCar2 and QDrone2 for deliveries and transfers  
-- Complete all deliveries successfully  
+- plan and execute delivery routes  
+- control **QCar2** and **QDrone2** stably  
+- perform correct pickup and delivery actions  
+- optionally use transfer if it supports your strategy  
+- demonstrate successful delivery capability in the provided scenario  
 
 ---
 
@@ -70,13 +58,6 @@ For complete details, refer to:
 
 ## Software Setup
  [Software Setup Instructions](../03_Setup/Software_Setup_Instructions.md)
-
----
-
-## Additional Resources
-
-- [Competition Guide](../00_Portal/AICA_COMPETITION_GUIDE.md)  
-- [Development Guide](../01_Core_Guides/Development_Guide.md)  
 
 ---
 

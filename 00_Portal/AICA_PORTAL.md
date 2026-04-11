@@ -10,7 +10,7 @@ The **IEEE SMC AI-Powered Collaborative Autonomy Challenge (AICA)** is a competi
 
 The competition is conducted in **two stages**:
 
-- **Virtual Stage** – Teams develop, implement, and test their solutions in Quanser Interractive Lab (QLabs) simulation environment based on the provided virtual stage scenario, and submit a video link demonstrating complete mission execution and system performance.
+- **Virtual Stage** – Teams develop, implement, and test their solutions in Quanser Interactive Lab (QLabs) simulation environment based on the provided virtual stage scenario, and submit a video link demonstrating complete mission execution and system performance.
 
 - **Conference Stage** – The **Top teams**, based on virtual-stage results, will be invited to compete at the **IEEE SMC 2026 Conference (October 4–7, Bellevue, Washington)**. In this stage, teams will execute and demonstrate their solutions in the same Quanser Interactive Labs (QLabs) simulation environment based on the Conference Stage scenario.
 
