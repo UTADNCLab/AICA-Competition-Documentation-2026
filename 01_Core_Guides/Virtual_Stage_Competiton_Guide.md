@@ -88,13 +88,12 @@ This section defines how team performance is scored and how rankings are determi
 - **Score for each completed delivery = 1000 − delivery completion time + window delivery bonus**
 - **Total Score = Sum of all delivery scores**
 
-#### Delivery Completion Time
 
-**Delivery completion time** is the time taken to complete a delivery, measured from the mission start time until the package is successfully delivered.
 
-#### Window Delivery Bonus
+**Delivery Completion Time** is the time taken to complete a delivery, measured from the mission start time until the package is successfully delivered.
 
-Only **QDrone2** can perform window deliveries, and the bonus depends on the target floor level.
+**Window Delivery Bonus**: Only **QDrone2** can perform window deliveries, and the bonus depends on the target floor level.
+
 
 **Bonus by floor level:**
 
