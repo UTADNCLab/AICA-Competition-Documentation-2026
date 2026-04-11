@@ -7,7 +7,7 @@ This guide explains what teams should prepare for virtual-stage evaluation.
 
 ## Navigation
 
-- [Virtual Stage Objective](#1-virtual-stage-objective)
+- [Virtual Stage Submission](#1-virtual-stage-submission)
 - [Virtual Stage Detailed Scenario](#2-virtual-stage-detailed-scenario)
 - [Core Principles for Multimodal Delivery](#3-core-principles-for-multimodal-delivery)
 - [Operational Guide](#4-operational-guide)
@@ -16,20 +16,11 @@ This guide explains what teams should prepare for virtual-stage evaluation.
 
 ---
 
-## 1) Virtual Stage Objective
+## 1) Virtual Stage Submission
 
-The objective of the Virtual Stage is to demonstrate your system’s ability to complete delivery missions in the QLabs simulation environment.
+The objective of the Virtual Stage is to demonstrate each team’s ability to implement multimodal delivery in the Quanser Interactive Labs (**QLabs**) simulation environment.
 
-Your submission should clearly demonstrate:
-
-- End-to-end mission completion  
-- Efficient routing and navigation using provided maps and paths  
-- Stable control and correct action sequencing  
-- Effective coordination between QCar2 and QDrone2  
-
-For full submission details, see: [Virtual Stage Submission Guide](../02_Participation/Submission_Guide.md)
-
-This stage evaluates mission completion, system reliability, and coordination performance.
+For full submission details, see the [Virtual Stage Submission Guide](../02_Participation/Submission_Guide.md).
 
 ---
 
@@ -37,19 +28,16 @@ This stage evaluates mission completion, system reliability, and coordination pe
 
 For the complete scenario description, see: [Virtual Stage Detailed Scenario](../01_Core_Guides/Virtual_Stage_Detailed_Scenario.md)
 
----
+This document includes:
 
-### Key Scenario Elements
-
-- Central depot pickups for packages  
-    - **QCar2** can carry: 2 small packages or 1 large package  
-    - **QDrone2** can carry: 1 small package only  
-- Coordination between QCar2 and QDrone2  
-- Vehicle-to-vehicle transfers  
-- Window delivery vs common drop 
-- Delivery completion requirements  
-
-> This section provides a high-level overview. Refer to the detailed scenario page for full rules and configurations.
+- Central pickup operations for delivery packages
+  - **QCar2** can carry **2 small packages** or **1 large package**
+  - **QDrone2** can carry **1 small package only**
+- Vehicle-to-vehicle transfer operations
+- **Window delivery** and **Shared drop-off** delivery options
+- Delivery completion requirements
+- Pickup and delivery location references
+- **QCar2** node references and **QDrone2** coordinate references
 
 ---
 
@@ -82,7 +70,7 @@ For the complete scenario description, see: [Virtual Stage Detailed Scenario](..
 
 ## 4) Operational Guide
 
-The Operational Guide provides the step-by-step mission workflow and the operational constraints for valid pickup, transfer, delivery, and mission execution for both **QCar2** and **QDrone2** in the virtual stage. [Operational Guide](../01_Core_Guides/Operational_Guide.md)
+See the [Operational Guide](../01_Core_Guides/Operational_Guide.md) for the step-by-step mission workflow and the operational constraints for valid pickup, transfer, delivery, and mission execution for both **QCar2** and **QDrone2** in the virtual stage.
 
 ---
 
@@ -92,30 +80,35 @@ This section defines how team performance is scored and how rankings are determi
 
 ### Scoring Method
 
-- The mission clock starts at the official mission start  
-- A delivery is counted when the delivery is successfully completed according to the scenario logic  
+- Mission time begins at the mission start time.
+- When a delivery is successfully completed, the delivery score calculated from the scoring formula will be shown in the Quanser Interactive Labs (QLabs) window.
 
 **Scoring formula:**
 
-- **Delivery score = 1000 − current mission time + floor-based bonus**
+- **Score for each completed delivery = 1000 − delivery completion time + window delivery bonus**
 - **Total Score = Sum of all delivery scores**
 
-#### Not all deliveries receive a bonus. Only **window deliveries by QDrone2** are eligible for a floor-based bonus, and the bonus increases with the target floor level.
+#### Delivery Completion Time
 
-**Example floor-based bonus logic:**
+**Delivery completion time** is the time taken to complete a delivery, measured from the mission start time until the package is successfully delivered.
+
+#### Window Delivery Bonus
+
+Only **QDrone2** can perform window deliveries, and the bonus depends on the target floor level.
+
+**Bonus by floor level:**
 
 - Floor 4 → **+400**
 - Floor 3 → **+300**
 - Floor 2 → **+200**
 
-Higher scores correspond to faster delivery completion and more valuable delivery choices.
+Higher scores are earned by completing deliveries earlier and by choosing delivery methods that provide additional bonus points.
+
 
 ### Ranking
 
-- Teams are ranked based on their total score  
-- The team with the highest total score ranks first  
-
-For a detailed explanation of scoring behavior and recommended strategies, see: [Scoring and Strategy](../01_Core_Guides/Scoring_and_Strategy.md)
+- Teams are ranked based on their total score
+- The team with the highest total score ranks first
 
 ---
 

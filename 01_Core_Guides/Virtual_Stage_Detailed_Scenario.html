@@ -21,7 +21,6 @@
 <h2 id="navigation">Navigation</h2>
 <ul>
 <li><a href="#scenario-summary">Scenario Summary</a></li>
-<li><a href="#mission-objective">Mission Objective</a></li>
 <li><a href="#1-system-setup">System Setup</a></li>
 <li><a href="#2-depot-and-pickup-operations">Depot and Pickup Operations</a></li>
 <li><a href="#3-vehicle-to-vehicle-transfer">Vehicle-to-Vehicle Transfer</a></li>
@@ -32,17 +31,9 @@
 <hr />
 <h2 id="scenario-summary">Scenario Summary</h2>
 <ul>
-<li>AICA Virtual Stage is a collaborative autonomy challenge where teams design and demonstrate an end-to-end delivery system using a ground vehicle (<strong>QCar2</strong>) and an aerial vehicle (<strong>QDrone2</strong>) operating in a shared mission environment.</li>
-<li>The scenario involves package pickup, vehicle-to-vehicle transfer, route execution, and final delivery using either window or common drop methods.</li>
-<li>Teams must coordinate both vehicles effectively while operating under timing constraints and predefined operational conditions.</li>
-</ul>
-<hr />
-<h2 id="mission-objective">Mission Objective</h2>
-<ul>
-<li>The objective is to complete all assigned deliveries in the minimum possible total mission time.</li>
-<li>Mission timing starts at the official scenario start and ends after all required deliveries are completed.</li>
-<li>Teams should optimize routing, coordination, delivery order, and delivery decisions while following operational constraints.</li>
-<li>Competitors are free to choose the order of deliveries, task allocation between QCar2 and QDrone2, and how they execute the mission strategy.</li>
+<li>AICA Virtual Stage is a collaborative autonomy challenge where teams design, implement, and demonstrate a delivery system using a ground vehicle (<strong>QCar2</strong>) and an aerial vehicle (<strong>QDrone2</strong>) operating in a shared mission environment.</li>
+<li>The scenario focuses on demonstrating the ability to perform multimodal delivery through package pickup, route execution, and final delivery using either window delivery or shared drop-off methods.</li>
+<li>Vehicle-to-vehicle transfer is supported as an optional coordination feature and may be used if it benefits the team’s delivery strategy.</li>
 </ul>
 <hr />
 <h2 id="1-system-setup">1) System Setup</h2>
@@ -64,11 +55,11 @@
 <h2 id="2-depot-and-pickup-operations">2) Depot and Pickup Operations</h2>
 <p>At mission start:</p>
 <ul>
-<li>All packages are located at a central depot</li>
-<li>The depot contains <strong>5 delivery packages</strong>:</li>
+<li>All packages are located at a Central Pickup</li>
+<li>The central pickup contains <strong>5 delivery packages</strong>:</li>
 <li><strong>4 small packages</strong></li>
 <li><strong>1 large package</strong></li>
-<li>Both QCar2 and QDrone2 can pick up from the depot</li>
+<li>Both QCar2 and QDrone2 can pick up from the central pickup</li>
 <li><strong>QCar2</strong> can pick up small or large packages</li>
 <li><strong>QDrone2</strong> can only pick up small packages</li>
 </ul>
@@ -79,7 +70,7 @@
 <li><strong>QDrone2</strong> remains within <strong>2.0 m</strong> horizontal distance and within <strong>0.0 m to 4.0 m</strong> vertical offset of the pickup location for <strong>3 seconds</strong></li>
 </ul>
 <p>After the required hold time, the package is considered loaded.</p>
-<h4 id="example-pickup-from-depot-will-update-with-new-depot-location">Example Pickup from Depot will update with new depot location</h4>
+<h4 id="example-central-pickup-package-by-qcar2">Example Central Pickup Package by QCar2</h4>
 <p><img src="../images/car_pickup_box.png"></p>
 <h3 id="carry-constraints">Carry Constraints</h3>
 <p>Current carry limits at a time are:</p>
@@ -112,46 +103,39 @@
 <p><img src="../images/drone_to_Car.png"></p>
 <hr />
 <h2 id="4-delivery-locations">4) Delivery Locations</h2>
-<p>Each delivery objective (apartment) has two delivery options.</p>
-<h3 id="a-apartment-window-drone-only">A) Apartment Window (Drone Only)</h3>
+<p>Each delivery has two options.</p>
+<h3 id="a-window-delivery-qdrone2-only">A) Window Delivery (QDrone2 Only)</h3>
 <ul>
 <li>Delivery is performed directly to the apartment window</li>
 <li>Only <strong>QDrone2</strong> can perform window delivery</li>
-<li>This is the faster and higher-value delivery mode</li>
+<li>This delivery mode provides bonus points and can result in a higher score.</li>
 </ul>
-<h3 id="b-common-drop-location">B) Common Drop Location</h3>
+<h3 id="b-shared-drop-off-location">B) Shared Drop-Off Location</h3>
 <ul>
-<li>A shared drop point is provided for each apartment building</li>
+<li>A Shared Drop-Off point is provided for each apartment building</li>
 <li><strong>QCar2</strong> or <strong>QDrone2</strong> can deliver to this location</li>
-<li>This is more flexible, but may be less favorable for scoring depending on the scenario configuration</li>
+<li>This delivery option is more flexible, but it may be less favorable for achieving a higher score.</li>
 </ul>
-<h3 id="floor-drop-off-window-delivery-vs-common-drop-off">Floor Drop-Off (Window Delivery) v/s Common Drop-Off</h3>
-<ul>
-<li>Delivery locations may include both <strong>floor drop-off</strong> targets and <strong>common drop-off</strong> locations.</li>
-<li><strong>Floor drop-off</strong> deliveries can receive different score bonuses depending on the floor level.</li>
-<li><strong>Common drop-off</strong> deliveries follow the standard scoring method without floor-based bonus.</li>
-<li>Teams should consider both the delivery type and the scoring difference when planning delivery order and strategy.</li>
-</ul>
+<p>Teams should consider both the delivery type and the scoring difference when planning delivery order and strategy.</p>
 <hr />
 <h2 id="5-delivery-completion">5) Delivery Completion</h2>
-<p>A delivery is considered complete only after the package is successfully dropped at the designated drop-off location according to the scenario logic.</p>
-<h3 id="window-delivery-drone">Window Delivery (Drone)</h3>
+<h3 id="window-delivery-qdrone2">Window Delivery (QDrone2)</h3>
 <ul>
-<li>The drone must remain within <strong>2.0 m</strong> horizontal distance and within <strong>0.0 m to 4.0 m</strong> vertical offset of the window delivery target for at least <strong>3 seconds</strong></li>
+<li>The QDrone2 must remain within <strong>2.0 m</strong> horizontal distance and within <strong>0.0 m to 4.0 m</strong> vertical offset of the window delivery target for at least <strong>3 seconds</strong></li>
 </ul>
 <h4 id="example-window-delivery">Example Window Delivery</h4>
 <p><img src="../images/Drone_window_delivery.png"></p>
-<h3 id="common-drop-delivery-car-or-drone">Common Drop Delivery (Car or Drone)</h3>
+<h3 id="shared-drop-off-delivery-car-or-drone">Shared Drop off Delivery (Car or Drone)</h3>
 <ul>
 <li><strong>QCar2:</strong> Must remain within <strong>2.0 m</strong> of the drop location for at least <strong>3 seconds</strong></li>
 <li><strong>QDrone2:</strong> Must remain within <strong>2.0 m</strong> horizontal distance and within <strong>0.0 m to 4.0 m</strong> vertical offset of the drop location for at least <strong>3 seconds</strong></li>
 </ul>
-<h4 id="example-common-delivery-by-car">Example Common Delivery by Car</h4>
+<h4 id="example-shared-drop-off-delivery-by-car">Example Shared drop off Delivery by Car</h4>
 <p><img src="../images/common_drop_by_car_or_drone.png"></p>
 <hr />
 <h2 id="6-pick-up-and-delivery-location">6) Pick up and Delivery Location</h2>
 <ul>
-<li>Pickup Depot: <strong>P</strong></li>
+<li>Central pickup: <strong>P</strong></li>
 <li>Small package delivery locations: <strong>D1, D2, D3, D4</strong></li>
 <li>Large package delivery location: <strong>D5</strong></li>
 </ul>
@@ -171,12 +155,12 @@
 <th>Package Type</th>
 <th style="text-align: right;">Python Node</th>
 <th style="text-align: right;">MATLAB / Simulink Node</th>
-<th>Ground Location <code>[x y]</code></th>
+<th>Shared Drop-Off Location <code>[x y]</code></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Pickup Depot (P)</td>
+<td>Central pickup (P)</td>
 <td>Pickup</td>
 <td style="text-align: right;">24</td>
 <td style="text-align: right;">25</td>
@@ -225,14 +209,14 @@
 <tr>
 <th>Location</th>
 <th>Package Type</th>
-<th>Ground Location <code>[x y z]</code></th>
+<th>Shared Drop-Off Location <code>[x y z]</code></th>
 <th style="text-align: right;">Floor</th>
-<th>Window Location <code>[x y z]</code></th>
+<th>Window Delivery Location <code>[x y z]</code></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Pickup Depot (P)</td>
+<td>Central pickup (P)</td>
 <td>Pickup</td>
 <td><code>[-2.50305 29.6703 0.05]</code></td>
 <td style="text-align: right;">-</td>

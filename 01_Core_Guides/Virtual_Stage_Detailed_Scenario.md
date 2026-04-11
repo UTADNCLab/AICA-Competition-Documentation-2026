@@ -7,7 +7,6 @@ This page describes the mission environment, delivery workflow, key location dat
 ## Navigation
 
 - [Scenario Summary](#scenario-summary)
-- [Mission Objective](#mission-objective)
   - [System Setup](#1-system-setup)
   - [Depot and Pickup Operations](#2-depot-and-pickup-operations)
   - [Vehicle-to-Vehicle Transfer](#3-vehicle-to-vehicle-transfer)
@@ -19,18 +18,9 @@ This page describes the mission environment, delivery workflow, key location dat
 
 ## Scenario Summary
 
-- AICA Virtual Stage is a collaborative autonomy challenge where teams design and demonstrate an end-to-end delivery system using a ground vehicle (**QCar2**) and an aerial vehicle (**QDrone2**) operating in a shared mission environment.
-- The scenario involves package pickup, vehicle-to-vehicle transfer, route execution, and final delivery using either window or common drop methods.
-- Teams must coordinate both vehicles effectively while operating under timing constraints and predefined operational conditions.
-
----
-
-## Mission Objective
-
-- The objective is to complete all assigned deliveries in the minimum possible total mission time.
-- Mission timing starts at the official scenario start and ends after all required deliveries are completed.
-- Teams should optimize routing, coordination, delivery order, and delivery decisions while following operational constraints.
-- Competitors are free to choose the order of deliveries, task allocation between QCar2 and QDrone2, and how they execute the mission strategy.
+- AICA Virtual Stage is a collaborative autonomy challenge where teams design, implement, and demonstrate a delivery system using a ground vehicle (**QCar2**) and an aerial vehicle (**QDrone2**) operating in a shared mission environment.
+- The scenario focuses on demonstrating the ability to perform multimodal delivery through package pickup, route execution, and final delivery using either window delivery or shared drop-off methods.
+- Vehicle-to-vehicle transfer is supported as an optional coordination feature and may be used if it benefits the team’s delivery strategy.
 
 ---
 
@@ -60,11 +50,11 @@ Initial spawn positions of QCar2 and QDrone2 can be adjusted by competitors by e
 
 At mission start:
 
-- All packages are located at a central depot
-- The depot contains **5 delivery packages**:
+- All packages are located at a Central Pickup
+- The central pickup contains **5 delivery packages**:
   - **4 small packages**
   - **1 large package**
-- Both QCar2 and QDrone2 can pick up from the depot
+- Both QCar2 and QDrone2 can pick up from the central pickup
   - **QCar2** can pick up small or large packages
   - **QDrone2** can only pick up small packages
 
@@ -77,7 +67,7 @@ A pickup is successful when:
 
 After the required hold time, the package is considered loaded.
 
-#### Example Pickup from Depot will update with new depot location
+#### Example Central Pickup Package by QCar2
 
 <img src="../images/car_pickup_box.png">
 
@@ -126,50 +116,43 @@ After this, package ownership transfers to the receiving vehicle.
 
 ## 4) Delivery Locations
 
-Each delivery objective (apartment) has two delivery options.
+Each delivery has two options.
 
-### A) Apartment Window (Drone Only)
+### A) Window Delivery (QDrone2 Only)
 
 - Delivery is performed directly to the apartment window
 - Only **QDrone2** can perform window delivery
-- This is the faster and higher-value delivery mode
+- This delivery mode provides bonus points and can result in a higher score.
 
 
-### B) Common Drop Location
+### B) Shared Drop-Off Location
 
-- A shared drop point is provided for each apartment building
+- A Shared Drop-Off point is provided for each apartment building
 - **QCar2** or **QDrone2** can deliver to this location
-- This is more flexible, but may be less favorable for scoring depending on the scenario configuration
+- This delivery option is more flexible, but it may be less favorable for achieving a higher score.
 
 
-### Floor Drop-Off (Window Delivery) v/s Common Drop-Off
-
-- Delivery locations may include both **floor drop-off** targets and **common drop-off** locations.
-- **Floor drop-off** deliveries can receive different score bonuses depending on the floor level.
-- **Common drop-off** deliveries follow the standard scoring method without floor-based bonus.
-- Teams should consider both the delivery type and the scoring difference when planning delivery order and strategy.
+Teams should consider both the delivery type and the scoring difference when planning delivery order and strategy.
 
 
 ---
 
 ## 5) Delivery Completion
 
-A delivery is considered complete only after the package is successfully dropped at the designated drop-off location according to the scenario logic.
+### Window Delivery (QDrone2)
 
-### Window Delivery (Drone)
-
-- The drone must remain within **2.0 m** horizontal distance and within **0.0 m to 4.0 m** vertical offset of the window delivery target for at least **3 seconds**
+- The QDrone2 must remain within **2.0 m** horizontal distance and within **0.0 m to 4.0 m** vertical offset of the window delivery target for at least **3 seconds**
 
 #### Example Window Delivery
 
 <img src="../images/Drone_window_delivery.png">
 
-### Common Drop Delivery (Car or Drone)
+### Shared Drop off Delivery (Car or Drone)
 
 - **QCar2:** Must remain within **2.0 m** of the drop location for at least **3 seconds**
 - **QDrone2:** Must remain within **2.0 m** horizontal distance and within **0.0 m to 4.0 m** vertical offset of the drop location for at least **3 seconds**
 
-#### Example Common Delivery by Car
+#### Example Shared drop off Delivery by Car
 
 <img src="../images/common_drop_by_car_or_drone.png">
 
@@ -177,7 +160,7 @@ A delivery is considered complete only after the package is successfully dropped
 
 ## 6) Pick up and Delivery Location
 
-- Pickup Depot: **P**
+- Central pickup: **P**
 - Small package delivery locations: **D1, D2, D3, D4**
 - Large package delivery location: **D5**
 
@@ -192,9 +175,9 @@ Node numbering is different between **Python** and **MATLAB / Simulink** for QCa
 
 ### QCar2 Pickup and Delivery Reference
 
-| Location | Package Type | Python Node | MATLAB / Simulink Node | Ground Location `[x y]` |
+| Location | Package Type | Python Node | MATLAB / Simulink Node | Shared Drop-Off Location `[x y]` |
 |---|---|---:|---:|---|
-| Pickup Depot (P) | Pickup | 24 | 25 | `[-2.50305 29.6703]` |
+| Central pickup (P) | Pickup | 24 | 25 | `[-2.50305 29.6703]` |
 | Drop Location 1 (D1) | Small | 2 | 3 | `[11.2739 -10.84655]` |
 | Drop Location 2 (D2) | Small | 14 | 15 | `[22.5478 29.6703]` |
 | Drop Location 3 (D3) | Small | 20 | 21 | `[0.0 44.9735]` |
@@ -203,9 +186,9 @@ Node numbering is different between **Python** and **MATLAB / Simulink** for QCa
 
 ### QDrone2 Pickup and Delivery Reference
 
-| Location | Package Type | Ground Location `[x y z]` | Floor | Window Location `[x y z]` |
+| Location | Package Type | Shared Drop-Off Location `[x y z]` | Floor | Window Delivery Location `[x y z]` |
 |---|---|---|---:|---|
-| Pickup Depot (P) | Pickup | `[-2.50305 29.6703 0.05]` | - | None |
+| Central pickup (P) | Pickup | `[-2.50305 29.6703 0.05]` | - | None |
 | Drop Location 1 (D1) | Small | `[11.2739 -10.84655 0.05]` | 4 | `[15.1739 -18.04655 9.65]` |
 | Drop Location 2 (D2) | Small | `[22.5478 29.6703 0.05]` | 3 | `[26.0478 16.7703 9.65]` |
 | Drop Location 3 (D3) | Small | `[0.0 44.9735 0.05]` | 2 | `[1.3 46.9735 4.85]` |

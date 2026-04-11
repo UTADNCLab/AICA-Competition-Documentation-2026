@@ -8,8 +8,6 @@ It includes operational guidance for both **QCar2** and **QDrone2**.
 
 ## Navigation
 
-## Navigation
-
 1. [System Execution Flow](#1-system-execution-flow)
 2. [Before You Start](#2-before-you-start)
       - [Open QLabs and Load the Cityscape Map Manually](#open-qlabs-and-load-the-cityscape-map-manually)
@@ -49,11 +47,11 @@ It includes operational guidance for both **QCar2** and **QDrone2**.
 
 The overall execution flow is:
 
-- **`spawn_competition.py`** runs once at the beginning to prepare the simulation environment
+- **`setup_env.py`** or **`setup_env.m`** runs once at the beginning to prepare the simulation environment. These files should **NOT** be modified.
 - **QLabs** loads the required map and acts as the shared simulation environment
-- **Navigator Drone → Flight Stack Drone → RT Model Drone** controls the drone and updates it in QLabs
+- **Navigator Drone → Flight Stack Drone → RT Model Drone** controls the drone and updates it in QLabs.
 - **Navigator Car → Drive Stack Car → RT Model Car** controls the car and updates it in QLabs
-- **`game.py`** runs alongside QLabs and handles pickup logic, transfer timing, package behavior, and scoring
+- **`game.py`** runs alongside QLabs and handles pickup logic, transfer timing, package behavior, and scoring. This should **NOT** be modified
 - Together, these components run continuously until the mission is completed
 
 ---
@@ -69,10 +67,7 @@ Before running the system, make sure:
 - all competition files are placed in the correct folder
 - the software setup steps have already been completed
 
-For setup details, refer to:
-
-- [System and Software Setup](../00_Portal/AICA_COMPETITION_GUIDE.md#system-and-software-setup)
-- [What Is Provided](../01_Core_Guides/What_Is_Provided.md)
+For setup details, refer to: [System and Software Setup](../00_Portal/AICA_COMPETITION_GUIDE.md#system-and-software-setup)
 
 ### Open QLabs and Load the Cityscape Map Manually
 
@@ -88,7 +83,7 @@ For setup details, refer to:
 - The virtual stage is designed to run in the **Cityscape** map.
 - Make sure the Cityscape map is loaded before spawning QCar2 and QDrone2.
 - If the wrong map is open, the spawn locations, nodes, and delivery locations will not match the competition scenario.
-- Always confirm the correct map is loaded before running `spawn_competition.py`.
+- Always confirm the correct map is loaded before running `setup_env.py` or `setup_env.m`.
 
 ### Run the Spawn File Manually
 
@@ -96,8 +91,8 @@ If you do not want the BAT file to handle vehicle spawning, you can run the spaw
 
 Run one of the following depending on your workflow:
 
-- **Python:** `python spawn_competition.py`
-- **MATLAB:** run `spawn_competition.m`
+- **Python:** `python setup_env.py`
+- **MATLAB:** run `setup_env.m`
 
 This step spawns **QCar2** and **QDrone2** in the QLabs environment using the configured spawn location.
 
@@ -113,14 +108,16 @@ This step spawns **QCar2** and **QDrone2** in the QLabs environment using the co
 
 A complete BAT launcher is provided for one-click startup.
 
-Example: `launch_full_stack.bat`
+Example: `run_all.bat`
 
 This file is intended to:
 
 1. open QLabs
 2. load the required competition map
-3. spawn QCar2 and QDrone2
+3. run the QCar2 and QDrone2 setup environment files (**Do not modify**)
 4. start the RT models
+    - `virtual_DriveStack.rt-win64` (**Do not modify**)
+    - `virtual_FlightStack.rt-win64` (**Do not modify**)
 5. arm both vehicles
 6. command QDrone2 takeoff to hover altitude
 7. run the selected navigator files or models
@@ -134,7 +131,7 @@ Examples:
 
 - comment out the QLabs launch command if QLabs is already open
 - comment out the map-loading step if the **Cityscape** map is already loaded
-- comment out the spawn step if `spawn_competition.py` or `spawn_competition.m` has already been run manually
+- comment out the spawn step if `setup_env.py` or `setup_env.m` has already been run manually
 
 ### Important
 
@@ -148,7 +145,7 @@ Examples:
 
 ---
 
-## 4) Run the Game File (Mandatory)
+## 4) Run the Game File (**Mandatory — Do not modify**)
 
 Run:
 
@@ -304,7 +301,7 @@ Users can provide:
 - end node
 - velocity
 - manual control commands
-- Intention commands
+- intention commands
 
 ### QCar2 Intention List
 
@@ -321,7 +318,7 @@ QCar2 uses fixed communication ports for simulator connection, sensors, and game
 
 #### Port Information
 
-The final QCar2 port list will be documented here in the same format as QDrone2.
+The QCar2 communication ports are documented below in the same format as QDrone2.
 
 Example format:
 
@@ -429,11 +426,22 @@ The following node map shows the node numbers that can be used for **QCar2 auton
 
 <img src="../images/node_map_qcar2.png" alt="QCar2 Python node map" width="520">
 
+#### Sample Autonomous Files
+
+Sample files for autonomous operation are also provided in the `tools\` folder, including:
+
+- `plan_path.py`
+- `example.py`
+
+For QCar2, `plan_path.py` provides a sample autonomous path-planning workflow in which a node-based route is generated and the QCar2 drives autonomously based on the selected node path.
+
 #### Important
 
 - Teams should use these node numbers when selecting QCar2 start and end nodes in Python.
 - Node numbering may differ from MATLAB / Simulink, so always use the correct node reference for the selected workflow.
+- The files in `tools\` are provided as sample references for autonomous planning and execution.
 
+---
 
 ### 7.2 QDrone2 Autonomous Control
 
@@ -453,11 +461,28 @@ Based on the selected target, the controller computes:
 - heading control
 - motion toward the required pickup, drop, or transfer target
 
-#### Important
+#### Sample Autonomous Files
 
-- QDrone2 autonomous movement is based on target locations in the mission environment.
-- The drone must still satisfy the required condition checks for pickup, delivery, and transfer.
-- For mission tasks, use the correct target coordinates defined in the [Virtual Stage Detailed Scenario](../01_Core_Guides/Virtual_Stage_Detailed_Scenario.md).
+Sample files for autonomous operation are also provided in the `tools\` folder, including:
+
+- `city_voxel_map.npz`
+- `occupancy_grid.txt`
+- `profile_ramp.py`
+- `qdrone2_plans.npz`
+- `read_occupancy_grid.py`
+- `example.py`
+
+For QDrone2, these files provide sample references for map reading, waypoint generation, and autonomous motion planning.
+
+#### Voxel Map and Occupancy Grid
+
+The voxel map and occupancy grid files are provided as sample environment representations for autonomous planning.
+
+- `city_voxel_map.npz` stores a sample 3D voxel representation of the environment
+- `occupancy_grid.txt` provides a sample occupancy grid representation
+- `read_occupancy_grid.py` can be used as a reference for reading and processing occupancy information
+- `qdrone2_plans.npz` provides sample stored planning data for drone operation
+
 
 ---
 
@@ -516,15 +541,14 @@ Depending on the operation, the target location may refer to:
 - the drop location
 - the transfer target location
 
-The actual code snippets shown in each section remain unchanged and use the variable names defined in the implementation.
 
 ---
 
-### 9.1 Drone Pickup
+### 9.1 QDrone2 Pickup
 
 #### Exact Distance Requirement
 
-A drone pickup is valid when all of the following are satisfied relative to the pickup location:
+A QDrone2 pickup is valid when all of the following are satisfied relative to the pickup location:
 
 - horizontal distance must be **2.0 m or less**
 - vertical offset must be between **0.0 m and 4.0 m**
@@ -532,54 +556,55 @@ A drone pickup is valid when all of the following are satisfied relative to the 
 
 #### Operational Description
 
-If the drone is spawned near the depot or moved near a package:
+If the QDrone2 is spawned near the depot or moved near a package:
 
-1. move the drone into the valid pickup region
+1. move the QDrone2 into the valid pickup region
 2. press the assigned pickup key
 3. the timer starts in `game.py`
 4. once the timer reaches **3 seconds**, the package attaches to the drone
 
-#### Drone Carry Capacity at a Time
+#### QDrone2 Carry Capacity at a Time
 
 QDrone2 can carry: **1 small package only**
 
 #### Condition Interpretation
 
-The drone condition check is based on horizontal distance and vertical offset between the drone and the target location.
+The QDrone2 condition check is based on horizontal distance and vertical offset between the QDrone1 and the target location.
 
 #### Actual Condition Check
 
 ```python
 np.hypot(dx, dy) <= 2.0 and 0.0 <= dz <= 4.0
 
-
-where:
-dx = difference in x-position between QDrone2 and the pickup location
-dy = difference in y-position between QDrone2 and the pickup location
-dz = difference in z-position between QDrone2 and the pickup location
-
 ```
 
-### 9.2 Car Pickup
+where:
+- `dx` = difference in x-position between QDrone2 and the target location
+- `dy` = difference in y-position between QDrone2 and the target location
+- `dz` = difference in z-position between QDrone2 and the target location
+
+
+
+### 9.2 QCar2 Pickup
 
 #### Exact Distance Requirement
 
-A car pickup is valid when all of the following are satisfied relative to the pickup location:
+A QCar2 pickup is valid when all of the following are satisfied relative to the pickup location:
 
-- distance from the car to the pickup point must be **less than 2.0 m**
+- distance from the QCar2 to the pickup point must be **less than 2.0 m**
 - the condition must be maintained for the full **3 seconds**
 
 #### Operational Description
 
-For the car:
+For the QCar2:
 
-1. stop the car near the pickup depot
+1. stop the QCar2 near the pickup depot
 2. press the assigned pickup key
 3. the timer starts in `game.py`
 
 The same pickup logic applies.
 
-#### Car Carry Capacity at a Time
+#### QCar2 Carry Capacity at a Time
 
 QCar2 can carry:
 
@@ -588,23 +613,23 @@ QCar2 can carry:
 
 #### Condition Interpretation
 
-The car condition check is based on the distance between the current car position and the target location.
+The QCar2 condition check is based on the distance between the current QCar2 position and the target location.
 
 #### Actual Condition Check
 
 ```python
 np.linalg.norm(loc_car - LOC_PICK) < 2.0
-
-where:
-loc_car = QCar2 current position
-LOC_PICK = pickup/target location
 ```
 
-### 9.3 Drone Delivery
+where:
+- `loc_car` = QCar2 current position
+- `LOC_PICK` = target location
+
+### 9.3 QDrone2 Delivery
 
 #### Exact Distance Requirement
 
-A drone delivery is valid when all of the following are satisfied relative to the drop location:
+A QDrone2 delivery is valid when all of the following are satisfied relative to the drop location:
 
 - horizontal distance must be **2.0 m or less**
 - vertical offset must be between **0.0 m and 4.0 m**
@@ -612,43 +637,43 @@ A drone delivery is valid when all of the following are satisfied relative to th
 
 #### Operational Description
 
-To deliver using the drone:
+To deliver using the QDrone2:
 
-1. move the drone into the valid drop region
+1. move the QDrone2 into the valid drop region
 2. hover in the required position range
 3. press the assigned drop-off intention key
 4. the timer begins in `game.py`
 5. once the required time is completed, the package is dropped at the location
 
-#### Window Delivery (Drone Only)
+#### Window Delivery (QDrone2 Only)
 
-- Only **QDrone2** may perform window deliveries
+Only **QDrone2** may perform window deliveries
 
 ---
 
-### 9.4 Car Delivery
+### 9.4 QCar2 Delivery
 
 #### Exact Distance Requirement
 
-A car delivery is valid when all of the following are satisfied relative to the drop location:
+A QCar2 delivery is valid when all of the following are satisfied relative to the shared drop-off location:
 
-- distance from the car to the drop location must be **less than 2.0 m**
-- the car must remain stopped at the required position
+- distance from the QCar2 to the shared drop-off location must be **less than 2.0 m**
+- the QCar2 must remain stopped at the required location
 - the condition must be maintained for the full **3 seconds**
 
 #### Operational Description
 
-To deliver using the car:
+To deliver using the QCar2:
 
-1. move the car to the drop-off location
-2. stop the car at the required position
+1. move the QCar2 to the shared drop-off location
+2. stop the QCar2 at the required location
 3. press the assigned drop-off intention key
 4. the timer begins in `game.py`
-5. once the required time is completed, the package is dropped at the location
+5. once the required time is completed, the package is dropped at the shared drop-off location
 
-#### Common Drop Delivery
+#### Shared Drop-Off Delivery
 
-- QCar2 and QDrone2 can both perform a common delivery.
+QCar2 and QDrone2 can both perform a shared drop-off delivery.
 
 ---
 
@@ -656,8 +681,8 @@ To deliver using the car:
 
 Transfer can happen in both directions:
 
-- **Car → Drone**
-- **Drone → Car**
+- **QCar2 → QDrone2**
+- **QDrone2 → QCar2**
 
 Both vehicles must use the correct intention values.
 
@@ -667,11 +692,11 @@ Both vehicles must use the correct intention values.
 
 ---
 
-### 10.1 Car to Drone Transfer
+### 10.1 QCar2 to QDrone2 Transfer
 
 #### Exact Distance Requirement
 
-A car-to-drone transfer is valid when all of the following are satisfied relative to the car:
+A QCar2 to QDrone2 transfer is valid when all of the following are satisfied relative to the car:
 
 - horizontal distance from drone to car must be **2.0 m or less**
 - vertical offset from drone to car must be between **0.0 m and 4.0 m**
@@ -681,7 +706,7 @@ A car-to-drone transfer is valid when all of the following are satisfied relativ
 
 #### Operational Description
 
-To transfer from car to drone:
+To transfer from QCar2 to QDrone2:
 
 1. stop the car at the desired transfer location
 2. move the drone above or near the car within the valid transfer region
@@ -689,8 +714,8 @@ To transfer from car to drone:
 
 Now set intentions:
 
-- car intention = **Transfer to Drone**
-- drone intention = **Transfer from Car**
+- QCar2 intention = **Transfer to Drone**
+- QDrone2 intention = **Transfer from Car**
 
 #### Important
 
@@ -704,35 +729,35 @@ If only one side is set, transfer will **not** occur.
 #### Transfer Completion
 
 - the timer begins in `game.py`
-- after **3 seconds**, the package transfers from the car to the drone
+- after **3 seconds**, the package transfers from the QCar2 to QDrone2
 
 
 ---
 
-### 10.2 Drone to Car Transfer
+### 10.2 QDrone2 to QCar2 Transfer
 
 #### Exact Distance Requirement
 
-A drone-to-car transfer is valid when all of the following are satisfied relative to the car:
+A QDrone2 to QCar2 transfer is valid when all of the following are satisfied relative to the car:
 
-- horizontal distance from drone to car must be **2.0 m or less**
-- vertical offset from drone to car must be between **0.0 m and 4.0 m**
+- horizontal distance from QDrone2 to QCar2 must be **2.0 m or less**
+- vertical offset from QDrone2 to QCar2 must be between **0.0 m and 4.0 m**
 - QCar2 must be stationary
 - both vehicles must have the correct intention values set
 - the condition must be maintained for the full **3 seconds**
 
 #### Operational Description
 
-To transfer from drone to car:
+To transfer from QDrone2 to QCar2:
 
-1. stop the car at the desired location
-2. hover the drone above or near the car within the valid transfer region
+1. stop the QCar2 at the desired location
+2. hover the QDrone2 above or near the QCar2 within the valid transfer region
 3. set the correct intention values on both vehicles
 
 Now set intentions:
 
-- drone intention = **Transfer to Car**
-- car intention = **Transfer from Drone**
+- QDrone2 intention = **Transfer to Car**
+- QCar2 intention = **Transfer from Drone**
 
 #### Transfer Completion
 
@@ -775,26 +800,36 @@ Before running a full mission, verify the following:
 
 The competition package includes the following types of files:
 
-- **spawn files** → set up the vehicles and scenario
+- **setup environment files** → prepare the QCar2 and QDrone2 simulation environment (**Do not modify**)
+- **RT model files** → run the provided vehicle stack (**Do not modify**)
 - **BAT files** → start the stack and automate execution
-- **navigator files** → main files teams run and modify for MATLAB / Simulink or Python operation
-- **`game.py`** → backend mission logic and scoring
+- **navigator files** → main files that teams run and modify for MATLAB / Simulink or Python operation
+- **`game.py`** → backend mission logic, package handling, timing, and scoring (**Do not modify**)
 
 ### File Structure
 
-    Competition_Folder\
-        spawn_competition.m
-        spawn_competition.py
-        Navigator.slx
-        navigator.py
-        navigator_QCar2.slx
-        navigator_QCar2_python.py
-        launch_full_stack.bat
-        spawn_location.txt
-        PATH PLANNING FILES
-        VOXEL MAP FILES
-        game.py
----
+```text
+AICA_Competition_Files\
+    setup_env.py                  (Do not modify)
+    setup_env.m                   (Do not modify)
+    QDrone2_Navigator.slx
+    QDrone2_Navigator.py
+    QCar2_Navigator.slx
+    QCar2_Navigator.py
+    run_all.bat
+    spawn_location.txt
+    virtual_DriveStack.rt-win64   (Do not modify)
+    virtual_FlightStack.rt-win64  (Do not modify)
+    game.py                       (Do not modify)
+    tools\
+        city_voxel_map.npz
+        occupancy_grid.txt
+        plan_path.py
+        profile_ramp.py
+        qdrone2_plans.npz
+        read_occupancy_grid.py
+        example.py    
+```
 
 #### Back to:
 
