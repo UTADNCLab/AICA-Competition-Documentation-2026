@@ -39,13 +39,13 @@ Your system should:
 
 ## Submission
 
-Full details: [Submission Guide](../02_Participation/Submission_Guide.md)
+For details, see the [Submission Guide](../02_Participation/Submission_Guide.md)
 
 ---
 
 ## Scenario and Operational Guide
 
-For complete details, refer to:
+For complete details, see the:
 
 -  [Virtual Stage Detailed Scenario](../01_Core_Guides/Virtual_Stage_Detailed_Scenario.md)  
 -  [Operational Guide](../01_Core_Guides/Operational_Guide.md)  

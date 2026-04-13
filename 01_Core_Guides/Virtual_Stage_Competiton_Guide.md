@@ -1,6 +1,6 @@
 # Virtual Stage Competition Guide 
 
-Welcome to Virtual Stage (Stage 1) of the IEEE SMC AI-Powered Collaborative Autonomy Challenge (AICA).  
+Welcome to the Virtual Stage of the IEEE SMC AICA Challenge.  
 This guide explains what teams should prepare for virtual-stage evaluation.
 
 ---
@@ -18,22 +18,22 @@ This guide explains what teams should prepare for virtual-stage evaluation.
 
 ## 1) Virtual Stage Submission
 
-The objective of the Virtual Stage is to demonstrate each team’s ability to implement multimodal delivery in the Quanser Interactive Labs (**QLabs**) simulation environment.
+The objective of the Virtual Stage is to create a video that demonstrates each team’s ability to implement algorithms for the multimodal autonomous delivery system in the **QLabs** simulation environment.
 
-For full submission details, see the [Virtual Stage Submission Guide](../02_Participation/Submission_Guide.md).
+For the full submission details, see the [Virtual Stage Submission Guide](../02_Participation/Submission_Guide.md).
 
 ---
 
 ## 2) Virtual Stage Detailed Scenario
 
-For the complete scenario description, see: [Virtual Stage Detailed Scenario](../01_Core_Guides/Virtual_Stage_Detailed_Scenario.md)
+For the complete scenario description, see the [Virtual Stage Detailed Scenario](../01_Core_Guides/Virtual_Stage_Detailed_Scenario.md)
 
 This document includes:
 
-- Central pickup operations for delivery packages
+- Central pickup operations
   - **QCar2** can carry **2 small packages** or **1 large package**
   - **QDrone2** can carry **1 small package only**
-- Vehicle-to-vehicle transfer operations
+- **Vehicle-to-vehicle transfer** 
 - **Window delivery** and **Shared drop-off** delivery options
 - Delivery completion requirements
 - Pickup and delivery location references
@@ -43,27 +43,20 @@ This document includes:
 
 ## 3) Core Principles for Multimodal Delivery
 
-### Planning and Decision-Making
-- Use the provided maps and routes to plan efficient paths and delivery strategies  
-- Select appropriate actions based on mission state (pickup, transfer, delivery)  
-- Ensure correct sequencing of actions for complete mission execution  
-
-### Control Systems
-- Execute stable steering, velocity control, stopping, and hover behavior  
-- Ensure smooth and reliable motion during navigation and task execution  
-- QCar2 must follow lane-based navigation and remain within road boundaries  
-
-### Localization and Navigation
-- Use available position data to follow planned routes accurately  
-- Maintain lane discipline and avoid invalid shortcuts outside defined paths  
-- Adapt navigation based on mission progress and task requirements  
+### Delivery Planning and Decision-Making
+- Plan delivery tasks by assigning them to either QCar2, QDrone2, or their coordinated operation through vehicle-to-vehicle transfer.
+- Develop delivery planning strategies to achieve a high score by considering the city map, vehicle capabilities, pickup and drop-off locations, and available delivery options.
 
 ### Multi-Agent Coordination
 - Coordinate QCar2 and QDrone2 actions for pickup, transfer, and delivery  
 - Manage timing and interaction between vehicles for efficient mission execution  
 
+### Control Systems and Navigation
+- Design and implement a control algorithm to generate steering and velocity commands for the autonomous navigation of QCar2 within road boundaries while avoiding collisions. 
+- Develop smooth and safe trajectories for QDrone2, ensuring stable, high-performance flight while avoiding obstacles. 
+
 ### Mission Completion and Efficiency
-- Ensure all deliveries are completed successfully  
+- ~~Ensure atleast one delivery is completed successfully  ~~
 - Optimize overall mission time and execution efficiency  
 
 ---

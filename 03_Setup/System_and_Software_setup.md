@@ -23,6 +23,7 @@ If you are using only one workflow, follow the corresponding section only.
 
 ---
 
+
 ## Step 1 -- Initial Download 
 
 Before software installation, 
@@ -30,59 +31,29 @@ On your system, create a folder called _Quanser_ under _Documents_. This should 
 
 ---
 
-### 1A) Download Official Quanser Resources (We have new rt motel for Qdrone2 with extended coverage I am not sure whether the new model is updated in Quanser site I will clone their resources into our github which has the updated the rt model of qdrone2)
+### 1A) Download Competition Files 
+
+A separate folder for actual competition files.
 
 #### With Git
 
 1. Install [Git](https://git-scm.com/downloads).
 2. Open a terminal in `C:\Users\<YourUsername>\Documents\Quanser\`.
-3. Clone your documentation repo:
-
-```bash
-git clone <YOUR_AICA_DOCUMENTATION_REPO_URL> Quanser Resources
-```
+3. Clone the repository: https://github.com/UTADNCLab/IEEE-SMC-AICA-Competition-2026.git
 
 #### Without Git (ZIP)
 
-1. Open your documentation repository on GitHub.
-2. Click **Code -> Download ZIP**.
-3. Extract the ZIP (you see the folders 0_libraries, 1_setup ..)
-4. Copy all the contents of that folder into your newly created Documents/Quanser folder.
-
-```text
-C:\Users\<YourUsername>\Documents\Quanser\0_libraries, 1_setup ..\
-```
-
-For detailed installation guide for Quanser resources refer: [Quanser_Academic_Resources](https://github.com/quanser/Quanser_Academic_Resources)
-
-
----
-
-### 1B) Download Competition Files 
-
-A separate folder for actual competition files.
-
-#### With Git 
-
-From `C:\Users\<YourUsername>\Documents\Quanser\`, run:
-
-```bash
-git clone <YOUR_COMPETITION_FILES_REPO_URL> 9_AICA_Competition_Files
-```
-
-#### Without Git (ZIP)
-
-1. Open the competition-files repository on GitHub.
+1. Open the repository on GitHub.
 2. Click **Code -> Download ZIP**.
 3. Extract the ZIP and place it at:
 
 ```text
-C:\Users\<YourUsername>\Documents\Quanser\9_AICA_Competition_Files\
+C:\Users\<YourUsername>\Documents\Quanser
 ```
 
 ---
 
-### 1C) Expected Local Layout
+### 1B) Expected Local Layout
 
 ```text
 C:\Users\<YourUsername>\Documents\Quanser\
@@ -90,7 +61,8 @@ C:\Users\<YourUsername>\Documents\Quanser\
     9_AICA_Competition_Files\
 ```
 
-> Keep separate folders .
+For detailed installation guide for Quanser resources refer: [Quanser_Academic_Resources](https://github.com/quanser/Quanser_Academic_Resources)
+
 
 ---
 

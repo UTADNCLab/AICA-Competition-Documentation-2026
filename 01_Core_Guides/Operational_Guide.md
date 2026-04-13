@@ -67,7 +67,7 @@ Before running the system, make sure:
 - all competition files are placed in the correct folder
 - the software setup steps have already been completed
 
-For setup details, refer to: [System and Software Setup](../00_Portal/AICA_COMPETITION_GUIDE.md#system-and-software-setup)
+For setup details, see the [System and Software Setup](../00_Portal/AICA_COMPETITION_GUIDE.md#system-and-software-setup)
 
 ### Open QLabs and Load the Cityscape Map Manually
 
@@ -274,7 +274,7 @@ The provided QDrone2 Python code also uses:
 
 #### Reference Python Section
 
-For the Python section related to this communication setup, refer to: [QDrone2 Communication Python Section](QDrone2_communication.md)
+For the Python section related to this communication setup, see the [QDrone2 Communication Python Section](QDrone2_communication.md)
 
 ---
 
@@ -341,7 +341,7 @@ Example format:
 
 #### Reference Python Section
 
-For the Python section related to this communication setup, refer to: [QCar2 Communication Python Section](QCar2_communication.md)
+For the Python section related to this communication setup, see the [QCar2 Communication Python Section](QCar2_communication.md)
 
 ---
 

@@ -25,7 +25,7 @@ Before using this guide, ensure that:
 - Your system meets the hardware requirements
 - The full setup process has been completed
 
-For complete setup instructions, refer to: [System and Software Setup](../03_Setup/Software_Setup_Instructions.md)
+For complete setup instructions, see the [System and Software Setup](../03_Setup/Software_Setup_Instructions.md)
 
 ---
 

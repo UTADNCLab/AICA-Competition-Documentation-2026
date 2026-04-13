@@ -15,7 +15,7 @@ On your system, create a folder called _Quanser_ under _Documents_. This should 
 
 ---
 
-### 1) Download Competition Files 
+### 1A) Download Competition Files 
 
 A separate folder for actual competition files.
 
@@ -45,7 +45,7 @@ C:\Users\<YourUsername>\Documents\Quanser\
     9_AICA_Competition_Files\
 ```
 
-For detailed installation guide for Quanser resources refer: [Quanser_Academic_Resources](https://github.com/quanser/Quanser_Academic_Resources)
+For detailed installation guide for Quanser resources, see the [Quanser_Academic_Resources](https://github.com/quanser/Quanser_Academic_Resources)
 
 ---
 

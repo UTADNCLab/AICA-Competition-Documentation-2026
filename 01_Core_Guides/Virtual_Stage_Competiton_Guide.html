@@ -16,7 +16,7 @@
         </div>
       </header>
       <section class="content markdown-body">
-        <p>Welcome to Virtual Stage (Stage 1) of the IEEE SMC AI-Powered Collaborative Autonomy Challenge (AICA).<br />
+        <p>Welcome to the Virtual Stage of the IEEE SMC AICA Challenge.<br />
 This guide explains what teams should prepare for virtual-stage evaluation.</p>
 <hr />
 <h2 id="navigation">Navigation</h2>
@@ -30,17 +30,17 @@ This guide explains what teams should prepare for virtual-stage evaluation.</p>
 </ul>
 <hr />
 <h2 id="1-virtual-stage-submission">1) Virtual Stage Submission</h2>
-<p>The objective of the Virtual Stage is to demonstrate each team’s ability to implement multimodal delivery in the Quanser Interactive Labs (<strong>QLabs</strong>) simulation environment.</p>
-<p>For full submission details, see the <a href="../02_Participation/Submission_Guide.html">Virtual Stage Submission Guide</a>.</p>
+<p>The objective of the Virtual Stage is to create a video that demonstrates each team’s ability to implement algorithms for the multimodal autonomous delivery system in the <strong>QLabs</strong> simulation environment.</p>
+<p>For the full submission details, see the <a href="../02_Participation/Submission_Guide.html">Virtual Stage Submission Guide</a>.</p>
 <hr />
 <h2 id="2-virtual-stage-detailed-scenario">2) Virtual Stage Detailed Scenario</h2>
-<p>For the complete scenario description, see: <a href="../01_Core_Guides/Virtual_Stage_Detailed_Scenario.html">Virtual Stage Detailed Scenario</a></p>
+<p>For the complete scenario description, see the <a href="../01_Core_Guides/Virtual_Stage_Detailed_Scenario.html">Virtual Stage Detailed Scenario</a></p>
 <p>This document includes:</p>
 <ul>
-<li>Central pickup operations for delivery packages</li>
+<li>Central pickup operations</li>
 <li><strong>QCar2</strong> can carry <strong>2 small packages</strong> or <strong>1 large package</strong></li>
 <li><strong>QDrone2</strong> can carry <strong>1 small package only</strong></li>
-<li>Vehicle-to-vehicle transfer operations</li>
+<li><strong>Vehicle-to-vehicle transfer</strong> </li>
 <li><strong>Window delivery</strong> and <strong>Shared drop-off</strong> delivery options</li>
 <li>Delivery completion requirements</li>
 <li>Pickup and delivery location references</li>
@@ -48,32 +48,24 @@ This guide explains what teams should prepare for virtual-stage evaluation.</p>
 </ul>
 <hr />
 <h2 id="3-core-principles-for-multimodal-delivery">3) Core Principles for Multimodal Delivery</h2>
-<h3 id="planning-and-decision-making">Planning and Decision-Making</h3>
+<h3 id="delivery-planning-and-decision-making">Delivery Planning and Decision-Making</h3>
 <ul>
-<li>Use the provided maps and routes to plan efficient paths and delivery strategies  </li>
-<li>Select appropriate actions based on mission state (pickup, transfer, delivery)  </li>
-<li>Ensure correct sequencing of actions for complete mission execution  </li>
-</ul>
-<h3 id="control-systems">Control Systems</h3>
-<ul>
-<li>Execute stable steering, velocity control, stopping, and hover behavior  </li>
-<li>Ensure smooth and reliable motion during navigation and task execution  </li>
-<li>QCar2 must follow lane-based navigation and remain within road boundaries  </li>
-</ul>
-<h3 id="localization-and-navigation">Localization and Navigation</h3>
-<ul>
-<li>Use available position data to follow planned routes accurately  </li>
-<li>Maintain lane discipline and avoid invalid shortcuts outside defined paths  </li>
-<li>Adapt navigation based on mission progress and task requirements  </li>
+<li>Plan delivery tasks by assigning them to either QCar2, QDrone2, or their coordinated operation through vehicle-to-vehicle transfer.</li>
+<li>Develop delivery planning strategies to achieve a high score by considering the city map, vehicle capabilities, pickup and drop-off locations, and available delivery options.</li>
 </ul>
 <h3 id="multi-agent-coordination">Multi-Agent Coordination</h3>
 <ul>
 <li>Coordinate QCar2 and QDrone2 actions for pickup, transfer, and delivery  </li>
 <li>Manage timing and interaction between vehicles for efficient mission execution  </li>
 </ul>
+<h3 id="control-systems-and-navigation">Control Systems and Navigation</h3>
+<ul>
+<li>Design and implement a control algorithm to generate steering and velocity commands for the autonomous navigation of QCar2 within road boundaries while avoiding collisions. </li>
+<li>Develop smooth and safe trajectories for QDrone2, ensuring stable, high-performance flight while avoiding obstacles. </li>
+</ul>
 <h3 id="mission-completion-and-efficiency">Mission Completion and Efficiency</h3>
 <ul>
-<li>Ensure all deliveries are completed successfully  </li>
+<li>~~Ensure atleast one delivery is completed successfully  ~~</li>
 <li>Optimize overall mission time and execution efficiency  </li>
 </ul>
 <hr />

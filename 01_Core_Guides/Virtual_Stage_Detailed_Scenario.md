@@ -46,7 +46,7 @@ Initial spawn positions of QCar2 and QDrone2 can be adjusted by competitors by e
 
 ---
 
-## 2) Depot and Pickup Operations
+## 2) Central Pickup Operations
 
 At mission start:
 

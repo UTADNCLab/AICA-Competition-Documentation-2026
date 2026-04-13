@@ -6,7 +6,7 @@
 
 ---
 
-## In-Person Stage  (To Be Announced)
+## Conference Stage  (To Be Announced)
 
 
 
