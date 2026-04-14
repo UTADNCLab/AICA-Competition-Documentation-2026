@@ -116,7 +116,7 @@ Higher scores are earned by completing deliveries earlier and by choosing delive
 
 #### Back to: 
 
-[Competition Objective](../01_Core_Guides/Competition_Objective.md)
+[Competition Guide](../01_Core_Guides/Competition_Objective.md)
 
 [AICA Home Portal](../00_Portal/AICA_PORTAL.md)
 

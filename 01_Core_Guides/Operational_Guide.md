@@ -480,7 +480,7 @@ Depending on the operation, the target location may refer to:
 
 #### Exact Distance Requirement
 
-A QDrone2 pickup is valid when all of the following are satisfied relative to the pickup location:
+A QDrone2 pickup is valid when all of the following are satisfied relative to the central pickup location:
 
 - horizontal distance must be **2.0 m or less**
 - vertical offset must be between **0.0 m and 4.0 m**
@@ -531,7 +531,7 @@ A QCar2 pickup is valid when all of the following are satisfied relative to the 
 
 For the QCar2:
 
-1. stop the QCar2 near the pickup depot
+1. stop the QCar2 near the central pickup
 2. press the assigned pickup key
 3. the timer starts in `game.py`
 
