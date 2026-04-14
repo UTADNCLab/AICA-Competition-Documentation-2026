@@ -8,7 +8,7 @@ This page describes the mission environment, delivery workflow, key location dat
 
 - [Scenario Summary](#scenario-summary)
     - [System Setup](#1-system-setup)
-    - [Depot and Pickup Operations](#2-depot-and-pickup-operations)
+    - [Central Pickup Operations](#2-central-pickup-operations)
     - [Vehicle-to-Vehicle Transfer](#3-vehicle-to-vehicle-transfer)
     - [Delivery Locations](#4-delivery-locations)
     - [Delivery Completion](#5-delivery-completion)

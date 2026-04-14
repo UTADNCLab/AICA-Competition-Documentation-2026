@@ -23,7 +23,7 @@ A separate folder for actual competition files.
 
 1. Install [Git](https://git-scm.com/downloads).
 2. Open a terminal in `C:\Users\<YourUsername>\Documents\Quanser\`.
-3. Clone the repository: https://github.com/UTADNCLab/IEEE-SMC-AICA-Competition-2026.git
+3. Clone the repository: [IEEE SMC AICA Competition 2026](https://github.com/UTADNCLab/IEEE-SMC-AICA-Competition-2026.git)
 
 #### Without Git (ZIP)
 
@@ -113,19 +113,11 @@ Run `step_1_check_requirements` and select your mode:
 
 A **green highlighted box** indicates successful configuration and required dependencies are available.
 
-## Example: Successful Setup Check ( will update this when we test on system without QUARC now in my image there is 1 in QUARC column)
-
-The image below shows an example of a successful `step_1_check_requirements` result.
-
-<img src="../images/python_setup_bat_file.png">
-
 In a successful setup check:
 
 - the required dependencies are detected correctly
 - installed software versions are shown
 - the system diagnosis completes without missing required tools
-
-Use this as a **reference** when validating your environment configuration.
 
 ---
 
