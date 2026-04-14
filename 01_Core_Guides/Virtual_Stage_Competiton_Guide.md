@@ -75,12 +75,13 @@ This section defines how team performance is scored and how rankings are determi
 
 - Mission time begins at the mission start time.
 - When a delivery is successfully completed, a delivery score is calculated using the scoring formula.
-- The **total score** is displayed at the **top** of the QLabs window.
+- The **total score** is displayed at the **top* of the QLabs window.
 
 **Scoring formula:**
 
 - **Score for each completed delivery = 1000 − delivery completion time + window delivery bonus**
 - **Total Score = Sum of all delivery scores**
+
 
 
 **Delivery Completion Time** is the time taken to complete a delivery, measured from the mission start time until the package is successfully delivered.

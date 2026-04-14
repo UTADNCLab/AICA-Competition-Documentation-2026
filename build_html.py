@@ -100,7 +100,7 @@ def add_heading_ids(content_html: str) -> str:
             return m.group(0)
         return f'<{tag} id="{hid}">{inner}</{tag}>'
 
-    return re.sub(r"<(h[1-6])>(.*?)</\\1>", repl, content_html, flags=re.IGNORECASE | re.DOTALL)
+    return re.sub(r"<(h[1-6])>(.*?)</\1>", repl, content_html, flags=re.IGNORECASE | re.DOTALL)
 
 
 def strip_first_h1(content_html: str, page_title: str) -> str:
