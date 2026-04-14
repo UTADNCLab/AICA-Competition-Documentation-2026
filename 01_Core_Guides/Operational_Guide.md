@@ -11,33 +11,25 @@ It includes operational guidance for both **QCar2** and **QDrone2**.
 1. [System Execution Flow](#1-system-execution-flow)
 2. [Before You Start](#2-before-you-start)
       - [Open QLabs and Load the Cityscape Map Manually](#open-qlabs-and-load-the-cityscape-map-manually)
-      - [Run the Setup Environment File Manually](#run-the-setup-environment-file-manually)
 3. [Automated System Startup](#3-automated-system-startup)
-      - [Optional Manual Setup Before Running the BAT File](#optional-manual-setup-before-running-the-bat-file)
-4. [Run the Game File (Mandatory - Do not modify)](#4-run-the-game-file-mandatory--do-not-modify)
+4. [Game File (Do not modify)](#4-game-file-do-not-modify)
 5. [Navigator Information](#5-navigator-information)
       - [QDrone2 Navigator](#51-qdrone2-navigator)
       - [QDrone2 Communication Channels and Ports](#511-qdrone2-communication-channels-and-ports)
       - [QCar2 Navigator](#52-qcar2-navigator)
       - [QCar2 Communication Channels and Ports](#521-qcar2-communication-channels-and-ports)
-6. [Manual Control Details](#6-manual-control-details)
-      - [QCar2 Manual Control](#61-qcar2-manual-control)
-      - [QDrone2 Manual Control](#62-qdrone2-manual-control)
-7. [Autonomous Control Details](#7-autonomous-control-details)
-      - [QCar2 Autonomous Control](#71-qcar2-autonomous-control)
-      - [QDrone2 Autonomous Control](#72-qdrone2-autonomous-control)
-8. [Action Key Mapping and Intention Mapping](#8-action-key-mapping-and-intention-mapping)
-      - [Python Action Keys for QDrone2](#81-python-action-keys-for-qdrone2)
-      - [MATLAB / Simulink Intention Mapping](#82-matlab--simulink-intention-mapping)
-9. [Pickup and Delivery Operations and Conditions](#9-pickup-and-delivery-operations-and-conditions)
-      - [Drone Pickup](#91-drone-pickup)
-      - [Car Pickup](#92-car-pickup)
-      - [Drone Delivery](#93-drone-delivery)
-      - [Car Delivery](#94-car-delivery)
-10. [Transfer Operation and Conditions](#10-transfer-operation-and-conditions)
-      - [Car to Drone Transfer](#101-car-to-drone-transfer)
-      - [Drone to Car Transfer](#102-drone-to-car-transfer)
-11. [Final Runtime Check, Mission Completion, and File Reference](#11-final-runtime-check-mission-completion-and-file-reference)
+6. [Autonomous Control Details](#6-autonomous-control-details)
+      - [QCar2 Autonomous Control](#61-qcar2-autonomous-control)
+      - [QDrone2 Autonomous Control](#62-qdrone2-autonomous-control)
+7. [Pickup and Delivery Operations and Conditions](#7-pickup-and-delivery-operations-and-conditions)
+      - [Drone Pickup](#71-drone-pickup)
+      - [Car Pickup](#72-car-pickup)
+      - [Drone Delivery](#73-drone-delivery)
+      - [Car Delivery](#74-car-delivery)
+8. [Transfer Operation and Conditions](#8-transfer-operation-and-conditions)
+      - [Car to Drone Transfer](#81-car-to-drone-transfer)
+      - [Drone to Car Transfer](#82-drone-to-car-transfer)
+9. [Final Runtime Check, Mission Completion, and File Reference](#9-final-runtime-check-mission-completion-and-file-reference)
       - [Mission Timing and Completion](#mission-timing-and-completion)
       - [Final Runtime Check](#final-runtime-check)
       - [File Structure](#file-structure)
@@ -45,14 +37,28 @@ It includes operational guidance for both **QCar2** and **QDrone2**.
 
 ## 1) System Execution Flow
 
-The overall execution flow is:
+The overall execution flow is as follows:
 
-- **`setup_env.py`** or **`setup_env.m`** runs once at the beginning to prepare the simulation environment. These files should **NOT** be modified.
-- **QLabs** loads the required map and acts as the shared simulation environment
-- **Navigator Drone → Flight Stack Drone → RT Model Drone** controls the drone and updates it in QLabs.
-- **Navigator Car → Drive Stack Car → RT Model Car** controls the car and updates it in QLabs
-- **`game.py`** runs alongside QLabs and handles pickup logic, transfer timing, package behavior, and scoring. This should **NOT** be modified
-- Together, these components run continuously until the mission is completed
+- **QLabs** loads the required map and serves as the simulation environment.
+- **`setup_env.py`** runs once at the start to load the vehicles and their corresponding real-time models **(RT models)**. This file should **NOT** be modified.
+
+**Note:** This file reads the initial positions and headings of the vehicles from `spawn_locations.txt`. Competitors may modify `spawn_locations.txt` to set custom spawn locations.
+
+- **RT Model QDrone2** simulates the actuators and sensors of the QDrone2. Competitors only need to load this model.
+- **Virtual FlightStack** executes the controllers, sensor fusion algorithms, and core drone functions. Competitors only need to load this model.
+- **QDrone2 Navigator** sends waypoints to the Virtual FlightStack, reads vehicle states from it, and sends the QDrone2 intention to `game.py`.
+
+**Note:** Competitors are expected to develop the **QDrone2 Navigator**. Specifically, they must send the correct waypoints and intentions to execute their delivery plan. Example implementations in both Python and MATLAB/Simulink are provided in the Competition Package and may be used as a reference or modified as needed.
+
+- **RT Model QCar2** simulates the actuators and sensors of the QCar2. Competitors only need to load this model.
+- **Virtual DriveStack** executes the sensor fusion algorithms and core car functions. Competitors only need to load this model.
+- **QCar2 Navigator** sends velocity and steering commands to the Virtual DriveStack, reads vehicle states from it, and sends the QCar2 intention to `game.py`.
+
+**Note:** Competitors are expected to develop the **QCar2 Navigator**. Specifically, they must send the correct velocity commands, steering commands, and intentions to execute their delivery plan. A controller for autonomous driving must be implemented within the QCar2 Navigator. Example implementations in both Python and MATLAB/Simulink are provided in the Competition Package and may be used as a reference or modified as needed.
+
+- The **QDrone2 Navigator** and **QCar2 Navigator** can each be developed in **Python** or **MATLAB/Simulink**.
+- **`game.py`** enforces the game rules, handles pickup, vehicle-to-vehicle transfer, and drop-off logic, and tracks scoring. This file should **NOT** be modified.
+- All components must be loaded and run continuously until the mission is complete. A batch file `run_all.bat` is provided to load all components for Python-based Navigator implementations, and `run_all.m` is provided for MATLAB/Simulink implementations.
 
 ---
 
@@ -76,31 +82,13 @@ For setup details, see the [System and Software Setup](../00_Portal/AICA_COMPETI
 3. In QLabs, open **Self-Driving Car Studio**.
 4. Select and load the **Cityscape** map.
 5. Wait until the Cityscape environment finishes loading completely.
-6. After the map is open, continue with the startup BAT file or run the required files manually.
+6. After the map is open, continue with `run_all.BAT` or `run_all.m` or run the required files manually.
 
 ### Important
 
 - The virtual stage is designed to run in the **Cityscape** map.
-- Make sure the Cityscape map is loaded before running the setup environment files for QCar2 and QDrone2.
+- Make sure the Cityscape map is loaded.
 - If the wrong map is open, the spawn locations, nodes, and delivery locations will not match the competition scenario.
-- Always confirm the correct map is loaded before running `setup_env.py` or `setup_env.m`.
-
-### Run the Setup Environment File Manually
-
-If you do not want the BAT file to handle teh set up of vehicles, you can run the `setup environment` file manually after loading the Cityscape map.
-
-Run one of the following depending on your workflow:
-
-- **Python:** `python setup_env.py`
-- **MATLAB:** run `setup_env.m`
-
-This step spawns **QCar2** and **QDrone2** in the QLabs environment using the configured spawn location.
-
-### Important
-
-- Make sure QLabs is already open and the **Cityscape** map is loaded before running the spawn file.
-- The setup environment file should be run only after the correct map is fully loaded.
-- If vehicles are already spawned, avoid running the setup environment file again unless you want to reset the scenario.
 
 ---
 
@@ -112,44 +100,37 @@ Example: `run_all.bat`
 
 This file is intended to:
 
-1. open QLabs
-2. load the required competition map
-3. run the QCar2 and QDrone2 setup environment files (**Do not modify**)
-4. start the RT models
-    - `virtual_DriveStack.rt-win64` (**Do not modify**)
-    - `virtual_FlightStack.rt-win64` (**Do not modify**)
-5. arm both vehicles
-6. command QDrone2 takeoff to hover altitude
-7. run the selected navigator files or models
-8. begin execution based on the selected mode
+1. run the setup environment file **(setup_env.py)**
+2. start the models 
+    - `virtual_DriveStack.rt-win64`
+    - `virtual_FlightStack.rt-win64` 
+3. start the models 
+    - `QCar2_Navigator.py`
+    - `QDrone2_Navigator.py`
+4. run the game file **(game.py)**
 
-### Optional Manual Setup Before Running the BAT File
+Example: `run_all.m`
 
-If QLabs is already open with the **Cityscape** map loaded, or if the vehicles have already been spawned manually, the corresponding steps in the BAT file may be commented out.
+This file is intended to:
 
-Examples:
-
-- comment out the QLabs launch command if QLabs is already open
-- comment out the map-loading step if the **Cityscape** map is already loaded
-- comment out the setup environment step if `setup_env.py` or `setup_env.m` has already been run manually
-
-### Important
-
-- This launcher is intended to run the full startup workflow automatically, including the selected navigator files or models.
-- It may be configured to use either **MATLAB / Simulink** or **Python**, depending on the version selected in the file.
-- If you want to use the **Python** navigator files, make sure the Python commands are enabled in the BAT file.
-- If you want to use the **MATLAB / Simulink** navigator files, make sure the MATLAB commands are enabled in the BAT file.
-- By default, one version may be enabled and the other may be commented out, or you can start the navigator models separately by commenting out both versions in the BAT file.
-- If manual setup steps have already been completed, users may comment out the corresponding BAT file lines before running it.
-- Teams should review the BAT file before running to make sure it matches their intended workflow.
+1. run the setup environment file **(setup_env.py)**
+2. start the models 
+    - `virtual_DriveStack.rt-win64`
+    - `virtual_FlightStack.rt-win64` 
+3. start the models 
+    - `QCar2_Navigator.slx`
+    - `QDrone2_Navigator.slx`
+4. run the game file **(game.py)**
 
 ---
 
-## 4) Run the Game File (**Mandatory — Do not modify**)
+## 4) Game File (**Do not modify**)
 
 Run:
 
     python game.py
+
+**Note:** If you have several Python Versions you can use `py -3.12 game.py` which specifies the version. 
 
 This file is required for the scenario to work properly.
 
@@ -186,93 +167,90 @@ Commenting out unnecessary video subsystems can improve runtime performance and 
 The QDrone navigator supports:
 
 - waypoint-based autonomous control
-- manual control
-- control mode switching
-- intention mode switching
+- publishing intention
 - camera streams, enabled as needed and disabled by default in the provided code and model
+- sensor readings
 
-### Note
-
-- **Manual control is available only in Python**
-- **MATLAB / Simulink does not support manual control in the provided navigator files**
-
-### QDrone2 Inputs
-
-Users can provide:
-
-- waypoints for autonomous control
-- manual control commands
-- autonomous or manual control mode
-- autonomous or manual intention mode
 
 ### QDrone2 Intention List
 
-- Nothing
-- Pickup Small
-- Drop
-- Transfer from Car
-- Transfer to Car
+    0: Nothing
+
+    1: Pickup Small
+
+    2: Pickup Large
+
+    3: Drop
+
+    4: Transfer from Drone
+
+    5: Transfer to Drone
+
 
 ### 5.1.1 QDrone2 Communication Channels and Ports
 
 QDrone2 uses fixed communication ports for the simulator, cameras, and game connection.
 
+---
+
 #### Camera and Sensor Ports
 
 If camera support is enabled in Python, the following ports are used:
 
-- **RealSense RGB + Depth Camera**
-  - Address: `tcpip://localhost:18986`
-  - Device ID: `0@tcpip://localhost:18986`
-  - Mode: `RGB&DEPTH`
-  - RGB resolution: `640 x 480`
-  - Depth resolution: `640 x 480`
+| Camera | Address | Camera ID | Resolution |
+|---|---|---|---|
+| RealSense RGB + Depth | `tcpip://localhost:18986` | `0@tcpip://localhost:18986` | `640 x 480` (RGB + Depth) |
+| Right Camera | `tcpip://localhost:18982` | `0@tcpip://localhost:18982` | `640 x 480` |
+| Back Camera | `tcpip://localhost:18983` | `1@tcpip://localhost:18983` | `640 x 480` |
+| Left Camera | `tcpip://localhost:18984` | `2@tcpip://localhost:18984` | `640 x 480` |
+| Downward Camera | `tcpip://localhost:18985` | `3@tcpip://localhost:18985` | `640 x 480` |
 
-- **Right Camera**
-  - Address: `tcpip://localhost:18982`
-  - Camera ID: `0@tcpip://localhost:18982`
-  - Resolution: `640 x 480`
+> **Note:** The RealSense camera operates in `RGB & DEPTH` mode and provides both RGB and Depth streams on the same port.
 
-- **Back Camera**
-  - Address: `tcpip://localhost:18983`
-  - Camera ID: `1@tcpip://localhost:18983`
-  - Resolution: `640 x 480`
+---
 
-- **Left Camera**
-  - Address: `tcpip://localhost:18984`
-  - Camera ID: `2@tcpip://localhost:18984`
-  - Resolution: `640 x 480`
+**Data and Game Ports**
 
-- **Downward Camera**
-  - Address: `tcpip://localhost:18985`
-  - Camera ID: `3@tcpip://localhost:18985`
-  - Resolution: `640 x 480`
 
-#### Data and Game Ports
+Drone Data Stream:
 
-The provided QDrone2 Python code also uses:
+| Parameter | Value |
+|---|---|
+| Address | `tcpip://localhost:18373` |
+| Agent Mode | `C` |
+| Send Buffer Size | `1460` |
+| Receive Buffer Shape | `(1, 16)` — `float64` |
+| Receive Buffer Size | `1460` |
 
-- **Drone data stream**
-  - Address: `tcpip://localhost:18373`
-  - Agent mode: `C`
-  - Send buffer size: `1460`
-  - Receive buffer shape: `(1,16)` with `float64`
-  - Receive buffer size: `1460`
+Received Data Layout:
 
-- **Game stream**
-  - Address: `tcpip://127.0.0.1:19001`
-  - Agent mode: `C`
-  - Send buffer size: `8`
-  - Receive buffer shape: `(1,1)` with `float64`
-  - Receive buffer size: `24`
+| Index | Description | Unit |
+|---|---|---|
+| `[0]` | Stream connection flag | — |
+| `[1:4]` | IMU gyroscope data | rad/s |
+| `[4:7]` | IMU accelerometer data | m/s² |
+| `[7:10]` | Estimated angular position | rad |
+| `[10:13]` | Estimated angular rates | rad/s |
+| `[13:16]` | Estimated angular acceleration | rad/s² |
+| `[16:20]` | Pose — x, y, z, yaw | m, m, m, rad |
 
-#### Important
+**Sent Data:** Waypoint as `[x, y, z, yaw]` vector.
 
-- These ports are part of the provided QDrone2 system used in the virtual stage.
-- Teams should use these ports as documented.
-- If camera streaming is not needed, disabling unused cameras can reduce runtime load.
+---
 
-#### Reference Python Section
+**Drone Intention Stream**
+
+| Parameter | Value |
+|---|---|
+| Address | `tcpip://127.0.0.1:19001` |
+| Agent Mode | `C` |
+| Send Buffer Size | `8` |
+| Receive Buffer Shape | `(1, 1)` — `float64` |
+| Receive Buffer Size | `24` |
+
+**Received Data:** None.
+
+**Sent Data:** QDrone2 intention value.
 
 For the Python section related to this communication setup, see the [QDrone2 Communication Python Section](QDrone2_communication.md)
 
@@ -283,15 +261,9 @@ For the Python section related to this communication setup, see the [QDrone2 Com
 The QCar navigator supports:
 
 - node-based trajectory selection
-- manual control
-- velocity selection
-- Intention commands
+- velocity and steering 
+- publishing intention
 - camera stream, enabled as needed and disabled by default in the provided code and model
-
-### Note
-
-- **Manual control is available only in Python**
-- **MATLAB / Simulink does not support manual control in the provided navigator files**
 
 ### QCar2 Inputs
 
@@ -299,110 +271,98 @@ Users can provide:
 
 - start node
 - end node
-- velocity
-- manual control commands
+- velocity and steering 
 - intention commands
 
 ### QCar2 Intention List
 
-- Nothing
-- Pickup Small
-- Pickup Large
-- Drop
-- Transfer from Drone
-- Transfer to Drone
+    0: Nothing
+
+    1: Pickup Small
+
+    2: Pickup Large
+
+    3: Drop
+
+    4: Transfer from Drone
+
+    5: Transfer to Drone
+
 
 ### 5.2.1 QCar2 Communication Channels and Ports
 
-QCar2 uses fixed communication ports for simulator connection, sensors, and game connection.
+QCar2 uses fixed communication ports for the simulator, cameras, and game connection.
 
-#### Port Information
+---
 
-The QCar2 communication ports are documented below in the same format as QDrone2.
+#### Camera and Sensor Ports
 
-Example format:
+If camera support is enabled in Python, the following ports are used:
 
-- **Front Camera**
-  - Address: `tcpip://localhost:PORT_NUMBER`
-  - Resolution: `WIDTH x HEIGHT`
-  - Frame rate: `VALUE`
+| Camera | Address | Camera ID | Resolution |
+|---|---|---|---|
+| Right Camera | `tcpip://localhost:18961` | `0@tcpip://localhost:18961` | `640 x 480` |
+| Back Camera | `tcpip://localhost:18962` | `1@tcpip://localhost:18962` | `640 x 480` |
+| Front Camera | `tcpip://localhost:18963` | `2@tcpip://localhost:18963` | `640 x 480` |
+| Left Camera | `tcpip://localhost:18964` | `3@tcpip://localhost:18964` | `640 x 480` |
 
-- **Vehicle data stream**
-  - Address: `tcpip://localhost:PORT_NUMBER`
-  - Agent mode: `C`
-  - Send buffer size: `VALUE`
-  - Receive buffer size: `VALUE`
+> **Note:** All cameras operate at a frame rate of `30 fps` with a resolution of `640 x 480`.
 
-#### Important
+---
 
-- These ports are part of the provided QCar2 system used in the virtual stage.
-- Teams should use the documented ports exactly as provided.
-- If camera streaming is not needed, disabling unused sensors can reduce runtime load.
+#### **Data and Game Ports**
 
-#### Reference Python Section
+---
+
+**QCar2 Data Stream**
+
+| Parameter | Value |
+|---|---|
+| Address | `tcpip://localhost:18375` |
+| Agent Mode | `C` |
+| Send Buffer Size | `1460` |
+| Receive Buffer Shape | `(1, 10)` — `float64` |
+| Receive Buffer Size | `1460` |
+
+**Received Data Layout:**
+
+| Index | Description | Unit |
+|---|---|---|
+| `[0]` | Motor power consumption | W |
+| `[1]` | Battery level | % |
+| `[2]` | Car speed | m/s |
+| `[3:6]` | Gyroscope data | rad/s |
+| `[6:9]` | Accelerometer data | m/s² |
+| `[9]` | Connection status flag | — |
+
+**Sent Data:** Velocity and steering commands as `[velocity, steering]` vector.
+
+---
+
+**QCar2 Intention Stream**
+
+| Parameter | Value |
+|---|---|
+| Address | `tcpip://localhost:19000` |
+| Agent Mode | `C` |
+| Send Buffer Size | `8` |
+| Receive Buffer Shape | `(1, 3)` — `float64` |
+| Receive Buffer Size | `24` |
+
+**Received Data:** Vehicle pose as `[x, y, yaw]`.
+
+**Sent Data:** QCar2 intention value.
 
 For the Python section related to this communication setup, see the [QCar2 Communication Python Section](QCar2_communication.md)
 
 ---
 
-## 6) Manual Control Details
 
-### 6.1 QCar2 Manual Control
-
-QCar2 open-loop control uses two main inputs:
-
-- **Velocity Command**
-- **Steering Angle**
-
-#### Input Limits
-
-- velocity command range: `[-0.2, 0.2]`
-- steering angle range: `[-0.6, 0.6]` rad
-
-#### Keyboard Controls
-
-- **Up Arrow** → positive velocity command
-- **Down Arrow** → negative velocity command
-- **No key pressed** → velocity command = `0`
-- **Left Arrow** → negative steering angle
-- **Right Arrow** → positive steering angle
-- **M** → mode switch (Manual to Auto or Auto to Manual)
-
-#### Manual Mode Summary for QCar2
-
-Arrows:
-
-- Up / Down → forward / backward velocity command
-- Left / Right → steering command
-
----
-
-### 6.2 QDrone2 Manual Control
-
-QDrone2 manual mode uses the following default keyboard controls:
-
-- **W / S** → pitch forward / backward
-- **A / D** → roll left / right
-- **E / Q** → altitude up / down
-- **Z / X** → yaw left / right
-- **M** → mode switch (Manual to Auto or Auto to Manual)
-
-#### Default Motion Rates
-
-- Pitch: about **0.5 m/s**
-- Roll: about **0.5 m/s**
-- Altitude: about **0.5 m/s**
-- Yaw: about **π/6 rad/s**
-
-Maximum drone speed is about **2.5 m/s**.
-
----
-
-## 7) Autonomous Control Details
+## 6) Autonomous Control Details
 
 This section describes how QCar2 and QDrone2 operate in autonomous mode.
 
-### 7.1 QCar2 Autonomous Control
+### 6.1 QCar2 Autonomous Control
 
 In autonomous mode, QCar2 uses node-based routing for path planning and motion execution.
 
@@ -410,7 +370,8 @@ Users can provide:
 
 - start node
 - end node
-- desired velocity command
+- desired velocity and steering command
+- publishing intention
 
 Based on the selected start node and end node, the controller computes:
 
@@ -424,7 +385,15 @@ The following node map shows the node numbers that can be used for **QCar2 auton
 
 **Pickup location:** Node **24**
 
-<img src="../images/node_map_qcar2.png" alt="QCar2 Python node map" width="520">
+<img src="../images/roadmap_Python.png" alt="QCar2 Python node map" width="520">
+
+#### QCar2 Node Map for MATLAB/Simulink 
+
+The following node map shows the node numbers that can be used for **QCar2 autonomous route planning in the MATLAB/Simulink version**.
+
+**Pickup location:** Node **25**
+
+<img src="../images/roadmap_Matlab.png" alt="QCar2 MATLAB/Simulink node map" width="520">
 
 #### Sample Autonomous Files
 
@@ -438,12 +407,11 @@ For QCar2, `plan_path.py` provides a sample autonomous path-planning workflow in
 #### Important
 
 - Teams should use these node numbers when selecting QCar2 start and end nodes in Python.
-- Node numbering may differ from MATLAB / Simulink, so always use the correct node reference for the selected workflow.
 - The files in `tools\` are provided as sample references for autonomous planning and execution.
 
 ---
 
-### 7.2 QDrone2 Autonomous Control
+### 6.2 QDrone2 Autonomous Control
 
 In autonomous mode, QDrone2 uses waypoint-based navigation to move between mission targets.
 
@@ -451,8 +419,7 @@ Users can provide:
 
 - waypoint or target position
 - desired autonomous motion target
-- autonomous control mode
-- autonomous intention mode
+- publishing intention
 
 Based on the selected target, the controller computes:
 
@@ -486,43 +453,8 @@ The voxel map and occupancy grid files are provided as sample environment repres
 
 ---
 
-## 8) Action Key Mapping and Intention Mapping
 
-### 8.1 Python Action Keys for QDrone2
-
-Default QDrone2 keys in Python:
-
-- `6` → Pickup
-- `7` → Drop
-- `8` → Transfer from Car
-- `9` → Transfer to Car
-- `0` → Nothing / Reset intention
-
-For QCar2, the same `0` key is used for resetting intention to Nothing.
-
----
-
-### 8.2 MATLAB / Simulink Intention Mapping
-
-In MATLAB / Simulink, intentions are set by changing the numeric constant going into the intention input.
-
-This means:
-
-- you do **not** press keyboard keys in the same way as Python
-- instead, you manually set the desired numeric intention value in the model when running
-
-#### Important Clarification
-
-The Python keys and the MATLAB intention values are mapped to the same internal values used by `game.py`.
-
-**For example**: Pressing **`6`** in Python may correspond to intention value `1` in MATLAB
-  - Even though the visible key number is different, `game.py` interprets them as the same action.
-  - Do not confuse **keyboard key number** with **internal intention value**. The behavior is the same in `game.py`. Only the way you trigger the intention differs between Python and MATLAB / Simulink.
-
-
----
-
-## 9) Pickup and Delivery Operations and Conditions
+## 7) Pickup and Delivery Operations and Conditions
 
 Pickup and delivery actions are managed by `game.py` and require the vehicle to remain inside the valid region for the full action duration.
 
@@ -544,7 +476,7 @@ Depending on the operation, the target location may refer to:
 
 ---
 
-### 9.1 QDrone2 Pickup
+### 7.1 QDrone2 Pickup
 
 #### Exact Distance Requirement
 
@@ -586,13 +518,13 @@ where:
 
 
 
-### 9.2 QCar2 Pickup
+### 7.2 QCar2 Pickup
 
 #### Exact Distance Requirement
 
-A QCar2 pickup is valid when all of the following are satisfied relative to the pickup location:
+A QCar2 pickup is valid when all of the following are satisfied relative to the central pickup location:
 
-- distance from the QCar2 to the pickup point must be **less than 2.0 m**
+- distance from the QCar2 to the central pickup point must be **less than 2.0 m**
 - the condition must be maintained for the full **3 seconds**
 
 #### Operational Description
@@ -627,7 +559,7 @@ where:
   - `loc_car` = QCar2 current position
   - `LOC_PICK` = target location
 
-### 9.3 QDrone2 Delivery
+### 7.3 QDrone2 Delivery
 
 #### Exact Distance Requirement
 
@@ -653,7 +585,7 @@ Only **QDrone2** may perform window deliveries
 
 ---
 
-### 9.4 QCar2 Delivery
+### 7.4 QCar2 Delivery
 
 #### Exact Distance Requirement
 
@@ -679,7 +611,7 @@ QCar2 and QDrone2 can both perform a shared drop-off delivery.
 
 ---
 
-## 10) Transfer Operation and Conditions
+## 8) Transfer Operation and Conditions
 
 Transfer can happen in both directions:
 
@@ -694,7 +626,7 @@ Both vehicles must use the correct intention values.
 
 ---
 
-### 10.1 QCar2 to QDrone2 Transfer
+### 8.1 QCar2 to QDrone2 Transfer
 
 #### Exact Distance Requirement
 
@@ -736,7 +668,7 @@ If only one side is set, transfer will **not** occur.
 
 ---
 
-### 10.2 QDrone2 to QCar2 Transfer
+### 8.2 QDrone2 to QCar2 Transfer
 
 #### Exact Distance Requirement
 
@@ -768,20 +700,13 @@ Now set intentions:
 
 ---
 
-## 11) Final Runtime Check, Mission Completion, and File Reference
+## 9) Final Runtime Check, Mission Completion, and File Reference
 
 ### Mission Timing and Completion
 
 - Mission time begins at the official mission start.
-- The mission objective is to minimize total completion time.
-- If required deliveries are not completed, the mission is considered incomplete.
-
-A delivery is considered complete only after the scenario logic confirms a valid delivery event.
-
-### Important
-
-- `game.py` manages pickup timing, transfer timing, delivery timing, and scoring.
-- Teams should verify package completion behavior during runtime.
+- When a delivery is successfully completed, a delivery score is calculated using the scoring formula.
+- The **total score** is displayed at the **top** of the QLabs window.
 
 ### Final Runtime Check
 
@@ -798,31 +723,21 @@ Before running a full mission, verify the following:
 - transfer actions are working
 - score display is visible in QLabs
 
-### Main File Types
-
-The competition package includes the following types of files:
-
-- **setup environment files** → prepare the QCar2 and QDrone2 simulation environment (**Do not modify**)
-- **RT model files** → run the provided vehicle stack (**Do not modify**)
-- **BAT files** → start the stack and automate execution
-- **navigator files** → main files that teams run and modify for MATLAB / Simulink or Python operation
-- **`game.py`** → backend mission logic, package handling, timing, and scoring (**Do not modify**)
-
 ### File Structure
 
 ```text
 AICA_Competition_Files\
-    setup_env.py                  (Do not modify)
-    setup_env.m                   (Do not modify)
+    setup_env.py                  
     QDrone2_Navigator.slx
     QDrone2_Navigator.py
     QCar2_Navigator.slx
     QCar2_Navigator.py
     run_all.bat
+    run_all.m
     spawn_location.txt
-    virtual_DriveStack.rt-win64   (Do not modify)
-    virtual_FlightStack.rt-win64  (Do not modify)
-    game.py                       (Do not modify)
+    virtual_DriveStack.rt-win64   
+    virtual_FlightStack.rt-win64  
+    game.py                       
     tools\
         city_voxel_map.npz
         occupancy_grid.txt

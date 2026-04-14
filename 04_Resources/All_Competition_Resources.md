@@ -9,7 +9,6 @@ This page lists all documentation and resources for the competition.
 - [Competition Guide](../01_Core_Guides/Competition_Objective.md)
 - [Virtual Stage Competition Guide](../01_Core_Guides/Virtual_Stage_Competiton_Guide.md)
 - [Software Setup Instructions](../03_Setup/Software_Setup_Instructions.md)
-- [What Is Provided](../01_Core_Guides/What_Is_Provided.md)
 
 
 ## Auxillary Materials
