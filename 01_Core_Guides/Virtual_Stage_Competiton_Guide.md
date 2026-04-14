@@ -75,7 +75,7 @@ This section defines how team performance is scored and how rankings are determi
 
 - Mission time begins at the mission start time.
 - When a delivery is successfully completed, a delivery score is calculated using the scoring formula.
-- The **total score** is displayed at the **top* of the QLabs window.
+- The **total score** is displayed at the **top** of the QLabs window.
 
 **Scoring formula:**
 
