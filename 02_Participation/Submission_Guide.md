@@ -57,12 +57,6 @@ To be considered complete:
 - Submitted runs must include **at least one** completed delivery.
 - Completion should be visible in simulation outputs
 
-If all deliveries are not completed:
-
-- The mission is considered **incomplete**
-- Final scoring will reflect incomplete objective completion
-- Points are awarded according to completed progress and official scoring logic
-
 ---
 
 ## 5) Timing and Scoring Visibility

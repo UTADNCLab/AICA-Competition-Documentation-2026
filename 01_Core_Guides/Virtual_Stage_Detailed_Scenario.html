@@ -76,7 +76,7 @@
 <li>There are <strong>5</strong> delivery tasks: <strong>4 small-package</strong> deliveries and <strong>1 large-package</strong> delivery.</li>
 <li>The <strong>QCar2</strong> can pick up both <strong>small and large</strong> packages.</li>
 <li>The <strong>QDrone2</strong> can only pick up <strong>small packages</strong>.</li>
-<li>The <strong>central pickup</strong> location is indicated by <strong>yellow pad</strong> in QLabs screen.</li>
+<li>The <strong>central pickup</strong> location is indicated by <strong>green pad</strong> in QLabs screen.</li>
 </ul>
 <h3>Pickup Condition</h3>
 <p>A pickup is successful when:</p>
@@ -86,8 +86,6 @@
 <li>The <strong>QDrone2</strong> picks up a <strong>small package</strong> after remaining within <strong>2.0 m</strong> horizontal distance and within a vertical offset of <strong>0.0 m to 4.0 m</strong> from the pickup location for <strong>3 seconds</strong> while its <strong>intention</strong> is set to <strong>1</strong>.</li>
 </ul>
 <p>After the required hold time, the package is considered loaded.</p>
-<h4>Example Central Pickup Package by QCar2</h4>
-<p><img src="../images/car_pickup_box.png"></p>
 <h3>Carry Constraints</h3>
 <p>Current carry limits at a time are:</p>
 <ul>
@@ -165,10 +163,9 @@
 <li>Use the <strong>QCar2 table</strong> for pickup and drop node selection in car routing</li>
 <li>Use the <strong>QDrone2 table</strong> for pickup, drop, and window delivery target coordinates</li>
 </ul>
-<p>*</p>
 <p><em>Figure: QCar2 node numbering reference showing the Python mapping</em></p>
 <p><img src="../images/roadmap_Python.png"></p>
-<h2>---</h2>
+<hr />
 <p><em>Figure: QCar2 node numbering reference showing the MATLAB / Simulink mapping.</em></p>
 <p><img src="../images/roadmap_Matlab.png"></p>
 <h3>QCar2 Pickup and Delivery Reference</h3>

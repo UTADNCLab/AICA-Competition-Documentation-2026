@@ -52,7 +52,7 @@ At mission start:
 - There are **5** delivery tasks: **4 small-package** deliveries and **1 large-package** delivery.
 - The **QCar2** can pick up both **small and large** packages.
 - The **QDrone2** can only pick up **small packages**.
-- The **central pickup** location is indicated by **yellow pad** in QLabs screen.
+- The **central pickup** location is indicated by **green pad** in QLabs screen.
 
 
 ### Pickup Condition
@@ -64,10 +64,6 @@ A pickup is successful when:
 - The **QDrone2** picks up a **small package** after remaining within **2.0 m** horizontal distance and within a vertical offset of **0.0 m to 4.0 m** from the pickup location for **3 seconds** while its **intention** is set to **1**.
 
 After the required hold time, the package is considered loaded.
-
-#### Example Central Pickup Package by QCar2 
-
-<img src="../images/car_pickup_box.png">
 
 ### Carry Constraints
 
@@ -174,13 +170,11 @@ Teams should consider both the delivery type and the scoring difference when pla
 - Use the **QCar2 table** for pickup and drop node selection in car routing
 - Use the **QDrone2 table** for pickup, drop, and window delivery target coordinates
 
-*
 
 *Figure: QCar2 node numbering reference showing the Python mapping*
 
 <img src="../images/roadmap_Python.png">
 
----
 ---
 
 *Figure: QCar2 node numbering reference showing the MATLAB / Simulink mapping.*
