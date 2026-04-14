@@ -31,8 +31,8 @@ For the complete scenario description, see the [Virtual Stage Detailed Scenario]
 This document includes:
 
 - Central pickup operations
-  - **QCar2** can carry **2 small packages** or **1 large package**
-  - **QDrone2** can carry **1 small package only**
+    - **QCar2** can carry **2 small packages** or **1 large package**
+    - **QDrone2** can carry **1 small package only**
 - **Vehicle-to-vehicle transfer** 
 - **Window delivery** and **Shared drop-off** delivery options
 - Delivery completion requirements
@@ -74,13 +74,13 @@ This section defines how team performance is scored and how rankings are determi
 ### Scoring Method
 
 - Mission time begins at the mission start time.
-- When a delivery is successfully completed, the delivery score calculated from the scoring formula will be shown in the Quanser Interactive Labs (QLabs) window.
+- When a delivery is successfully completed, a delivery score is calculated using the scoring formula.
+- The **total score** is displayed at the **top** of the QLabs window.
 
 **Scoring formula:**
 
 - **Score for each completed delivery = 1000 − delivery completion time + window delivery bonus**
 - **Total Score = Sum of all delivery scores**
-
 
 
 **Delivery Completion Time** is the time taken to complete a delivery, measured from the mission start time until the package is successfully delivered.

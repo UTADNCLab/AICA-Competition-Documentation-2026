@@ -54,7 +54,7 @@ For the submitted attempt:
 
 To be considered complete:
 
-- **All deliveries must be completed** in the submitted run
+- Submitted runs must include **at least one** completed delivery.
 - Completion should be visible in simulation outputs
 
 If all deliveries are not completed:
@@ -105,7 +105,7 @@ Before submitting, verify:
 - [ ] Video is a single continuous run
 - [ ] Startup and execution steps are visible
 - [ ] No edits/cuts/rerun patching
-- [ ] All deliveries completed
+- [ ] At least one delivery is completed
 - [ ] Final score and time visibility included
 ---
 

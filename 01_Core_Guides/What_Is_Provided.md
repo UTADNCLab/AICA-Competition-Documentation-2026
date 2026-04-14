@@ -6,14 +6,12 @@ This page gives a simple overview of the main files provided for the competition
 
 ## Overview
 
-The competition package includes files for setting up the scenario, starting the vehicle stack, running the mission logic, and developing the team solution.
+The competition package contains all files needed to run, manage, and solve the AICA challenge. It includes:
 
-In general:
-
-- The organizers provide the scenario setup and backend mission logic
-- Teams mainly work on the **navigator** files to implement their solution
-- Some files must run in the background for scoring, package handling, pickup, and transfer logic
-- Sample autonomous planning files are also provided in the `tools\` folder for reference
+- **Scenario setup** - configures the mission environment and backend logic
+- **Navigator files** - the primary files where teams implement their solution
+- **Background files** - handle scoring, package management, pickup, delivery, and transfer logic
+- **Sample planning files** - reference implementations located in the `tools/` folder
 
 ---
 
@@ -25,7 +23,7 @@ Before using this guide, ensure that:
 - Your system meets the hardware requirements
 - The full setup process has been completed
 
-For complete setup instructions, see the [System and Software Setup](../03_Setup/Software_Setup_Instructions.md)
+For complete setup instructions, see the [System and Software Setup](../03_Setup/System_and_Software_setup.md)
 
 ---
 
@@ -48,24 +46,21 @@ These files:
 ### Important
 
 - These files are required to correctly initialize the competition environment.
-- Run the appropriate setup environment file before starting the mission workflow.
+- Run the appropriate setup environment file only after the **Cityscape** competition map is loaded in QLabs.
 - These files should **NOT** be modified.
-
 ---
 
 ## 2) RT Model Files
 
-The following RT model files are provided for the virtual stack:
+The virtual-stage workflow uses the following RT model files through the provided startup workflow:
 
 - `virtual_DriveStack.rt-win64` **(Do not modify)**
 - `virtual_FlightStack.rt-win64` **(Do not modify)**
 
-These files are used to run the provided drive stack and flight stack in the virtual-stage environment.
-
 ### Important
 
 - These RT model files should **NOT** be modified.
-- RT model execution is handled through the provided BAT file.
+- They are used through the provided BAT startup workflow.
 - No separate manual step is required to run these RT model files in the standard workflow.
 - `virtual_DriveStack.rt-win64` is used for **QCar2**.
 - `virtual_FlightStack.rt-win64` is used for **QDrone2**.

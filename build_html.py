@@ -100,7 +100,7 @@ def add_heading_ids(content_html: str) -> str:
             return m.group(0)
         return f'<{tag} id="{hid}">{inner}</{tag}>'
 
-    return re.sub(r"<(h[1-6])>(.*?)</\1>", repl, content_html, flags=re.IGNORECASE | re.DOTALL)
+    return re.sub(r"<(h[1-6])>(.*?)</\\1>", repl, content_html, flags=re.IGNORECASE | re.DOTALL)
 
 
 def strip_first_h1(content_html: str, page_title: str) -> str:
@@ -127,9 +127,103 @@ def strip_first_h1(content_html: str, page_title: str) -> str:
     return content_html
 
 
+def clean_html_text(text: str) -> str:
+    """Strip tags and normalize whitespace."""
+    text = re.sub(r"<[^>]+>", "", text)
+    text = html_lib.unescape(text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
+
+
+def color_package_type_tables(content_html: str) -> str:
+    """
+    Find tables with a 'Package Type' column and add CSS classes to those cells:
+      Pickup -> package-pickup
+      Small  -> package-small
+      Large  -> package-large
+    """
+
+    def process_table(match):
+        table_html = match.group(0)
+
+        # Find all table rows
+        rows = re.findall(r"<tr>(.*?)</tr>", table_html, flags=re.IGNORECASE | re.DOTALL)
+        if not rows:
+            return table_html
+
+        # Find the header row that contains <th>
+        header_row = None
+        for row in rows:
+            if "<th" in row.lower():
+                header_row = row
+                break
+
+        if not header_row:
+            return table_html
+
+        headers = re.findall(r"<th[^>]*>(.*?)</th>", header_row, flags=re.IGNORECASE | re.DOTALL)
+        header_texts = [clean_html_text(h).lower() for h in headers]
+
+        try:
+            package_idx = header_texts.index("package type")
+        except ValueError:
+            return table_html
+
+        # Add table class
+        table_html = re.sub(
+            r"<table>",
+            '<table class="package-type-table">',
+            table_html,
+            count=1,
+            flags=re.IGNORECASE
+        )
+
+        def process_row(row_match):
+            row_html = row_match.group(0)
+
+            # Skip header rows
+            if "<th" in row_html.lower():
+                return row_html
+
+            tds = re.findall(r"<td[^>]*>(.*?)</td>", row_html, flags=re.IGNORECASE | re.DOTALL)
+            if package_idx >= len(tds):
+                return row_html
+
+            package_value = clean_html_text(tds[package_idx]).lower()
+
+            css_class = None
+            if package_value == "pickup":
+                css_class = "package-pickup"
+            elif package_value == "small":
+                css_class = "package-small"
+            elif package_value == "large":
+                css_class = "package-large"
+
+            if not css_class:
+                return row_html
+
+            td_pattern = re.compile(r"(<td[^>]*>)(.*?)(</td>)", re.IGNORECASE | re.DOTALL)
+
+            td_matches = list(td_pattern.finditer(row_html))
+            if package_idx >= len(td_matches):
+                return row_html
+
+            target_td = td_matches[package_idx]
+            start_tag, inner_html, end_tag = target_td.groups()
+            replacement = f'{start_tag}<span class="{css_class}">{inner_html}</span>{end_tag}'
+
+            return row_html[:target_td.start()] + replacement + row_html[target_td.end():]
+
+        table_html = re.sub(r"<tr>.*?</tr>", process_row, table_html, flags=re.IGNORECASE | re.DOTALL)
+        return table_html
+
+    return re.sub(r"<table>.*?</table>", process_table, content_html, flags=re.IGNORECASE | re.DOTALL)
+
+
 def render_page(content_html: str, page_title: str, css_href: str) -> str:
     content_html = add_heading_ids(content_html)
     content_html = strip_first_h1(content_html, page_title)
+    content_html = color_package_type_tables(content_html)
 
     banner_href = css_href_for(Path("index.html")) if css_href == "styles.css" else "../" * css_href.count("../") + "images/banner.png"
     if css_href == "styles.css":
@@ -142,6 +236,22 @@ def render_page(content_html: str, page_title: str, css_href: str) -> str:
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{page_title}</title>
   <link rel="stylesheet" href="{css_href}" />
+  <style>
+    .package-pickup {{
+      color: #2e9b47;
+      font-weight: 700;
+    }}
+
+    .package-small {{
+      color: #c83a3a;
+      font-weight: 700;
+    }}
+
+    .package-large {{
+      color: #2f66d0;
+      font-weight: 700;
+    }}
+  </style>
 </head>
 <body>
   <div class="page-wrap">

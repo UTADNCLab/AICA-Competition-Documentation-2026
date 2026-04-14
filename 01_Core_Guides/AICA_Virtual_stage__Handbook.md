@@ -2,7 +2,7 @@
 
 ## Overview
 
-The **IEEE SMC AI-Powered Collaborative Autonomy Challenge (AICA)** focuses on implementing a delivery scenario in the Quanser Interactive Labs (**QLabs**) simulation environment.
+The **IEEE SMC (AICA) Challenge ** focuses on implementing a delivery scenario in the Quanser Interactive Labs (**QLabs**) simulation environment.
 
 Teams demonstrate their ability to complete deliveries from the **Central Pickup** location to the required delivery locations using:
 

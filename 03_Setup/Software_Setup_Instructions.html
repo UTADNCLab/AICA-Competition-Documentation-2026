@@ -5,6 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Software Setup & Installation</title>
   <link rel="stylesheet" href="../styles.css" />
+  <style>
+    .package-pickup {
+      color: #2e9b47;
+      font-weight: 700;
+    }
+
+    .package-small {
+      color: #c83a3a;
+      font-weight: 700;
+    }
+
+    .package-large {
+      color: #2f66d0;
+      font-weight: 700;
+    }
+  </style>
 </head>
 <body>
   <div class="page-wrap">
@@ -20,19 +36,19 @@
 <p>If you are using both <strong>MATLAB / Simulink</strong> and <strong>Python</strong>, follow both sections below.<br />
 If you are using only one workflow, follow the corresponding section only.</p>
 <hr />
-<h2 id="step-1-initial-download">Step 1 -- Initial Download</h2>
+<h2>Step 1 -- Initial Download</h2>
 <p>Before software installation, 
 On your system, create a folder called <em>Quanser</em> under <em>Documents</em>. This should look like <code>C:/Users/user/Documents/Quanser</code>. download the documentation and competition runtime files into your local <code>Documents/Quanser</code> workspace.</p>
 <hr />
-<h3 id="1a-download-competition-files">1A) Download Competition Files</h3>
+<h3>1A) Download Competition Files</h3>
 <p>A separate folder for actual competition files.</p>
-<h4 id="with-git">With Git</h4>
+<h4>With Git</h4>
 <ol>
 <li>Install <a href="https://git-scm.com/downloads">Git</a>.</li>
 <li>Open a terminal in <code>C:\Users\&lt;YourUsername&gt;\Documents\Quanser\</code>.</li>
 <li>Clone the repository: https://github.com/UTADNCLab/IEEE-SMC-AICA-Competition-2026.git</li>
 </ol>
-<h4 id="without-git-zip">Without Git (ZIP)</h4>
+<h4>Without Git (ZIP)</h4>
 <ol>
 <li>Open the repository on GitHub.</li>
 <li>Click <strong>Code -&gt; Download ZIP</strong>.</li>
@@ -41,26 +57,26 @@ On your system, create a folder called <em>Quanser</em> under <em>Documents</em>
 <pre><code class="language-text">C:\Users\&lt;YourUsername&gt;\Documents\Quanser
 </code></pre>
 <hr />
-<h3 id="1b-expected-local-layout">1B) Expected Local Layout</h3>
+<h3>1B) Expected Local Layout</h3>
 <pre><code class="language-text">C:\Users\&lt;YourUsername&gt;\Documents\Quanser\
     0_libraries, 1_setup ..\
     9_AICA_Competition_Files\
 </code></pre>
 <p>For detailed installation guide for Quanser resources, see the <a href="https://github.com/quanser/Quanser_Academic_Resources">Quanser_Academic_Resources</a></p>
 <hr />
-<h2 id="step-2-install-required-software">Step 2 -- Install Required Software</h2>
-<h3 id="matlab-2023a-or-later">MATLAB (2023a or later)</h3>
+<h2>Step 2 -- Install Required Software</h2>
+<h3>MATLAB (2023a or later)</h3>
 <ul>
 <li>Download: <a href="https://www.mathworks.com/downloads/">MATLAB for Windows</a></li>
 <li>In MATLAB, install <strong>Quanser Interactive Labs for MATLAB</strong> via Add-On Explorer.</li>
 </ul>
 <p><img src="../images/Matlab_Get_Add_on.png" class="img-small" alt="MATLAB Get Add-On Explorer"></p>
 <p><img alt="Quanser Interactive Labs for MATLAB" src="../images/Quanser_Interactive_lab_for_matlab_.png" /></p>
-<h3 id="c-compiler-required-for-simulink-workflows">C Compiler (required for Simulink workflows)</h3>
+<h3>C Compiler (required for Simulink workflows)</h3>
 <ul>
 <li>Download: <a href="https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&amp;channel=Stable&amp;version=VS18&amp;source=VSLandingPage&amp;cid=2500&amp;passive=false">Visual Studio Community</a></li>
 </ul>
-<h3 id="python-312-recommended">Python (3.12 recommended)</h3>
+<h3>Python (3.12 recommended)</h3>
 <ul>
 <li>Download from: <a href="https://www.python.org/downloads/">Python Official Downloads</a><blockquote>
 <p>WARNING
@@ -72,15 +88,15 @@ On your system, create a folder called <em>Quanser</em> under <em>Documents</em>
 <p><strong>NOTE:</strong>
 <strong>IF YOU DOWNLOAD FROM THE PYTHON WEBSITE, DO NOT USE THE PYTHON INSTALL MANAGER</strong>  </p>
 </blockquote>
-<h3 id="quanser-interactive-labs-qlabs">Quanser Interactive Labs (QLabs)</h3>
+<h3>Quanser Interactive Labs (QLabs)</h3>
 <ul>
 <li>Install via MATLAB Add-On Explorer (MATLAB workflow), or</li>
 <li>Install standalone: <a href="https://qlabs.quanserdocs.com/en/latest/Get%20Started.html">QLabs Getting Started</a></li>
 </ul>
 <p><img src="../images/Qlabs_install_link.png"></p>
-<h3 id="note-if-you-are-using-both-matlab-simulink-and-python-qlabs-only-needs-to-be-installed-once-using-either-of-the-methods-above"><strong>Note:</strong> If you are using both MATLAB / Simulink and Python, QLabs only needs to be installed once using either of the methods above.</h3>
+<h3><strong>Note:</strong> If you are using both MATLAB / Simulink and Python, QLabs only needs to be installed once using either of the methods above.</h3>
 <hr />
-<h2 id="step-3-check-system-requirements">Step 3 -- Check System Requirements</h2>
+<h2>Step 3 -- Check System Requirements</h2>
 <p>Navigate to:</p>
 <pre><code class="language-text">C:\Users\&lt;YourUsername&gt;\Documents\Quanser\5_research\1_setup\
 </code></pre>
@@ -138,7 +154,7 @@ On your system, create a folder called <em>Quanser</em> under <em>Documents</em>
 </tbody>
 </table>
 <p>A <strong>green highlighted box</strong> indicates successful configuration and required dependencies are available.</p>
-<h2 id="example-successful-setup-check-will-update-this-when-we-test-on-system-without-quarc-now-in-my-image-there-is-1-in-quarc-column">Example: Successful Setup Check ( will update this when we test on system without QUARC now in my image there is 1 in QUARC column)</h2>
+<h2>Example: Successful Setup Check ( will update this when we test on system without QUARC now in my image there is 1 in QUARC column)</h2>
 <p>The image below shows an example of a successful <code>step_1_check_requirements</code> result.</p>
 <p><img src="../images/python_setup_bat_file.png"></p>
 <p>In a successful setup check:</p>
@@ -149,7 +165,7 @@ On your system, create a folder called <em>Quanser</em> under <em>Documents</em>
 </ul>
 <p>Use this as a <strong>reference</strong> when validating your environment configuration.</p>
 <hr />
-<h2 id="step-4-configure-environment">Step 4 -- Configure Environment</h2>
+<h2>Step 4 -- Configure Environment</h2>
 <p>From <code>1_setup</code>, run:</p>
 <pre><code class="language-bat">configure_python.bat
 configure_matlab.bat
@@ -167,7 +183,7 @@ configure_matlab.bat
 <p>Restart your system after running setup scripts before continuing.</p>
 </blockquote>
 <hr />
-<h3 id="back-to-aica-portal">Back to <a href="../00_Portal/AICA_PORTAL.html"> AICA Portal</a></h3>
+<h3>Back to <a href="../00_Portal/AICA_PORTAL.html"> AICA Portal</a></h3>
       </section>
     </main>
   </div>

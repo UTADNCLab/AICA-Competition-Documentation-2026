@@ -5,6 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Virtual Stage Detailed Scenario</title>
   <link rel="stylesheet" href="../styles.css" />
+  <style>
+    .package-pickup {
+      color: #2e9b47;
+      font-weight: 700;
+    }
+
+    .package-small {
+      color: #c83a3a;
+      font-weight: 700;
+    }
+
+    .package-large {
+      color: #2f66d0;
+      font-weight: 700;
+    }
+  </style>
 </head>
 <body>
   <div class="page-wrap">
@@ -18,7 +34,7 @@
       <section class="content markdown-body">
         <p>This page describes the mission environment, delivery workflow, key location data, and strategy context for the AICA Virtual Stage.</p>
 <hr />
-<h2 id="navigation">Navigation</h2>
+<h2>Navigation</h2>
 <ul>
 <li><a href="#scenario-summary">Scenario Summary</a><ul>
 <li><a href="#1-system-setup">System Setup</a></li>
@@ -31,125 +47,132 @@
 </li>
 </ul>
 <hr />
-<h2 id="scenario-summary">Scenario Summary</h2>
+<h2>Scenario Summary</h2>
 <ul>
-<li>AICA Virtual Stage is a collaborative autonomy challenge where teams design, implement, and demonstrate a delivery system using a ground vehicle (<strong>QCar2</strong>) and an aerial vehicle (<strong>QDrone2</strong>) operating in a shared mission environment.</li>
+<li>AICA Challenge Virtual Stage is a collaborative autonomy challenge where teams design, implement, and demonstrate a delivery system using a <strong>QCar2</strong> and a <strong>QDrone2</strong> operating in a shared mission environment.</li>
 <li>The scenario focuses on demonstrating the ability to perform multimodal delivery through package pickup, route execution, and final delivery using either window delivery or shared drop-off methods.</li>
 <li>Vehicle-to-vehicle transfer is supported as an optional coordination feature and may be used if it benefits the team’s delivery strategy.</li>
 </ul>
 <hr />
-<h2 id="1-system-setup">1) System Setup</h2>
-<p>Each team is provided with files to spawn:</p>
-<ul>
-<li>One <strong>QCar2</strong></li>
-<li>One <strong>QDrone2</strong></li>
-</ul>
-<p>Both vehicles cooperate to transport delivery packages from the depot to designated apartment objectives.</p>
-<h3 id="vehicle-speed-limits">Vehicle Speed Limits</h3>
+<h2>1) System Setup</h2>
+<p>~~Each team is provided with one QCar2 and QDrone2.~~ </p>
+<p>The QCar2 can pick up packages from the central pickup location, deliver them to shared drop-off locations, and transfer packages to and from the QDrone2. Similarly, the QDrone2 can pick up packages from the central pickup location, deliver them to shared drop-off or window delivery locations, and transfer packages to and from the QCar2.</p>
+<h3>Vehicle Speed Limits</h3>
 <ul>
 <li><strong>QCar2 max speed:</strong> 13 m/s</li>
-<li><strong>QDrone2 max speed:</strong> 2 m/s</li>
+<li><strong>QDrone2 max speed:</strong> 2 - 3.5 m/s</li>
 </ul>
-<p>Vehicles may operate below these limits, but must not exceed them.</p>
-<h3 id="initial-vehicle-locations">Initial Vehicle Locations</h3>
-<p>Initial spawn positions of QCar2 and QDrone2 can be adjusted by competitors by editing the <code>spawn_location.txt</code> file in the competition files folder. This file is used to control the starting position of the spawned vehicle(s) in QLabs.</p>
+<p>~~Vehicles may operate below these limits, but must not exceed them.~~</p>
+<h3>Initial Vehicle Locations</h3>
+<ul>
+<li>The initial spawn positions and headings (yaw angles) of the QCar2 and QDrone2 can be adjusted by editing the <code>spawn_location.txt</code> file.</li>
+<li>For both QCar2 and QDrone2, intentions must be listed. Create tables. 0, 1, 2, 3, 4,5 for QCar2 and 0,1,2,3,4 for QDrone2.</li>
+</ul>
 <hr />
-<h2 id="2-central-pickup-operations">2) Central Pickup Operations</h2>
+<h2>2) Central Pickup Operations</h2>
 <p>At mission start:</p>
 <ul>
-<li>All packages are located at a Central Pickup</li>
-<li>The central pickup contains <strong>5 delivery packages</strong>:</li>
-<li><strong>4 small packages</strong></li>
-<li><strong>1 large package</strong></li>
-<li>Both QCar2 and QDrone2 can pick up from the central pickup</li>
-<li><strong>QCar2</strong> can pick up small or large packages</li>
-<li><strong>QDrone2</strong> can only pick up small packages</li>
+<li>All packages are located at the <strong>central pickup</strong> location.</li>
+<li>There are <strong>5</strong> delivery tasks: <strong>4 small-package</strong> deliveries and <strong>1 large-package</strong> delivery.</li>
+<li>The <strong>QCar2</strong> can pick up both <strong>small and large</strong> packages.</li>
+<li>The <strong>QDrone2</strong> can only pick up <strong>small packages</strong>.</li>
+<li>The <strong>central pickup</strong> location is indicated by <strong>yellow pad</strong> in QLabs screen.</li>
 </ul>
-<h3 id="pickup-condition">Pickup Condition</h3>
+<h3>Pickup Condition</h3>
 <p>A pickup is successful when:</p>
 <ul>
-<li><strong>QCar2</strong> remains within <strong>2.0 m</strong> of the pickup location for <strong>3 seconds</strong></li>
-<li><strong>QDrone2</strong> remains within <strong>2.0 m</strong> horizontal distance and within <strong>0.0 m to 4.0 m</strong> vertical offset of the pickup location for <strong>3 seconds</strong></li>
+<li>The <strong>QCar2</strong> picks up a <strong>small package</strong> after remaining within <strong>2.0 m</strong> of the pickup location for <strong>3 seconds</strong> while its <strong>intention</strong> is set to <strong>1</strong>.</li>
+<li>The <strong>QCar2</strong> picks up a <strong>large package</strong> after remaining within <strong>2.0 m</strong> of the pickup location for <strong>3 seconds</strong>  while its <strong>intention</strong> is set to <strong>2</strong>.</li>
+<li>The <strong>QDrone2</strong> picks up a <strong>small package</strong> after remaining within <strong>2.0 m</strong> horizontal distance and within a vertical offset of <strong>0.0 m to 4.0 m</strong> from the pickup location for <strong>3 seconds</strong> while its <strong>intention</strong> is set to <strong>1</strong>.</li>
 </ul>
 <p>After the required hold time, the package is considered loaded.</p>
-<h4 id="example-central-pickup-package-by-qcar2">Example Central Pickup Package by QCar2</h4>
+<h4>Example Central Pickup Package by QCar2</h4>
 <p><img src="../images/car_pickup_box.png"></p>
-<h3 id="carry-constraints">Carry Constraints</h3>
+<h3>Carry Constraints</h3>
 <p>Current carry limits at a time are:</p>
 <ul>
 <li><strong>QCar2:</strong> 2 small packages or 1 large package</li>
 <li><strong>QDrone2:</strong> 1 small package</li>
 </ul>
-<h4 id="example-for-qcar2-with-2-packages">Example for Qcar2 with 2 packages</h4>
+<h4>Example for Qcar2 with 2 packages</h4>
 <p><img src="../images/Car_carry_limit.png"></p>
 <hr />
-<h2 id="3-vehicle-to-vehicle-transfer">3) Vehicle-to-Vehicle Transfer</h2>
+<h2>3) Vehicle-to-Vehicle Transfer</h2>
 <p>To enable collaborative autonomy, transfer is allowed in both directions:</p>
 <ul>
 <li><strong>QCar2 → QDrone2</strong></li>
 <li><strong>QDrone2 → QCar2</strong></li>
 </ul>
-<h3 id="transfer-condition">Transfer Condition</h3>
+<h3>Transfer Condition</h3>
 <p>A transfer is successful when:</p>
 <ol>
-<li><strong>QCar2</strong> is stationary</li>
 <li><strong>QDrone2</strong> is within <strong>2.0 m</strong> horizontal distance of QCar2</li>
 <li><strong>QDrone2</strong> remains within <strong>0.0 m to 4.0 m</strong> vertical offset relative to QCar2</li>
 <li>The required transfer condition is maintained for <strong>3 seconds</strong></li>
+<li><strong>QDrone2 intention</strong> must be set to <strong>4</strong> and <strong>QCar2 intention</strong> must be set to <strong>4</strong> for <strong>QDrone2 → QCar2</strong> transfer.</li>
+<li><strong>QDrone2 intention</strong> must be set to <strong>3</strong> and <strong>QCar2 intention</strong> must be set to <strong>5</strong> for <strong>QCar2 → QDrone2</strong> transfer.</li>
 </ol>
 <p>After this, package ownership transfers to the receiving vehicle.</p>
-<h4 id="example-transfer">Example Transfer</h4>
+<h4>Example Transfer</h4>
 <p><strong>QCar2 → QDrone2</strong></p>
 <p><img src="../images/Qcar_to_qdrone.png"></p>
 <p><strong>QDrone2 → QCar2</strong></p>
 <p><img src="../images/drone_to_Car.png"></p>
 <hr />
-<h2 id="4-delivery-locations">4) Delivery Locations</h2>
+<h2>4) Delivery Locations</h2>
 <p>Each delivery has two options.</p>
-<h3 id="a-window-delivery-qdrone2-only">A) Window Delivery (QDrone2 Only)</h3>
+<h3>A) Window Delivery (QDrone2 Only)</h3>
 <ul>
 <li>Delivery is performed directly to the apartment window</li>
-<li>This delivery mode provides bonus points and can result in a higher score.</li>
+<li>This delivery mode provides bonus points.</li>
+<li>Window delivery locations are indicated by <strong>yellow pads</strong>.</li>
 </ul>
-<h3 id="b-shared-drop-off-location">B) Shared Drop-Off Location</h3>
+<h3>B) Shared Drop-Off Location</h3>
 <ul>
 <li>A Shared Drop-Off point is provided for each apartment building</li>
 <li><strong>QCar2</strong> or <strong>QDrone2</strong> can deliver to this location</li>
-<li>This delivery option is more flexible, but it may be less favorable for achieving a higher score.</li>
+<li>Shared drop-off locations are indicated by <strong>red pads</strong> for small-package deliveries and a <strong>blue pad</strong> for the large-package delivery.</li>
 </ul>
 <p>Teams should consider both the delivery type and the scoring difference when planning delivery order and strategy.</p>
 <hr />
-<h2 id="5-delivery-completion">5) Delivery Completion</h2>
-<h3 id="window-delivery-qdrone2">Window Delivery (QDrone2)</h3>
+<h2>5) Delivery Completion</h2>
+<h3>Window Delivery (QDrone2)</h3>
 <ul>
-<li>The QDrone2 must remain within <strong>2.0 m</strong> horizontal distance and within <strong>0.0 m to 4.0 m</strong> vertical offset of the window delivery target for at least <strong>3 seconds</strong></li>
+<li>The <strong>QDrone2</strong> must remain within <strong>2.0 m</strong> horizontal distance and within <strong>0.0 m to 4.0 m</strong> vertical offset of the window delivery location for at least <strong>3 seconds</strong> while its <strong>intention</strong> is set to <strong>2</strong>.</li>
 </ul>
-<h4 id="example-window-delivery">Example Window Delivery</h4>
+<h4>Example Window Delivery</h4>
 <p><img src="../images/Drone_window_delivery.png"></p>
-<h3 id="shared-drop-off-delivery-car-or-drone">Shared Drop off Delivery (Car or Drone)</h3>
+<h3>Shared Drop off Delivery (Car or Drone)</h3>
 <ul>
-<li><strong>QCar2:</strong> Must remain within <strong>2.0 m</strong> of the drop location for at least <strong>3 seconds</strong></li>
-<li><strong>QDrone2:</strong> Must remain within <strong>2.0 m</strong> horizontal distance and within <strong>0.0 m to 4.0 m</strong> vertical offset of the drop location for at least <strong>3 seconds</strong></li>
+<li><strong>QCar2:</strong> Must remain within <strong>2.0 m</strong> of the drop location for at least <strong>3 seconds</strong> while its <strong>intention</strong> is set to <strong>3</strong></li>
+<li><strong>QDrone2:</strong> Must remain within <strong>2.0 m</strong> horizontal distance and within <strong>0.0 m to 4.0 m</strong> vertical offset of the drop location for at least <strong>3 seconds</strong> while its <strong>intention</strong> is set to <strong>2</strong>.</li>
 </ul>
-<h4 id="example-shared-drop-off-delivery-by-car">Example Shared drop off Delivery by Car</h4>
+<h4>Example Shared drop off Delivery by Car</h4>
 <p><img src="../images/common_drop_by_car_or_drone.png"></p>
 <hr />
-<h2 id="6-pick-up-and-delivery-location">6) Pick up and Delivery Location</h2>
+<h2>6) Pick up and Delivery Location</h2>
 <ul>
-<li>Central pickup: <strong>P</strong></li>
-<li>Small package delivery locations: <strong>D1, D2, D3, D4</strong></li>
-<li>Large package delivery location: <strong>D5</strong></li>
+<li>Central pickup: <em>(Green Pad)</em> <strong>P</strong></li>
+<li>Small package delivery locations: <em>(Red Pad)</em> <strong>D1, D2, D3, D4</strong></li>
+<li>Large package delivery location: <em>(Blue Pad)</em> <strong>D5</strong></li>
 </ul>
-<h3 id="important-note">Important Note</h3>
-<p>Node numbering is different between <strong>Python</strong> and <strong>MATLAB / Simulink</strong> for QCar2.</p>
+<h3><img src= "../images/central_pickup.png"></h3>
+<h3>Important Note</h3>
 <ul>
-<li><strong>QCar2</strong> uses node numbers and location coordinates</li>
-<li><strong>QDrone2</strong> uses location coordinates only</li>
+<li>The <strong>QCar2</strong> uses <strong>node numbers</strong> for <strong>route planning</strong> and <strong>location coordinates for control</strong>.</li>
+<li><strong>Node numbering</strong> is different between <strong>Python</strong> and <strong>MATLAB / Simulink</strong> for QCar2.</li>
+<li>The <strong>QDrone2</strong> uses <strong>location coordinates</strong> for both <strong>path planning and control</strong>.</li>
 <li>Use the <strong>QCar2 table</strong> for pickup and drop node selection in car routing</li>
 <li>Use the <strong>QDrone2 table</strong> for pickup, drop, and window delivery target coordinates</li>
 </ul>
-<h3 id="qcar2-pickup-and-delivery-reference">QCar2 Pickup and Delivery Reference</h3>
-<table>
+<p>*</p>
+<p><em>Figure: QCar2 node numbering reference showing the Python mapping</em></p>
+<p><img src="../images/roadmap_Python.png"></p>
+<h2>---</h2>
+<p><em>Figure: QCar2 node numbering reference showing the MATLAB / Simulink mapping.</em></p>
+<p><img src="../images/roadmap_Matlab.png"></p>
+<h3>QCar2 Pickup and Delivery Reference</h3>
+<table class="package-type-table">
 <thead>
 <tr>
 <th>Location</th>
@@ -162,50 +185,50 @@
 <tbody>
 <tr>
 <td>Central pickup (P)</td>
-<td>Pickup</td>
+<td><span class="package-pickup">Pickup</span></td>
 <td style="text-align: right;">24</td>
 <td style="text-align: right;">25</td>
 <td><code>[-2.50305 29.6703]</code></td>
 </tr>
 <tr>
 <td>Drop Location 1 (D1)</td>
-<td>Small</td>
+<td><span class="package-small">Small</span></td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">3</td>
 <td><code>[11.2739 -10.84655]</code></td>
 </tr>
 <tr>
 <td>Drop Location 2 (D2)</td>
-<td>Small</td>
+<td><span class="package-small">Small</span></td>
 <td style="text-align: right;">14</td>
 <td style="text-align: right;">15</td>
 <td><code>[22.5478 29.6703]</code></td>
 </tr>
 <tr>
 <td>Drop Location 3 (D3)</td>
-<td>Small</td>
+<td><span class="package-small">Small</span></td>
 <td style="text-align: right;">20</td>
 <td style="text-align: right;">21</td>
 <td><code>[0.0 44.9735]</code></td>
 </tr>
 <tr>
 <td>Drop Location 4 (D4)</td>
-<td>Small</td>
+<td><span class="package-small">Small</span></td>
 <td style="text-align: right;">22</td>
 <td style="text-align: right;">23</td>
 <td><code>[-19.84125 29.6703]</code></td>
 </tr>
 <tr>
 <td>Drop Location 5 (D5)</td>
-<td>Large</td>
+<td><span class="package-large">Large</span></td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;">11</td>
 <td><code>[-12.8205 -4.5991]</code></td>
 </tr>
 </tbody>
 </table>
-<h3 id="qdrone2-pickup-and-delivery-reference">QDrone2 Pickup and Delivery Reference</h3>
-<table>
+<h3>QDrone2 Pickup and Delivery Reference</h3>
+<table class="package-type-table">
 <thead>
 <tr>
 <th>Location</th>
@@ -218,49 +241,49 @@
 <tbody>
 <tr>
 <td>Central pickup (P)</td>
-<td>Pickup</td>
+<td><span class="package-pickup">Pickup</span></td>
 <td><code>[-2.50305 29.6703 0.05]</code></td>
 <td style="text-align: right;">-</td>
 <td>None</td>
 </tr>
 <tr>
 <td>Drop Location 1 (D1)</td>
-<td>Small</td>
+<td><span class="package-small">Small</span></td>
 <td><code>[11.2739 -10.84655 0.05]</code></td>
 <td style="text-align: right;">4</td>
 <td><code>[15.1739 -18.04655 9.65]</code></td>
 </tr>
 <tr>
 <td>Drop Location 2 (D2)</td>
-<td>Small</td>
+<td><span class="package-small">Small</span></td>
 <td><code>[22.5478 29.6703 0.05]</code></td>
 <td style="text-align: right;">3</td>
 <td><code>[26.0478 16.7703 9.65]</code></td>
 </tr>
 <tr>
 <td>Drop Location 3 (D3)</td>
-<td>Small</td>
+<td><span class="package-small">Small</span></td>
 <td><code>[0.0 44.9735 0.05]</code></td>
 <td style="text-align: right;">2</td>
 <td><code>[1.3 46.9735 4.85]</code></td>
 </tr>
 <tr>
 <td>Drop Location 4 (D4)</td>
-<td>Small</td>
+<td><span class="package-small">Small</span></td>
 <td><code>[-19.84125 29.6703 0.05]</code></td>
 <td style="text-align: right;">1</td>
 <td>None</td>
 </tr>
 <tr>
 <td>Drop Location 5 (D5)</td>
-<td>Large</td>
+<td><span class="package-large">Large</span></td>
 <td><code>[-12.8205 -4.5991 0.05]</code></td>
 <td style="text-align: right;">1</td>
 <td>None</td>
 </tr>
 </tbody>
 </table>
-<h3 id="strategy-note">Strategy Note</h3>
+<h3>Strategy Note</h3>
 <p>Teams are free to choose delivery order, task allocation, and delivery method based on their own mission strategy.</p>
 <hr />
 <p>Back to:</p>

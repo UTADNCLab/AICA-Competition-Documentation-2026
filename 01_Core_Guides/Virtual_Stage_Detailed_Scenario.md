@@ -18,7 +18,7 @@ This page describes the mission environment, delivery workflow, key location dat
 
 ## Scenario Summary
 
-- AICA Virtual Stage is a collaborative autonomy challenge where teams design, implement, and demonstrate a delivery system using a ground vehicle (**QCar2**) and an aerial vehicle (**QDrone2**) operating in a shared mission environment.
+- AICA Challenge Virtual Stage is a collaborative autonomy challenge where teams design, implement, and demonstrate a delivery system using a **QCar2** and a **QDrone2** operating in a shared mission environment.
 - The scenario focuses on demonstrating the ability to perform multimodal delivery through package pickup, route execution, and final delivery using either window delivery or shared drop-off methods.
 - Vehicle-to-vehicle transfer is supported as an optional coordination feature and may be used if it benefits the team’s delivery strategy.
 
@@ -26,23 +26,21 @@ This page describes the mission environment, delivery workflow, key location dat
 
 ## 1) System Setup
 
-Each team is provided with files to spawn:
+~~Each team is provided with one QCar2 and QDrone2.~~ 
 
-- One **QCar2**
-- One **QDrone2**
-
-Both vehicles cooperate to transport delivery packages from the depot to designated apartment objectives.
+The QCar2 can pick up packages from the central pickup location, deliver them to shared drop-off locations, and transfer packages to and from the QDrone2. Similarly, the QDrone2 can pick up packages from the central pickup location, deliver them to shared drop-off or window delivery locations, and transfer packages to and from the QCar2.
 
 ### Vehicle Speed Limits
 
 - **QCar2 max speed:** 13 m/s
-- **QDrone2 max speed:** 2 m/s
+- **QDrone2 max speed:** 2 - 3.5 m/s
 
-Vehicles may operate below these limits, but must not exceed them.
+~~Vehicles may operate below these limits, but must not exceed them.~~
 
 ### Initial Vehicle Locations
 
-Initial spawn positions of QCar2 and QDrone2 can be adjusted by competitors by editing the `spawn_location.txt` file in the competition files folder. This file is used to control the starting position of the spawned vehicle(s) in QLabs.
+- The initial spawn positions and headings (yaw angles) of the QCar2 and QDrone2 can be adjusted by editing the `spawn_location.txt` file.
+- For both QCar2 and QDrone2, intentions must be listed. Create tables. 0, 1, 2, 3, 4,5 for QCar2 and 0,1,2,3,4 for QDrone2.
 
 ---
 
@@ -50,24 +48,24 @@ Initial spawn positions of QCar2 and QDrone2 can be adjusted by competitors by e
 
 At mission start:
 
-- All packages are located at a Central Pickup
-- The central pickup contains **5 delivery packages**:
-  - **4 small packages**
-  - **1 large package**
-- Both QCar2 and QDrone2 can pick up from the central pickup
-  - **QCar2** can pick up small or large packages
-  - **QDrone2** can only pick up small packages
+- All packages are located at the **central pickup** location.
+- There are **5** delivery tasks: **4 small-package** deliveries and **1 large-package** delivery.
+- The **QCar2** can pick up both **small and large** packages.
+- The **QDrone2** can only pick up **small packages**.
+- The **central pickup** location is indicated by **yellow pad** in QLabs screen.
+
 
 ### Pickup Condition
 
 A pickup is successful when:
 
-- **QCar2** remains within **2.0 m** of the pickup location for **3 seconds**
-- **QDrone2** remains within **2.0 m** horizontal distance and within **0.0 m to 4.0 m** vertical offset of the pickup location for **3 seconds**
+- The **QCar2** picks up a **small package** after remaining within **2.0 m** of the pickup location for **3 seconds** while its **intention** is set to **1**.
+- The **QCar2** picks up a **large package** after remaining within **2.0 m** of the pickup location for **3 seconds**  while its **intention** is set to **2**.
+- The **QDrone2** picks up a **small package** after remaining within **2.0 m** horizontal distance and within a vertical offset of **0.0 m to 4.0 m** from the pickup location for **3 seconds** while its **intention** is set to **1**.
 
 After the required hold time, the package is considered loaded.
 
-#### Example Central Pickup Package by QCar2
+#### Example Central Pickup Package by QCar2 
 
 <img src="../images/car_pickup_box.png">
 
@@ -95,10 +93,11 @@ To enable collaborative autonomy, transfer is allowed in both directions:
 
 A transfer is successful when:
 
-1. **QCar2** is stationary
-2. **QDrone2** is within **2.0 m** horizontal distance of QCar2
-3. **QDrone2** remains within **0.0 m to 4.0 m** vertical offset relative to QCar2
-4. The required transfer condition is maintained for **3 seconds**
+1. **QDrone2** is within **2.0 m** horizontal distance of QCar2
+2. **QDrone2** remains within **0.0 m to 4.0 m** vertical offset relative to QCar2
+3. The required transfer condition is maintained for **3 seconds**
+4. **QDrone2 intention** must be set to **4** and **QCar2 intention** must be set to **4** for **QDrone2 → QCar2** transfer.
+5. **QDrone2 intention** must be set to **3** and **QCar2 intention** must be set to **5** for **QCar2 → QDrone2** transfer.
 
 After this, package ownership transfers to the receiving vehicle.
 
@@ -121,14 +120,15 @@ Each delivery has two options.
 ### A) Window Delivery (QDrone2 Only)
 
 - Delivery is performed directly to the apartment window
-- This delivery mode provides bonus points and can result in a higher score.
+- This delivery mode provides bonus points.
+- Window delivery locations are indicated by **yellow pads**.
 
 
 ### B) Shared Drop-Off Location
 
 - A Shared Drop-Off point is provided for each apartment building
 - **QCar2** or **QDrone2** can deliver to this location
-- This delivery option is more flexible, but it may be less favorable for achieving a higher score.
+- Shared drop-off locations are indicated by **red pads** for small-package deliveries and a **blue pad** for the large-package delivery.
 
 
 Teams should consider both the delivery type and the scoring difference when planning delivery order and strategy.
@@ -140,7 +140,7 @@ Teams should consider both the delivery type and the scoring difference when pla
 
 ### Window Delivery (QDrone2)
 
-- The QDrone2 must remain within **2.0 m** horizontal distance and within **0.0 m to 4.0 m** vertical offset of the window delivery target for at least **3 seconds**
+- The **QDrone2** must remain within **2.0 m** horizontal distance and within **0.0 m to 4.0 m** vertical offset of the window delivery location for at least **3 seconds** while its **intention** is set to **2**.
 
 #### Example Window Delivery
 
@@ -148,8 +148,8 @@ Teams should consider both the delivery type and the scoring difference when pla
 
 ### Shared Drop off Delivery (Car or Drone)
 
-- **QCar2:** Must remain within **2.0 m** of the drop location for at least **3 seconds**
-- **QDrone2:** Must remain within **2.0 m** horizontal distance and within **0.0 m to 4.0 m** vertical offset of the drop location for at least **3 seconds**
+- **QCar2:** Must remain within **2.0 m** of the drop location for at least **3 seconds** while its **intention** is set to **3**
+- **QDrone2:** Must remain within **2.0 m** horizontal distance and within **0.0 m to 4.0 m** vertical offset of the drop location for at least **3 seconds** while its **intention** is set to **2**.
 
 #### Example Shared drop off Delivery by Car
 
@@ -159,18 +159,33 @@ Teams should consider both the delivery type and the scoring difference when pla
 
 ## 6) Pick up and Delivery Location
 
-- Central pickup: **P**
-- Small package delivery locations: **D1, D2, D3, D4**
-- Large package delivery location: **D5**
+- Central pickup: *(Green Pad)* **P**
+- Small package delivery locations: *(Red Pad)* **D1, D2, D3, D4**
+- Large package delivery location: *(Blue Pad)* **D5**
+
+### <img src= "../images/central_pickup.png">
+
 
 ### Important Note
 
-Node numbering is different between **Python** and **MATLAB / Simulink** for QCar2.
-
-- **QCar2** uses node numbers and location coordinates
-- **QDrone2** uses location coordinates only
+- The **QCar2** uses **node numbers** for **route planning** and **location coordinates for control**.
+- **Node numbering** is different between **Python** and **MATLAB / Simulink** for QCar2.
+- The **QDrone2** uses **location coordinates** for both **path planning and control**.
 - Use the **QCar2 table** for pickup and drop node selection in car routing
 - Use the **QDrone2 table** for pickup, drop, and window delivery target coordinates
+
+*
+
+*Figure: QCar2 node numbering reference showing the Python mapping*
+
+<img src="../images/roadmap_Python.png">
+
+---
+---
+
+*Figure: QCar2 node numbering reference showing the MATLAB / Simulink mapping.*
+
+<img src="../images/roadmap_Matlab.png">
 
 ### QCar2 Pickup and Delivery Reference
 
