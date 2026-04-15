@@ -56,8 +56,9 @@ This document includes:
 - Develop smooth and safe trajectories for QDrone2, ensuring stable, high-performance flight while avoiding obstacles. 
 
 ### Mission Completion and Efficiency
-- ~~Ensure atleast one delivery is completed successfully  ~~
+- Set an adjustable level of autonomy, ranging from fully manual control to fully autonomous operation.
 - Optimize overall mission time and execution efficiency  
+
 
 ---
 
