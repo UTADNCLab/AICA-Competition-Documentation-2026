@@ -37,7 +37,7 @@ It includes operational guidance for both **QCar2** and **QDrone2**.
 
 ## 1) System Execution Flow
 
-<img src="../images/block_diagram.png" alt="System Execution Flow" width="520">
+<img src="../images/block_diagram.png" alt="Block Diagram Workflow" width="520">
 
 The overall execution flow is as follows:
 
@@ -76,7 +76,7 @@ Before running the system, make sure:
 - all competition files are placed in the correct folder
 - the software setup steps have already been completed
 
-For setup details, see the [System and Software Setup](../00_Portal/AICA_COMPETITION_GUIDE.md#system-and-software-setup)
+For setup details, see the [System and Software Setup](../03_Setup/System_and_Software_setup.md)
 
 ### Open QLabs and Load the Cityscape Map Manually
 
