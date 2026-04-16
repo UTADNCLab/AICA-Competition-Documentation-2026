@@ -29,6 +29,7 @@ For the full submission details, see the [Virtual Stage Submission Guide](../02_
 For the complete scenario description, see the [Virtual Stage Detailed Scenario](../01_Core_Guides/Virtual_Stage_Detailed_Scenario.md)
 
 This document includes:
+
 - System Setup
 - Central Pickup Operations
 - Vehicle-to-Vehicle Package Transfer
