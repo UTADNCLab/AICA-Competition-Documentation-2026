@@ -17,7 +17,7 @@ Recommended hardware specifications for participating teams.
 
 Required software installation and configuration before running the AICA competition files.
 
-If you are using both **MATLAB / Simulink** and **Python**, follow both sections below.  
+If you are using both MATLAB / Simulink and Python, follow both sections below.  
 If you are using only one workflow, follow the corresponding section only.
 
 
@@ -44,7 +44,7 @@ A separate folder for actual competition files.
 #### Without Git (ZIP)
 
 1. Open the repository on GitHub.
-2. Click **Code -> Download ZIP**.
+2. Click Code -> Download ZIP.
 3. Extract the ZIP and place it at:
 
 ```text
@@ -71,7 +71,7 @@ For detailed installation guide for Quanser resources refer: [Quanser_Academic_R
 ### MATLAB (2023a or later)
 
 - Download: [MATLAB for Windows](https://www.mathworks.com/downloads/)
-- In MATLAB, install **Quanser Interactive Labs for MATLAB** via Add-On Explorer.
+- In MATLAB, install Quanser Interactive Labs for MATLAB via Add-On Explorer.
 
 <img src="../images/Matlab_Get_Add_on.png" class="img-small" alt="MATLAB Get Add-On Explorer">
 
@@ -87,10 +87,10 @@ For detailed installation guide for Quanser resources refer: [Quanser_Academic_R
 
 - Download from: [Python Official Downloads](https://www.python.org/downloads/)
 > WARNING
-> ⚠️❗**Make sure to click on  the _Add Python to PATH_ option in the first screen of the installer**.
+> ⚠️❗Make sure to click on  the _Add Python to PATH_ option in the first screen of the installer.
 
 > **NOTE:**
-> **IF YOU DOWNLOAD FROM THE PYTHON WEBSITE, DO NOT USE THE PYTHON INSTALL MANAGER**  
+> IF YOU DOWNLOAD FROM THE PYTHON WEBSITE, DO NOT USE THE PYTHON INSTALL MANAGER
 
 ### Quanser Interactive Labs (QLabs)
 
@@ -101,7 +101,7 @@ For detailed installation guide for Quanser resources refer: [Quanser_Academic_R
 
 
 
-### **Note:** If you are using both MATLAB / Simulink and Python, QLabs only needs to be installed once using either of the methods above.
+### **Note**: If you are using both MATLAB / Simulink and Python, QLabs only needs to be installed once using either of the methods above.
 
 ---
 
@@ -128,7 +128,7 @@ Run `step_1_check_requirements` and select your mode:
 | MATLAB Only | ![MATLAB Software Option](../images/matlab_setup_selection_in_bat_file.png) | ![MATLAB Device Option](../images/python_setup_selection_part_2_in_bat_file.png) |
 | Python + MATLAB | ![Both Software Option](../images/botj_setup_selection_in_bat_file.png)   | ![Both Device Option](../images/python_setup_selection_part_2_in_bat_file.png) |
 
-A **green highlighted box** indicates successful configuration and required dependencies are available.
+A green highlighted box indicates successful configuration and required dependencies are available.
 
 In a successful setup check:
 

@@ -46,72 +46,64 @@ This guide explains what teams should prepare for virtual-stage evaluation.</p>
 </ul>
 <hr />
 <h2 id="1-virtual-stage-submission">1) Virtual Stage Submission</h2>
-<p>The objective of the Virtual Stage is to create a video that demonstrates each team’s ability to implement algorithms for the multimodal autonomous delivery system in the <strong>QLabs</strong> simulation environment.</p>
+<p>The objective of the Virtual Stage is to create a video that demonstrates each team’s ability to implement algorithms for the multimodal autonomous delivery system in the QLabs simulation environment.</p>
 <p>For the full submission details, see the <a href="../02_Participation/Submission_Guide.html">Virtual Stage Submission Guide</a>.</p>
 <hr />
 <h2 id="2-virtual-stage-detailed-scenario">2) Virtual Stage Detailed Scenario</h2>
 <p>For the complete scenario description, see the <a href="../01_Core_Guides/Virtual_Stage_Detailed_Scenario.html">Virtual Stage Detailed Scenario</a></p>
-<p>This document includes:</p>
-<ul>
-<li>Central pickup operations<ul>
-<li><strong>QCar2</strong> can carry <strong>2 small packages</strong> or <strong>1 large package</strong></li>
-<li><strong>QDrone2</strong> can carry <strong>1 small package only</strong></li>
-</ul>
-</li>
-<li><strong>Vehicle-to-vehicle transfer</strong> </li>
-<li><strong>Window delivery</strong> and <strong>Shared drop-off</strong> delivery options</li>
-<li>Delivery completion requirements</li>
-<li>Pickup and delivery location references</li>
-<li><strong>QCar2</strong> node references and <strong>QDrone2</strong> coordinate references</li>
-</ul>
+<p>This document includes:
+- System Setup
+- Central Pickup Operations
+- Vehicle-to-Vehicle Package Transfer
+- Delivery Options
+- Pick up and Delivery Locations</p>
 <hr />
 <h2 id="3-core-principles-for-multimodal-delivery">3) Core Principles for Multimodal Delivery</h2>
 <h3 id="delivery-planning-and-decision-making">Delivery Planning and Decision-Making</h3>
 <ul>
-<li>Plan delivery tasks by assigning them to either QCar2, QDrone2, or their coordinated operation through vehicle-to-vehicle transfer.</li>
-<li>Develop delivery planning strategies to achieve a high score by considering the city map, vehicle capabilities, pickup and drop-off locations, and available delivery options.</li>
+<li>Plan delivery tasks by assigning them to either QCar2, QDrone2, or their coordinated operation through vehicle-to-vehicle package transfer</li>
+<li>Develop delivery planning strategies to achieve a high score by considering the city map, vehicle capabilities, pickup and drop-off locations, and available delivery options</li>
 </ul>
 <h3 id="multi-agent-coordination">Multi-Agent Coordination</h3>
 <ul>
-<li>Coordinate QCar2 and QDrone2 actions for pickup, transfer, and delivery  </li>
+<li>Coordinate QCar2 and QDrone2 actions for pickup, vehicle-to-vehicle package transfer, and delivery  </li>
 <li>Manage timing and interaction between vehicles for efficient mission execution  </li>
 </ul>
 <h3 id="control-systems-and-navigation">Control Systems and Navigation</h3>
 <ul>
-<li>Design and implement a control algorithm to generate steering and velocity commands for the autonomous navigation of QCar2 within road boundaries while avoiding collisions. </li>
-<li>Develop smooth and safe trajectories for QDrone2, ensuring stable, high-performance flight while avoiding obstacles. </li>
+<li>Develop smooth and safe trajectories for QDrone2, ensuring stable, high-performance flight while avoiding obstacles </li>
+<li>[Optional] Design and implement a control algorithm to generate steering and velocity commands for the autonomous navigation of QCar2 within road boundaries while avoiding collisions. </li>
 </ul>
 <h3 id="mission-completion-and-efficiency">Mission Completion and Efficiency</h3>
 <ul>
-<li>Set an adjustable level of autonomy, ranging from fully manual control to fully autonomous operation.</li>
+<li>Set an appropriate level of autonomy, ranging from fully manual control to fully autonomous operation</li>
 <li>Optimize overall mission time and execution efficiency  </li>
 </ul>
 <hr />
 <h2 id="4-operational-guide">4) Operational Guide</h2>
-<p>See the <a href="../01_Core_Guides/Operational_Guide.html">Operational Guide</a> for the step-by-step mission workflow and the operational constraints for valid pickup, transfer, delivery, and mission execution for both <strong>QCar2</strong> and <strong>QDrone2</strong> in the virtual stage.</p>
+<p>See the <a href="../01_Core_Guides/Operational_Guide.html">Operational Guide</a> for the step-by-step mission workflow and the operational constraints for valid pickup, vehicle-to-vehicle package transfer, delivery, and mission execution for both QCar2 and QDrone2 in the virtual stage</p>
 <hr />
 <h2 id="5-scoring-and-ranking">5) Scoring and Ranking</h2>
-<p>This section defines how team performance is scored and how rankings are determined in the Virtual Stage.</p>
+<p>This section defines how team performance is scored and how rankings are determined in the Virtual Stage</p>
 <h3 id="scoring-method">Scoring Method</h3>
 <ul>
-<li>Mission time begins at the mission start time.</li>
-<li>When a delivery is successfully completed, a delivery score is calculated using the scoring formula.</li>
-<li>The <strong>total score</strong> is displayed at the <strong>top</strong> of the QLabs window.</li>
+<li>Mission time begins at the mission start time</li>
+<li>When a delivery is successfully completed, a delivery score is calculated using the scoring formula</li>
+<li>The total score is displayed at the top of the QLabs window</li>
 </ul>
-<p><strong>Scoring formula:</strong></p>
+<h3 id="scoring-formula">Scoring Formula</h3>
 <ul>
-<li><strong>Score for each completed delivery = 1000 − delivery completion time + window delivery bonus</strong></li>
-<li><strong>Total Score = Sum of all delivery scores</strong></li>
+<li>Score for each completed delivery = 1000 − delivery completion time + window delivery bonus</li>
+<li>Total Score = Sum of all delivery scores</li>
 </ul>
-<p><strong>Delivery Completion Time</strong> is the time taken to complete a delivery, measured from the mission start time until the package is successfully delivered.</p>
-<p><strong>Window Delivery Bonus</strong>: Only <strong>QDrone2</strong> can perform window deliveries, and the bonus depends on the target floor level.</p>
-<p><strong>Bonus by floor level:</strong></p>
+<p>Delivery Completion Time is the time taken to complete a delivery, measured from the mission start time until the package is successfully delivered</p>
+<p>Window Delivery Bonus: Only QDrone2 can perform window deliveries, and the bonus depends on the target floor level</p>
+<p>Bonus by floor level:</p>
 <ul>
-<li>Floor 4 → <strong>+400</strong></li>
-<li>Floor 3 → <strong>+300</strong></li>
-<li>Floor 2 → <strong>+200</strong></li>
+<li>Floor 4 → +400</li>
+<li>Floor 3 → +300</li>
+<li>Floor 2 → +200</li>
 </ul>
-<p>Higher scores are earned by completing deliveries earlier and by choosing delivery methods that provide additional bonus points.</p>
 <h3 id="ranking">Ranking</h3>
 <ul>
 <li>Teams are ranked based on their total score</li>

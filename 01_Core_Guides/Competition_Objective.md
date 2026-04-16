@@ -6,7 +6,7 @@
 
 ---
 
-## Conference Stage  (To Be Announced)
+## On-Site Finals (To Be Announced)
 
 
 
