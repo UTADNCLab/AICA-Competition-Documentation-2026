@@ -563,11 +563,13 @@
 <p>This section describes the example navigator files provided in the package and demonstrates how they are executed</p>
 <h3 id="61-qcar2-navigator">6.1 QCar2 Navigator</h3>
 <p>A Stanley controller is implemented in the example navigator to autonomously drive QCar2 from a specified start node to a target node</p>
-<p>Users can provide:
-- start node
-- target node
-- desired velocity
-- intention</p>
+<p>Users can provide:</p>
+<ul>
+<li>start node</li>
+<li>target node</li>
+<li>desired velocity</li>
+<li>intention</li>
+</ul>
 <p>A route list is available that stores routes between any pair of nodes. The route between the start and target nodes is fetched from the routes list and passed to the Stanley controller, which computes:</p>
 <ul>
 <li>steering commands</li>
@@ -821,7 +823,7 @@
 <h4 id="operational-description">Operational Description</h4>
 <p>To transfer from QCar2 to QDrone2:</p>
 <ol>
-<li>stop the car at the desired transfer location</li>
+<li>~~stop the car at the desired transfer location~~</li>
 <li>move the drone above or near the car within the valid transfer region</li>
 <li>set the correct intention values on both vehicles</li>
 </ol>
@@ -855,7 +857,7 @@
 <h4 id="operational-description">Operational Description</h4>
 <p>To transfer from QDrone2 to QCar2:</p>
 <ol>
-<li>stop the QCar2 at the desired location</li>
+<li>~~stop the QCar2 at the desired location~~</li>
 <li>hover the QDrone2 above or near the QCar2 within the valid transfer region</li>
 <li>set the correct intention values on both vehicles</li>
 </ol>
