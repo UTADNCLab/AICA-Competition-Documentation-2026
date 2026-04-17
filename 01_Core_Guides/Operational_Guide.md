@@ -168,10 +168,12 @@ Commenting out unnecessary video subsystems can improve runtime performance and 
 ### 5.1 QDrone2 Navigator
 
 To enable QDrone2 to carry out its delivery plan, the QDrone2 Navigator should support:
+
 - waypoint generation for controllers
 - intention publishing
 
 The QDrone2 Navigator has access to:
+
 - camera streams (disabled by default and enabled as needed in the provided code and model)
 - sensor readings (IMU, angular position, angular rates, angular acceleration, and Pose [x, y, z, yaw])
 
@@ -259,10 +261,12 @@ Received Data Layout:
 ### 5.2 QCar2 Navigator
 
 To enable QCar2 to carry out its delivery plan, the QCar2 Navigator should support:
+
 - generation of velocity and steering commands, potentially via a controller implementation
 - intention publishing
 
 The QCar2 Navigator has access to:
+
 - camera streams (disabled by default and enabled as needed in the provided code and model)
 - sensor readings (Motor power consumption, battery level, car speed, IMU, Pose [x, y, yaw])
 
