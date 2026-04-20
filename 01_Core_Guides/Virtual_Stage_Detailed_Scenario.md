@@ -1,6 +1,6 @@
 # Virtual Stage Detailed Scenario
 
-This page describes the mission environment, delivery workflow, key location data, and strategy context for the AICA Virtual Stage.
+This page provides details of the virtual stage scenario that simulates a multimodal autonomous delivery system in an urban environment.
 
 ---
 
