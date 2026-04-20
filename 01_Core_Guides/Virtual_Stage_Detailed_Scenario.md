@@ -31,7 +31,7 @@ This page provides details of the virtual stage scenario that simulates a multim
 
 In the virtual stage scenario, one QCar2 and one QDrone2 operate cooperatively to perform deliveries within the city.
 
-The QCar2 can pick up packages from the central pickup location, deliver them to shared drop-off locations, and transfer packages to and from the QDrone2. 
+The QCar2 can pick up packages from the central pickup location, deliver them to shared drop-off locations, and transfer packages to and from the QDrone2.
 
 Similarly, the QDrone2 can pick up packages from the central pickup location, deliver them to shared drop-off or window delivery locations, and transfer packages to and from the QCar2.
 
@@ -42,11 +42,11 @@ Similarly, the QDrone2 can pick up packages from the central pickup location, de
 
 At mission start:
 
-- All packages are located at the central pickup location.
-- There are 5 delivery tasks: 4 small-package deliveries and 1 large-package delivery.
-- The QCar2 can pick up both small and large packages.
-- The QDrone2 can only pick up small packages.
-- The central pickup location is indicated by green pad in QLabs screen.
+- All packages are located at the central pickup location,
+- There are 5 delivery tasks: 4 small-package deliveries and 1 large-package delivery,
+- The QCar2 can pick up both small and large packages,
+- The QDrone2 can only pick up small packages,
+- The central pickup location is indicated by the green pad in QLabs screen.
 
 
 ### Carry Constraints
@@ -87,7 +87,7 @@ Each delivery has two options.
 
 ### A) Window Delivery (QDrone2 Only)
 
-- Delivery is performed directly to the apartment window
+- Delivery is performed directly to the apartment window.
 - This delivery mode provides bonus points.
 - Window delivery locations are indicated by yellow pads.
 
@@ -98,8 +98,8 @@ Each delivery has two options.
 
 ### B) Shared Drop-Off Location
 
-- A Shared Drop-Off point is provided for each apartment building
-- QCar2 or QDrone2 can deliver to this location
+- A Shared Drop-Off point is provided for each apartment building.
+- QCar2 or QDrone2 can deliver to this location.
 - Shared drop-off locations are indicated by red pads for small-package deliveries and a blue pad for the large-package delivery.
 
 
@@ -128,7 +128,7 @@ Each delivery has two options.
 
 ---
 
-*Figure: QCar2 node numbering reference showing the MATLAB / Simulink mapping.*
+*Figure: QCar2 node numbering reference showing the MATLAB / Simulink mapping*
 
 <img src="../images/roadmap_Matlab.png">
 
