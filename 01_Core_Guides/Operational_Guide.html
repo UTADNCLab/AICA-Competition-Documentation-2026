@@ -32,8 +32,7 @@
         </div>
       </header>
       <section class="content markdown-body">
-        <p>This guide explains how to run the AICA virtual stage and defines the operational conditions that must be satisfied during execution. It combines system startup, navigator usage, pickup/drop/Vehicle-to-vehicle package transfer behavior, runtime checks, communication channels, and mission constraints</p>
-<p>It includes operational guidance for both QCar2 and QDrone2</p>
+        <p>This guide explains how to run the AICA Challenge Virtual Stage and defines the operational conditions that must be satisfied during execution. It combines system startup, navigator usage, pickup/drop/Vehicle-to-vehicle package transfer behavior, runtime checks, communication channels, and mission constraints.</p>
 <hr />
 <h2 id="navigation">Navigation</h2>
 <ol>
@@ -77,59 +76,59 @@
 </ol>
 <hr />
 <h2 id="1-system-execution-flow">1) System Execution Flow</h2>
-<p><img src="../images/block_diagram.png" alt="Block Diagram Workflow" width="520"></p>
-<p>The overall execution flow is as follows:</p>
+<p><img src="../images/block_diagram.png" alt="Block Diagram Workflow" width="286"></p>
+<p>The overall execution flow is as follows.</p>
 <ul>
 <li>QLabs loads the required map and serves as the simulation environment.</li>
-<li><code>setup_env.py</code> runs once at the start to load the vehicles and their corresponding real-time models (RT models). This file should NOT be modified</li>
+<li><code>setup_env.py</code> runs once at the start to load the vehicles and their corresponding real-time models (RT models). This file should NOT be modified.  Competitors only need to run this file.</li>
 </ul>
-<p><strong>Note:</strong> This file reads the initial positions and headings of the vehicles from <code>spawn_locations.txt</code>. Competitors may modify <code>spawn_locations.txt</code> to set custom spawn locations</p>
+<p><strong>Note:</strong> The setup environment file reads the initial positions and headings of the vehicles from <code>spawn_locations.txt</code>. Competitors may modify <code>spawn_locations.txt</code> to set custom spawn locations.</p>
 <ul>
-<li>RT Model QDrone2 simulates the actuators and sensors of the QDrone2. Competitors only need to load this model</li>
-<li>Virtual FlightStack executes the controllers, sensor fusion algorithms, and core drone functions. Competitors only need to load this model</li>
-<li>QDrone2 Navigator sends waypoints to the Virtual FlightStack, reads vehicle states from it, and sends the QDrone2 intention to <code>game.py</code></li>
+<li>RT Model QDrone2 simulates the actuators and sensors of the QDrone2. Competitors only need to load this model.</li>
+<li>Virtual FlightStack executes the controllers, sensor fusion algorithms, and core drone functions. Competitors only need to load this model.</li>
+<li>QDrone2 Navigator sends waypoints to the Virtual FlightStack, reads vehicle states from it, and sends the QDrone2 intention to <code>game.py</code>.</li>
 </ul>
-<p><strong>Note:</strong> Competitors are expected to develop the QDrone2 Navigator. Specifically, they must send the correct waypoints and intentions to execute their delivery plan. Example implementations in both Python and MATLAB/Simulink are provided in the <code>9_AICA_Competition_Files</code> folder and may be used as a reference or modified as needed</p>
+<p><strong>Note:</strong> Competitors are expected to develop the QDrone2 Navigator. Specifically, they must send the correct waypoints and intentions to execute their delivery plan. Example implementations in both Python and MATLAB/Simulink are provided in the <code>9_AICA_Competition_Files</code> folder and may be used as a reference or modified as needed. </p>
 <ul>
-<li>RT Model QCar2 simulates the actuators and sensors of the QCar2. Competitors only need to load this model</li>
-<li>Virtual DriveStack executes the sensor fusion algorithms and core car functions. Competitors only need to load this model</li>
-<li>QCar2 Navigator sends velocity and steering commands to the Virtual DriveStack, reads vehicle states from it, and sends the QCar2 intention to <code>game.py</code></li>
+<li>RT Model QCar2 simulates the actuators and sensors of the QCar2. Competitors only need to load this model.</li>
+<li>Virtual DriveStack executes the sensor fusion algorithms and core car functions. Competitors only need to load this model.</li>
+<li>QCar2 Navigator sends velocity and steering commands to the Virtual DriveStack, reads vehicle states from it, and sends the QCar2 intention to <code>game.py</code>.</li>
 </ul>
-<p><strong>Note:</strong> Competitors are expected to develop the QCar2 Navigator. Specifically, they must send the correct velocity commands, steering commands, and intentions to execute their delivery plan. A controller for autonomous driving must be implemented within the QCar2 Navigator. Example implementations in both Python and MATLAB/Simulink are provided in the <code>9_AICA_Competition_Files</code> folder and may be used as a reference or modified as needed</p>
+<p><strong>Note:</strong> Competitors are expected to develop the QCar2 Navigator. Specifically, they must send the correct velocity commands, steering commands, and intentions to execute their delivery plan. A controller for autonomous driving must be implemented within the QCar2 Navigator. Example implementations in both Python and MATLAB/Simulink are provided in the <code>9_AICA_Competition_Files</code> folder and may be used as a reference or modified as needed.</p>
 <ul>
 <li>The QDrone2 Navigator and QCar2 Navigator can each be developed in Python or MATLAB/Simulink.</li>
 <li><code>game.py</code> enforces the game rules, handles pickup, vehicle-to-vehicle package transfer, and drop-off logic, and tracks scoring. This file should NOT be modified.</li>
-<li>All components must be loaded and run continuously until the mission is complete. A batch file <code>run_all.bat</code> is provided to load all components for Python-based Navigator implementations, and <code>run_all.m</code> is provided for MATLAB/Simulink implementations</li>
+<li>All components must be loaded and run continuously until the mission is complete. A batch file <code>run_all.bat</code> is provided to load all components for Python-based Navigator implementations, and <code>run_all.m</code> is provided for MATLAB/Simulink implementations.</li>
 </ul>
 <hr />
 <h2 id="2-before-you-start">2) Before You Start</h2>
 <p>Before running the system, make sure:</p>
 <ul>
-<li>all required software is installed</li>
-<li>your system meets the competition hardware requirements</li>
-<li>the required QLabs environment is available</li>
-<li>all competition files are placed in the correct folder</li>
-<li>the software setup steps have already been completed</li>
+<li>all required software is installed,</li>
+<li>your system meets the competition hardware requirements,</li>
+<li>the required QLabs environment is available,</li>
+<li>all competition files are placed in the correct folder,</li>
+<li>the software setup steps have already been completed.</li>
 </ul>
 <p>For setup details, see the <a href="../03_Setup/System_and_Software_setup.html">System and Software Setup</a></p>
 <h3 id="open-qlabs-and-load-the-cityscape-map-manually">Open QLabs and Load the Cityscape Map Manually</h3>
 <ol>
-<li>Open Quanser Interactive Labs from the Windows Start menu, or go to <code>C:\Program Files\Quanser\Quanser Interactive Labs</code> and run the application</li>
-<li>Wait for QLabs to fully launch</li>
-<li>In QLabs, open Self-Driving Car Studio</li>
-<li>Select and load the Cityscape map</li>
-<li>Wait until the Cityscape environment finishes loading completely</li>
-<li>After the map is open, continue with <code>run_all.BAT</code> or <code>run_all.m</code> or run the required files manually</li>
+<li>Open Quanser Interactive Labs from the Windows Start menu, or go to <code>C:\Program Files\Quanser\Quanser Interactive Labs</code> and run the application.</li>
+<li>Wait for QLabs to fully launch.</li>
+<li>In QLabs, open Self-Driving Car Studio.</li>
+<li>Select and load the Cityscape map.</li>
+<li>Wait until the Cityscape environment finishes loading completely.</li>
+<li>After the map is open, continue with <code>run_all.BAT</code> or <code>run_all.m</code> or run the required files manually.</li>
 </ol>
 <h3 id="important">Important</h3>
 <ul>
-<li>The virtual stage is designed to run in the Cityscape map</li>
-<li>Make sure the Cityscape map is loaded</li>
-<li>If the wrong map is open, the spawn locations, nodes, and delivery locations will not match the competition scenario</li>
+<li>The virtual stage is designed to run in the Cityscape map.</li>
+<li>Make sure the Cityscape map is loaded.</li>
+<li>If the wrong map is open, the spawn locations, nodes, and delivery locations will not match the competition scenario.</li>
 </ul>
 <hr />
 <h2 id="3-automated-system-startup">3) Automated System Startup</h2>
-<p>A complete BAT launcher is provided for one-click startup</p>
+<p>A complete BAT launcher is provided for one-click startup.</p>
 <p>Example: <code>run_all.bat</code></p>
 <p>This file is intended to:</p>
 <ol>
@@ -167,29 +166,29 @@
 <p>Run:</p>
 <pre><code>python game.py
 </code></pre>
-<p><strong>Note:</strong> If you have several Python Versions you can use <code>py -3.12 game.py</code> which specifies the version</p>
-<p>This file is required for the scenario to work properly</p>
+<p><strong>Note:</strong> If you have several Python Versions you can use <code>py -3.12 game.py</code> which specifies the version.</p>
+<p>This file is required for the scenario to work properly.</p>
 <p>It handles:</p>
 <ul>
-<li>pickup timing</li>
-<li>vehicle-to-vehicle package transfer timing</li>
-<li>delivery timing</li>
-<li>package movement and visualization in QLabs</li>
-<li>intention-based scenario logic</li>
-<li>score display in the QLabs window</li>
+<li>pickup timing,</li>
+<li>vehicle-to-vehicle package transfer timing,</li>
+<li>delivery timing,</li>
+<li>package movement and visualization in QLabs,</li>
+<li>intention-based scenario logic,</li>
+<li>score display in the QLabs window.</li>
 </ul>
 <h3 id="important">Important</h3>
 <p>Without <code>game.py</code>:</p>
 <ul>
-<li>package pickup will not work correctly</li>
-<li>vehicle-to-vehicle package transfer operations will fail</li>
-<li>deliveries will not be tracked correctly</li>
-<li>scoring will not update</li>
+<li>package pickup will not work correctly,</li>
+<li>vehicle-to-vehicle package transfer operations will fail,</li>
+<li>deliveries will not be tracked correctly,</li>
+<li>scoring will not update.</li>
 </ul>
 <hr />
 <h2 id="5-navigator-information">5) Navigator Information</h2>
 <h3 id="performance-note">Performance Note</h3>
-<p>Commenting out unnecessary video subsystems can improve runtime performance and reduce computing resource requirements</p>
+<p>Commenting out unnecessary video, subsystems can improve runtime performance and reduce computing resource requirements.</p>
 <hr />
 <h3 id="51-qdrone2-navigator">5.1 QDrone2 Navigator</h3>
 <p>To enable QDrone2 to carry out its delivery plan, the QDrone2 Navigator should support:</p>
@@ -214,7 +213,7 @@
 4: Transfer to QCar2
 </code></pre>
 <h3 id="511-qdrone2-communication-channels-and-ports">5.1.1 QDrone2 Communication Channels and Ports</h3>
-<p>QDrone2 uses fixed communication ports for the simulator, cameras, and game connection</p>
+<p>QDrone2 uses fixed communication ports for the simulator, cameras, and game connection.</p>
 <hr />
 <h4 id="camera-and-sensor-ports">Camera and Sensor Ports</h4>
 <p>If camera support is enabled in Python, the following ports are used:</p>
@@ -404,7 +403,7 @@
 5: Transfer to QDrone2
 </code></pre>
 <h3 id="521-qcar2-communication-channels-and-ports">5.2.1 QCar2 Communication Channels and Ports</h3>
-<p>QCar2 uses fixed communication ports for the simulator, cameras, and game connection</p>
+<p>QCar2 uses fixed communication ports for the simulator, cameras, and game connection.</p>
 <hr />
 <h4 id="camera-and-sensor-ports">Camera and Sensor Ports</h4>
 <p>If camera support is enabled in Python, the following ports are used:</p>
@@ -560,9 +559,9 @@
 <p><strong>Sent Data:</strong> QCar2 intention value.</p>
 <hr />
 <h2 id="6-example-navigator-files-in-competition-folders">6) Example Navigator Files in Competition Folders</h2>
-<p>This section describes the example navigator files provided in the package and demonstrates how they are executed</p>
+<p>This section describes the example navigator files provided in the package and demonstrates how they are executed.</p>
 <h3 id="61-qcar2-navigator">6.1 QCar2 Navigator</h3>
-<p>A Stanley controller is implemented in the example navigator to autonomously drive QCar2 from a specified start node to a target node</p>
+<p>A Stanley controller is implemented in the example navigator to autonomously drive QCar2 from a specified start node to a target node.</p>
 <p>Users can provide:</p>
 <ul>
 <li>start node</li>
@@ -575,13 +574,13 @@
 <li>steering commands</li>
 <li>velocity commands</li>
 </ul>
-<p>to enable autonomous driving toward the target node</p>
+<p>to enable autonomous driving toward the target node.</p>
 <h4 id="qcar2-node-map-for-python">QCar2 Node Map for Python</h4>
-<p>The following node map shows the node numbers that can be used for QCar2 autonomous route planning in the Python version</p>
+<p>The following node map shows the node numbers that can be used for QCar2 autonomous route planning in the Python version.</p>
 <p><strong>Pickup location:</strong> Node 24</p>
 <p><img src="../images/roadmap_Python.png" alt="QCar2 Python node map" width="520"></p>
 <h4 id="qcar2-node-map-for-matlabsimulink">QCar2 Node Map for MATLAB/Simulink</h4>
-<p>The following node map shows the node numbers that can be used for QCar2 autonomous route planning in the MATLAB/Simulink version</p>
+<p>The following node map shows the node numbers that can be used for QCar2 autonomous route planning in the MATLAB/Simulink version.</p>
 <p><strong>Pickup location:</strong> Node 2</p>
 <p><img src="../images/roadmap_Matlab.png" alt="QCar2 MATLAB/Simulink node map" width="520"></p>
 <h4 id="tools-to-support-example-navigator">Tools to support Example Navigator</h4>
@@ -617,10 +616,10 @@
 </tr>
 </tbody>
 </table>
-<p>Paths2pathposes converts prerecorded routes containing only position data into posed routes (position + heading) suitable for use with the Stanley controller. The converted routes are saved as <code>qcar2_pathposes.*</code> file (.npy for Python and .mat for MATLAB)</p>
+<p>Paths2pathposes converts prerecorded routes containing only position data into posed routes (position + heading) suitable for use with the Stanley controller. The converted routes are saved as <code>qcar2_pathposes.*</code> file (.npy for Python and .mat for MATLAB).</p>
 <hr />
 <h3 id="62-qdrone2-navigator">6.2 QDrone2 Navigator</h3>
-<p>No controller is implemented in the QDrone2 Navigator, as the Virtual FlightStack already provides a built-in position controller for QDrone2. Instead, the example navigator sends time-parameterized waypoints to smoothly guide the QDrone2 to its target</p>
+<p>No controller is implemented in the QDrone2 Navigator, as the Virtual FlightStack already provides a built-in position controller for QDrone2. Instead, the example navigator sends time-parameterized waypoints to smoothly guide the QDrone2 to its target.</p>
 <p>Users can provide:</p>
 <ul>
 <li>time-parameterized waypoints</li>
@@ -683,14 +682,14 @@
 </ul>
 <hr />
 <h2 id="7-pickup-and-delivery-operations-and-conditions">7) Pickup and Delivery Operations and Conditions</h2>
-<p>Pickup and delivery actions are managed by <code>game.py</code> and require the vehicle to remain inside the valid region for the full action duration</p>
+<p>Pickup and delivery actions are managed by <code>game.py</code> and require the vehicle to remain inside the valid region for the full action duration.</p>
 <h3 id="hold-time">Hold Time</h3>
 <ul>
 <li>Pickup action duration: 3 seconds</li>
 <li>Delivery action duration: 3 seconds</li>
 </ul>
 <h3 id="note-on-condition-checks">Note on Condition Checks</h3>
-<p>In the condition checks used in this guide, the term target location is used as a general meaning for the relevant task location</p>
+<p>In the condition checks used in this guide, the term target location is used as a general meaning for the relevant task location.</p>
 <p>Depending on the operation, the target location may refer to:</p>
 <ul>
 <li>the pickup location</li>
@@ -717,7 +716,7 @@
 <h4 id="qdrone2-carry-capacity-at-a-time">QDrone2 Carry Capacity at a Time</h4>
 <p>QDrone2 can carry: 1 small package only</p>
 <h4 id="condition-interpretation">Condition Interpretation</h4>
-<p>The QDrone2 condition check is based on horizontal distance and vertical offset between the QDrone1 and the target location</p>
+<p>The QDrone2 condition check is based on horizontal distance and vertical offset between the QDrone2 and the target location.</p>
 <h4 id="actual-condition-check">Actual Condition Check</h4>
 <pre><code class="language-python">np.hypot(dx, dy) &lt;= 2.0 and 0.0 &lt;= dz &lt;= 4.0
 
@@ -750,7 +749,7 @@
 <li>or 1 large package</li>
 </ul>
 <h4 id="condition-interpretation">Condition Interpretation</h4>
-<p>The QCar2 condition check is based on the distance between the current QCar2 position and the target location</p>
+<p>The QCar2 condition check is based on the distance between the current QCar2 position and the target location.</p>
 <h4 id="actual-condition-check">Actual Condition Check</h4>
 <pre><code class="language-python">np.linalg.norm(loc_car - LOC_PICK) &lt;= 2.0
 </code></pre>
@@ -763,9 +762,9 @@
 <h4 id="exact-distance-requirement">Exact Distance Requirement</h4>
 <p>A QDrone2 delivery is valid when all of the following are satisfied relative to the drop location:</p>
 <ul>
-<li>horizontal distance must be 2.0 m or less</li>
-<li>vertical offset must be between 0.0 m and 4.0 m</li>
-<li>the condition must be maintained for the full 3 seconds</li>
+<li>horizontal distance must be 2.0 m or less,</li>
+<li>vertical offset must be between 0.0 m and 4.0 m,</li>
+<li>the condition must be maintained for the full 3 seconds.</li>
 </ul>
 <h4 id="operational-description">Operational Description</h4>
 <p>To deliver using the QDrone2:</p>
@@ -777,15 +776,15 @@
 <li>once the required time is completed, the package is dropped at the location</li>
 </ol>
 <h4 id="window-delivery-qdrone2-only">Window Delivery (QDrone2 Only)</h4>
-<p>Only QDrone2 may perform window deliveries</p>
+<p>Only QDrone2 may perform window deliveries.</p>
 <hr />
 <h3 id="74-qcar2-delivery">7.4 QCar2 Delivery</h3>
 <h4 id="exact-distance-requirement">Exact Distance Requirement</h4>
 <p>A QCar2 delivery is valid when all of the following are satisfied relative to the shared drop-off location:</p>
 <ul>
-<li>distance from the QCar2 to the shared drop-off location must be less than 2.0 m</li>
-<li>the QCar2 must remain stopped at the required location</li>
-<li>the condition must be maintained for the full 3 seconds</li>
+<li>distance from the QCar2 to the shared drop-off location must be less than 2.0 m,</li>
+<li>the QCar2 must remain stopped at the required location,</li>
+<li>the condition must be maintained for the full 3 seconds.</li>
 </ul>
 <h4 id="operational-description">Operational Description</h4>
 <p>To deliver using the QCar2:</p>
@@ -797,7 +796,7 @@
 <li>once the required time is completed, the package is dropped at the shared drop-off location</li>
 </ol>
 <h4 id="shared-drop-off-delivery">Shared Drop-Off Delivery</h4>
-<p>QCar2 and QDrone2 can both perform a shared drop-off delivery</p>
+<p>QCar2 and QDrone2 can both perform a shared drop-off delivery.</p>
 <hr />
 <h2 id="8-vehicle-to-vehicle-package-transfer-operation-and-conditions">8) Vehicle-to-Vehicle Package Transfer Operation and Conditions</h2>
 <p>Vehicle-to-vehicle package transfer can happen in both directions:</p>
@@ -805,7 +804,7 @@
 <li>QCar2 → QDrone2</li>
 <li>QDrone2 → QCar2</li>
 </ul>
-<p>Both vehicles must use the correct intention values</p>
+<p>Both vehicles must use the correct intention values.</p>
 <h3 id="vehicle-to-vehicle-package-transfer-hold-time">Vehicle-to-vehicle package transfer Hold Time</h3>
 <ul>
 <li>Vehicle-to-vehicle package transfer action duration: 3 seconds</li>
