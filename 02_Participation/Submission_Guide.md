@@ -17,8 +17,11 @@ Prepare a YouTube link or a cloud storage link of the video that includes:
 
 [Optional] The video may include the Simulink interface or Python logs during mission execution.
 
+---
 
-## Back to: 
+
+
+Back to: 
 
 [Virtual Stage Competition Guide](../01_Core_Guides/Virtual_Stage_Competiton_Guide.md)
 
