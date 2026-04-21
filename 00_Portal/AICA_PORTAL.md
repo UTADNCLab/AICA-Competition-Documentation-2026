@@ -5,13 +5,14 @@
 
 ## Overview
 
-The IEEE SMC AICA Challenge is a competition focused on the development of autonomous algorithms for multimodal collaborative delivery through the coordination of a QCar2 (ground vehicle) and a QDrone2 (aerial vehicle). It provides participants with an opportunity to design and implement delivery strategies, including task planning, path planning, and control algorithms, within an integrated multimodal autonomous delivery system.
+The IEEE SMC AICA Challenge is a competition focused on the development of innovative solutions for collaborative autonomous systems. In this first year of the competition, the scenario features a multimodal autonomous delivery system consisting of a QCar2 (ground vehicle) and a QDrone2 (aerial vehicle) in an urban environment. Participants will have an opportunity to design and implement delivery strategies, path planning, and control algorithms.
+
 
 The competition is conducted in two stages:
 
-- **Virtual Stage** – Teams develop, implement, and test their solutions in Quanser Interactive Lab (QLabs) simulation environment based on the provided virtual stage scenario, and submit a video link demonstrating complete mission execution and system performance.
+- **Virtual Stage** – Teams develop, implement, and test solutions in Quanser Interactive Lab (QLabs) simulation environment based on the provided virtual stage scenario, and submit a video link demonstrating strategy and mission execution.
 
-- **On-Site Finals** – The top teams from the virtual stage will be invited to compete at the IEEE SMC 2026 Conference (October 4–7, Bellevue, Washington). In this stage, teams will execute and demonstrate their solutions in the same QLabs simulation environment based on the On-Site Finals scenario.
+- **On-Site Finals** – The top teams from the virtual stage will be invited to compete at the IEEE SMC 2026 Conference (October 4–7, Bellevue, Washington). In this stage, teams will execute and demonstrate solutions in the same QLabs simulation environment based on the On-Site Finals scenario.
 
 ---
 
