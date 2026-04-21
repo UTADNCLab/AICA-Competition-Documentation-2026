@@ -24,14 +24,17 @@ The competition is conducted in two stages:
 - [Registration](../02_Participation/Registration.md)
 - [Submission Guide](../02_Participation/Submission_Guide.md)
 - [System and Software Setup](../03_Setup/System_and_Software_setup.md)
-- [Contact us](mailto:smc.aica.2026@gmail.com)
 
 ## Acknowledgment
 
 
 This competition is organized as part of the IEEE Systems, Man, and Cybernetics (SMC) 2026 Conference and is designed by Quanser and The University of Texas at Arlington (UTA). We sincerely thank all supporting partners, organizers, and contributors for making this initiative possible.
 
----
+## Contact us
+
+For any competition related inquiries, please email: smc.aica.2026@gmail.com
+
+
 
 
 
