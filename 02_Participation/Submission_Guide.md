@@ -2,9 +2,7 @@
 
 This guide outlines the format and submission expectations for the final video in the AICA Challenge virtual stage.
 
-
-[Submission Link For Virtual Stage](https://forms.gle/6hzAKAqrSUkrrmTa8)
-
+<a href="https://forms.gle/6hzAKAqrSUkrrmTa8" class="submission-link">Submission Link for Virtual Stage</a>
 
 ## Requirements
 
@@ -14,12 +12,9 @@ Prepare a YouTube link or a cloud storage link of the video that includes:
 - at least one completed delivery
 - visible score and mission time
 
-
 [Optional] The video may include the Simulink interface or Python logs during mission execution.
 
 ---
-
-
 
 Back to: 
 
