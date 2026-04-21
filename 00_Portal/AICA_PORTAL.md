@@ -1,8 +1,7 @@
 # Home Portal
 
-### Welcome to the IEEE SMC AI-Powered Collaborative Autonomy (AICA) Challenge
-
-This competition is organized as part of the IEEE Systems, Man, and Cybernetics (SMC) 2026 Conference and is designed by Quanser and The University of Texas at Arlington (UTA). We sincerely thank all supporting partners, organizers, and contributors for making this initiative possible.
+### Welcome to the IEEE SMC AI-Powered Collaborative Autonomy (AICA) Challenge. We are delighted to have you join us in this exciting opportunity to explore the challenges of collaborative autonomous systems and develop innovative solutions.
+ 
 
 ## Overview
 
@@ -25,6 +24,11 @@ The competition is conducted in two stages:
 - [Submission Guide](../02_Participation/Submission_Guide.md)
 - [System and Software Setup](../03_Setup/System_and_Software_setup.md)
 - [Contact us](mailto:smc.aica.2026@gmail.com)
+
+## Acknowledgment
+
+
+This competition is organized as part of the IEEE Systems, Man, and Cybernetics (SMC) 2026 Conference and is designed by Quanser and The University of Texas at Arlington (UTA). We sincerely thank all supporting partners, organizers, and contributors for making this initiative possible.
 
 ---
 
