@@ -42,7 +42,7 @@
 </ul>
 </li>
 <li><a href="#3-automated-system-startup">Automated System Startup</a></li>
-<li><a href="#4-game-file-do-not-modify">Game File (Do not modify)</a></li>
+<li><a href="#4-game-file">Game File</a></li>
 <li><a href="#5-navigator-information">Navigator Information</a><ul>
 <li><a href="#51-qdrone2-navigator">QDrone2 Navigator</a></li>
 <li><a href="#511-qdrone2-communication-channels-and-ports">QDrone2 Communication Channels and Ports</a></li>
@@ -162,21 +162,21 @@
 <li>run the game file <code>game.py</code></li>
 </ol>
 <hr />
-<h2 id="4-game-file-do-not-modify">4) Game File (Do not modify)</h2>
+<h2 id="4-game-file">4) Game File</h2>
 <p>Run:</p>
 <pre><code>python game.py
 </code></pre>
-<p><strong>Note:</strong> If you have several Python Versions you can use <code>py -3.12 game.py</code> which specifies the version.</p>
-<p>This file is required for the scenario to work properly.</p>
+<p><strong>Note:</strong> If you have several Python versions, you can use <code>py -3.12 game.py</code> which specifies the version.</p>
+<p>The game file is required for the scenario to work properly.</p>
 <p>It handles:</p>
 <ul>
-<li>pickup timing,</li>
-<li>vehicle-to-vehicle package transfer timing,</li>
-<li>delivery timing,</li>
+<li>pickup,</li>
+<li>vehicle-to-vehicle package transfer,</li>
+<li>drop-off,</li>
 <li>package movement and visualization in QLabs,</li>
-<li>intention-based scenario logic,</li>
 <li>score display in the QLabs window.</li>
 </ul>
+<p>The game file logs key information in the command window, including pickup timer, drop-off timer, and vehicle-to-vehicle package transfer timer.</p>
 <h3 id="important">Important</h3>
 <p>Without <code>game.py</code>:</p>
 <ul>
@@ -188,7 +188,7 @@
 <hr />
 <h2 id="5-navigator-information">5) Navigator Information</h2>
 <h3 id="performance-note">Performance Note</h3>
-<p>Commenting out unnecessary video, subsystems can improve runtime performance and reduce computing resource requirements.</p>
+<p>Commenting out unnecessary video subsystems can improve runtime performance and reduce computing resource requirements.</p>
 <hr />
 <h3 id="51-qdrone2-navigator">5.1 QDrone2 Navigator</h3>
 <p>To enable QDrone2 to carry out its delivery plan, the QDrone2 Navigator should support:</p>
@@ -206,7 +206,7 @@
 
 1: Pickup Small
 
-2: Drop
+2: Drop-off
 
 3: Transfer from QCar2
 
@@ -396,7 +396,7 @@
 
 2: Pickup Large
 
-3: Drop
+3: Drop-off
 
 4: Transfer from QDrone2
 
@@ -682,211 +682,68 @@
 </ul>
 <hr />
 <h2 id="7-pickup-and-delivery-operations-and-conditions">7) Pickup and Delivery Operations and Conditions</h2>
-<p>Pickup and delivery actions are managed by <code>game.py</code> and require the vehicle to remain inside the valid region for the full action duration.</p>
-<h3 id="hold-time">Hold Time</h3>
-<ul>
-<li>Pickup action duration: 3 seconds</li>
-<li>Delivery action duration: 3 seconds</li>
-</ul>
-<h3 id="note-on-condition-checks">Note on Condition Checks</h3>
-<p>In the condition checks used in this guide, the term target location is used as a general meaning for the relevant task location.</p>
-<p>Depending on the operation, the target location may refer to:</p>
-<ul>
-<li>the pickup location</li>
-<li>the drop location</li>
-<li>the vehicle-to-vehicle package transfer location</li>
-</ul>
-<hr />
 <h3 id="71-qdrone2-pickup">7.1 QDrone2 Pickup</h3>
-<h4 id="exact-distance-requirement">Exact Distance Requirement</h4>
-<p>A QDrone2 pickup is valid when all of the following are satisfied relative to the central pickup location:</p>
+<p>The QDrone2 picks up a small package when all of the following are satisfied relative to the central pickup location: </p>
 <ul>
-<li>horizontal distance must be 2.0 m or less</li>
-<li>vertical offset must be between 0.0 m and 4.0 m</li>
-<li>the condition must be maintained for the full 3 seconds</li>
+<li>horizontal distance must be 2.0 m or less </li>
+<li>vertical distance must be between 0.0 m and 4.0 m </li>
+<li>the distance conditions must be maintained for 3 seconds </li>
+<li>QDrone2 intention must be set to 1 </li>
 </ul>
-<h4 id="operational-description">Operational Description</h4>
-<p>If the QDrone2 is spawned near the central pickup or moved near a package:</p>
-<ol>
-<li>move the QDrone2 into the valid pickup region</li>
-<li>press the assigned pickup key</li>
-<li>the timer starts in <code>game.py</code></li>
-<li>once the timer reaches 3 seconds, the package attaches to the drone</li>
-</ol>
-<h4 id="qdrone2-carry-capacity-at-a-time">QDrone2 Carry Capacity at a Time</h4>
-<p>QDrone2 can carry: 1 small package only</p>
-<h4 id="condition-interpretation">Condition Interpretation</h4>
-<p>The QDrone2 condition check is based on horizontal distance and vertical offset between the QDrone2 and the target location.</p>
-<h4 id="actual-condition-check">Actual Condition Check</h4>
-<pre><code class="language-python">np.hypot(dx, dy) &lt;= 2.0 and 0.0 &lt;= dz &lt;= 4.0
-
-</code></pre>
-<p>where:</p>
+<p><strong>Note:</strong> A pickup timer (counting up to 3 seconds) is displayed in the game file command window once the distance and intention conditions are satisfied.</p>
+<h3 id="72-qdrone2-drop-off">7.2 QDrone2 Drop-off</h3>
+<p>The QDrone2 drops a package off when all of the following are satisfied relative to the delivery location: </p>
 <ul>
-<li><code>dx</code> = difference in x-position between QDrone2 and the target location</li>
-<li><code>dy</code> = difference in y-position between QDrone2 and the target location</li>
-<li><code>dz</code> = difference in z-position between QDrone2 and the target location</li>
+<li>horizontal distance must be 2.0 m or less </li>
+<li>vertical distance must be between 0.0 m and 4.0 m </li>
+<li>the distance conditions must be maintained for 3 seconds </li>
+<li>QDrone2 intention must be set to 2 </li>
 </ul>
-<h3 id="72-qcar2-pickup">7.2 QCar2 Pickup</h3>
-<h4 id="exact-distance-requirement">Exact Distance Requirement</h4>
-<p>A QCar2 pickup is valid when all of the following are satisfied relative to the central pickup location:</p>
+<p><strong>Note:</strong> A drop-off timer (counting up to 3 seconds) is displayed in the game file command window once the distance and intention conditions are satisfied.</p>
+<h3 id="73-transfer-from-qcar2-to-qdrone2">7.3 Transfer from QCar2 to QDrone2</h3>
+<p>The QDrone2 takes a small package from QCar2  when all of the following are satisfied for the relative distance between the QDrone2 and QCar2: </p>
 <ul>
-<li>distance from the QCar2 to the central pickup point must be less than 2.0 m</li>
-<li>the condition must be maintained for the full 3 seconds</li>
+<li>horizontal distance must be 2.0 m or less </li>
+<li>vertical distance must be between 0.0 m and 4.0 m </li>
+<li>the distance conditions must be maintained for 3 seconds </li>
+<li>QDrone2 intention must be set to 3 and QCar2 intention is set to 5 </li>
 </ul>
-<h4 id="operational-description">Operational Description</h4>
-<p>For the QCar2:</p>
-<ol>
-<li>stop the QCar2 near the central pickup</li>
-<li>press the assigned pickup key</li>
-<li>the timer starts in <code>game.py</code></li>
-</ol>
-<p>The same pickup logic applies.</p>
-<h4 id="qcar2-carry-capacity-at-a-time">QCar2 Carry Capacity at a Time</h4>
-<p>QCar2 can carry:</p>
+<p><strong>Note:</strong> A vehicle-to-vehicle package transfer timer (counting up to 3 seconds) is displayed in the game file command window once the distance and intention conditions are satisfied.</p>
+<h3 id="74-transfer-from-qdrone2-to-qcar2">7.4 Transfer from QDrone2 to QCar2</h3>
+<p>The QCar2 takes a small package from QDrone2  when all of the following are satisfied for the relative distance between the QDrone2 and QCar2: </p>
 <ul>
-<li>2 small packages</li>
-<li>or 1 large package</li>
+<li>horizontal distance must be 2.0 m or less </li>
+<li>vertical distance must be between 0.0 m and 4.0 m </li>
+<li>the distance conditions must be maintained for 3 seconds </li>
+<li>QDrone2 intention must be set to 4 and QCar2 intention is set to 4 </li>
 </ul>
-<h4 id="condition-interpretation">Condition Interpretation</h4>
-<p>The QCar2 condition check is based on the distance between the current QCar2 position and the target location.</p>
-<h4 id="actual-condition-check">Actual Condition Check</h4>
-<pre><code class="language-python">np.linalg.norm(loc_car - LOC_PICK) &lt;= 2.0
-</code></pre>
-<p>where:</p>
+<p><strong>Note:</strong> A vehicle-to-vehicle package transfer timer (counting up to 3 seconds) is displayed in the game file command window once the distance and intention conditions are satisfied.</p>
+<h3 id="75-transfer-from-qdrone2-to-qcar2">7.5 Transfer from QDrone2 to QCar2</h3>
+<p>The QCar2 takes a small package from QDrone2  when all of the following are satisfied for the relative distance between the QDrone2 and QCar2: </p>
 <ul>
-<li><code>loc_car</code> = QCar2 current position</li>
-<li><code>LOC_PICK</code> = target location</li>
+<li>horizontal distance must be 2.0 m or less </li>
+<li>vertical distance must be between 0.0 m and 4.0 m </li>
+<li>the distance conditions must be maintained for 3 seconds </li>
+<li>QDrone2 intention must be set to 4 and QCar2 intention is set to 4 </li>
 </ul>
-<h3 id="73-qdrone2-delivery">7.3 QDrone2 Delivery</h3>
-<h4 id="exact-distance-requirement">Exact Distance Requirement</h4>
-<p>A QDrone2 delivery is valid when all of the following are satisfied relative to the drop location:</p>
+<p><strong>Note:</strong> A vehicle-to-vehicle package transfer timer (counting up to 3 seconds) is displayed in the game file command window once the distance and intention conditions are satisfied.</p>
+<h3 id="76-qcar2-pickup">7.6 QCar2 Pickup</h3>
+<p>The QCar2 picks up a package when all of the following are satisfied relative to the central pickup location: </p>
 <ul>
-<li>horizontal distance must be 2.0 m or less,</li>
-<li>vertical offset must be between 0.0 m and 4.0 m,</li>
-<li>the condition must be maintained for the full 3 seconds.</li>
+<li>horizontal distance must be 2.0 m or less  </li>
+<li>the distance conditions must be maintained for 3 seconds </li>
+<li>QCar2 intention must be set to 1 for a small package pickup and to 2 for a large package pickup </li>
 </ul>
-<h4 id="operational-description">Operational Description</h4>
-<p>To deliver using the QDrone2:</p>
-<ol>
-<li>move the QDrone2 into the valid drop region</li>
-<li>hover in the required position range</li>
-<li>press the assigned drop-off intention key</li>
-<li>the timer begins in <code>game.py</code></li>
-<li>once the required time is completed, the package is dropped at the location</li>
-</ol>
-<h4 id="window-delivery-qdrone2-only">Window Delivery (QDrone2 Only)</h4>
-<p>Only QDrone2 may perform window deliveries.</p>
+<p><strong>Note:</strong> A QCar2 pickup timer (counting up to 3 seconds) is displayed in the game file command window once the distance and intention conditions are satisfied.</p>
+<h3 id="77-qcar2-drop-off">7.7 QCar2 Drop-off</h3>
+<p>The QCar2 drops off a package when all of the following are satisfied relative to the central pickup location: </p>
+<ul>
+<li>horizontal distance must be 2.0 m or less  </li>
+<li>the distance conditions must be maintained for 3 seconds </li>
+<li>QCar2 intention must be set to 3</li>
+</ul>
+<p><strong>Note:</strong> A QCar2 drop-off timer (counting up to 3 seconds) is displayed in the game file command window once the distance and intention conditions are satisfied.</p>
 <hr />
-<h3 id="74-qcar2-delivery">7.4 QCar2 Delivery</h3>
-<h4 id="exact-distance-requirement">Exact Distance Requirement</h4>
-<p>A QCar2 delivery is valid when all of the following are satisfied relative to the shared drop-off location:</p>
-<ul>
-<li>distance from the QCar2 to the shared drop-off location must be less than 2.0 m,</li>
-<li>the QCar2 must remain stopped at the required location,</li>
-<li>the condition must be maintained for the full 3 seconds.</li>
-</ul>
-<h4 id="operational-description">Operational Description</h4>
-<p>To deliver using the QCar2:</p>
-<ol>
-<li>move the QCar2 to the shared drop-off location</li>
-<li>stop the QCar2 at the required location</li>
-<li>press the assigned drop-off intention key</li>
-<li>the timer begins in <code>game.py</code></li>
-<li>once the required time is completed, the package is dropped at the shared drop-off location</li>
-</ol>
-<h4 id="shared-drop-off-delivery">Shared Drop-Off Delivery</h4>
-<p>QCar2 and QDrone2 can both perform a shared drop-off delivery.</p>
-<hr />
-<h2 id="8-vehicle-to-vehicle-package-transfer-operation-and-conditions">8) Vehicle-to-Vehicle Package Transfer Operation and Conditions</h2>
-<p>Vehicle-to-vehicle package transfer can happen in both directions:</p>
-<ul>
-<li>QCar2 → QDrone2</li>
-<li>QDrone2 → QCar2</li>
-</ul>
-<p>Both vehicles must use the correct intention values.</p>
-<h3 id="vehicle-to-vehicle-package-transfer-hold-time">Vehicle-to-vehicle package transfer Hold Time</h3>
-<ul>
-<li>Vehicle-to-vehicle package transfer action duration: 3 seconds</li>
-</ul>
-<hr />
-<h3 id="81-qcar2-to-qdrone2-transfer">8.1 QCar2 to QDrone2 Transfer</h3>
-<h4 id="exact-distance-requirement">Exact Distance Requirement</h4>
-<p>A QCar2 to QDrone2 transfer is valid when all of the following are satisfied relative to the car:</p>
-<ul>
-<li>horizontal distance from drone to car must be 2.0 m or less</li>
-<li>vertical offset from drone to car must be between 0.0 m and 4.0 m</li>
-<li>both vehicles must have the correct intention values set</li>
-<li>the condition must be maintained for the full 3 seconds</li>
-</ul>
-<h4 id="operational-description">Operational Description</h4>
-<p>To transfer from QCar2 to QDrone2:</p>
-<ol>
-<li>~~stop the car at the desired transfer location~~</li>
-<li>move the drone above or near the car within the valid transfer region</li>
-<li>set the correct intention values on both vehicles</li>
-</ol>
-<p>Now set intentions:</p>
-<ul>
-<li>QCar2 intention = Transfer to Drone</li>
-<li>QDrone2 intention = Transfer from Car</li>
-</ul>
-<h4 id="important">Important</h4>
-<p>Vehicle-to-vehicle package transfer will only work if:</p>
-<ul>
-<li>both vehicles are in the correct position</li>
-<li>both intention values are correctly set</li>
-</ul>
-<p>If only one side is set, Vehicle-to-vehicle package transfer will not occur</p>
-<h4 id="vehicle-to-vehicle-package-transfer-completion">Vehicle-to-Vehicle Package Transfer Completion</h4>
-<ul>
-<li>the timer begins in <code>game.py</code></li>
-<li>after 3 seconds, the package transfers from the QCar2 to QDrone2</li>
-</ul>
-<hr />
-<h3 id="82-qdrone2-to-qcar2-transfer">8.2 QDrone2 to QCar2 Transfer</h3>
-<h4 id="exact-distance-requirement">Exact Distance Requirement</h4>
-<p>A QDrone2 to QCar2 transfer is valid when all of the following are satisfied relative to the car:</p>
-<ul>
-<li>horizontal distance from QDrone2 to QCar2 must be 2.0 m or less</li>
-<li>vertical offset from QDrone2 to QCar2 must be between 0.0 m and 4.0 m</li>
-<li>both vehicles must have the correct intention values set</li>
-<li>the condition must be maintained for the full 3 seconds</li>
-</ul>
-<h4 id="operational-description">Operational Description</h4>
-<p>To transfer from QDrone2 to QCar2:</p>
-<ol>
-<li>~~stop the QCar2 at the desired location~~</li>
-<li>hover the QDrone2 above or near the QCar2 within the valid transfer region</li>
-<li>set the correct intention values on both vehicles</li>
-</ol>
-<p>Now set intentions:</p>
-<ul>
-<li>QDrone2 intention = Transfer to Car</li>
-<li>QCar2 intention = Transfer from Drone</li>
-</ul>
-<h4 id="transfer-completion">Transfer Completion</h4>
-<ul>
-<li><code>game.py</code> starts the timer</li>
-<li>after 3 seconds, the package transfers from the drone to the car</li>
-</ul>
-<hr />
-<h2 id="9-final-runtime-check-mission-completion-and-file-reference">9) Final Runtime Check, Mission Completion, and File Reference</h2>
-<h3 id="mission-timing-and-completion">Mission Timing and Completion</h3>
-<ul>
-<li>Mission time begins at the mission start</li>
-<li>When a delivery is successfully completed, a delivery score is calculated using the scoring formula</li>
-<li>The total score is displayed at the top of the QLabs window</li>
-</ul>
-<h3 id="final-runtime-check">Final Runtime Check</h3>
-<p>Before running a full mission, verify the following:</p>
-<ul>
-<li>both vehicles are spawned</li>
-<li>QCar2 headlights are on</li>
-<li>QDrone2 has taken off and is hovering</li>
-<li>the Navigator files are running</li>
-<li><code>game.py</code> is running</li>
-</ul>
 <h3 id="file-structure">File Structure</h3>
 <pre><code class="language-text">9_AICA_Competition_Files\
     setup_env.py                  
