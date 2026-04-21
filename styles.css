@@ -133,9 +133,10 @@ body {
 .markdown-body a.submission-link {
   color: #ff4d4d;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 500;
   display: inline-block;
-  margin: 0.5rem 0 1rem;
+  margin: 0;
+  text-decoration: none;
 }
 
 .markdown-body a.submission-link:hover {
