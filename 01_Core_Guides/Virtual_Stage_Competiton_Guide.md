@@ -1,30 +1,30 @@
 # Virtual Stage Competition Guide 
 
-Welcome to the Virtual Stage of the IEEE SMC AICA Challenge.  
+Welcome to the Virtual Stage of the SMC AICA 2026.  
 This guide explains what teams should prepare for virtual-stage evaluation.
 
 ---
 
 ## Navigation
 
-- [Virtual Stage Submission](#1-virtual-stage-submission)
-- [Virtual Stage Detailed Scenario](#2-virtual-stage-detailed-scenario)
-- [Core Principles for Multimodal Delivery](#3-core-principles-for-multimodal-delivery)
-- [Operational Guide](#4-operational-guide)
-- [Scoring and Ranking](#5-scoring-and-ranking)
-- [Resources](#6-resources)
+- [Virtual Stage Submission](#virtual-stage-submission)
+- [Virtual Stage Detailed Scenario](#virtual-stage-detailed-scenario)
+- [Core Principles for Multimodal Delivery](#core-principles-for-multimodal-delivery)
+- [Operational Guide](#operational-guide)
+- [Scoring and Ranking](#scoring-and-ranking)
+- [Resources](#resources)
 
 ---
 
-## 1) Virtual Stage Submission
+## Virtual Stage Submission
 
 The objective of the Virtual Stage is to create a video that demonstrates each team’s ability to implement algorithms for the multimodal autonomous delivery system in the QLabs simulation environment.
 
-For the full submission details, see the [Virtual Stage Submission Guide](../02_Participation/Submission_Guide.md).
+For the full submission details, see the [Virtual Stage Submission Guide](../02_Participation/Submission_Guide.md)
 
 ---
 
-## 2) Virtual Stage Detailed Scenario
+## Virtual Stage Detailed Scenario
 
 For the complete scenario description, see the [Virtual Stage Detailed Scenario](../01_Core_Guides/Virtual_Stage_Detailed_Scenario.md)
 
@@ -34,11 +34,11 @@ This document includes:
 - Central Pickup Operations
 - Vehicle-to-Vehicle Package Transfer
 - Delivery Options
-- Pick up and Delivery Locations
+- Pickup and Delivery Locations
 
 ---
 
-## 3) Core Principles for Multimodal Delivery
+## Core Principles for Multimodal Delivery
 
 ### Delivery Planning and Decision-Making
 - Plan delivery tasks by assigning them to either QCar2, QDrone2, or their coordinated operation through vehicle-to-vehicle package transfer
@@ -50,23 +50,21 @@ This document includes:
 
 ### Control Systems and Navigation
 - Develop smooth and safe trajectories for QDrone2, ensuring stable, high-performance flight while avoiding obstacles 
-- [Optional] Design and implement a control algorithm to generate steering and velocity commands for the autonomous navigation of QCar2 within road boundaries while avoiding collisions. 
-
+- [Optional] Design and implement a control algorithm to generate steering and velocity commands for the autonomous navigation of QCar2 within road boundaries while avoiding collisions
 
 ### Mission Completion and Efficiency
 - Set an appropriate level of autonomy, ranging from fully manual control to fully autonomous operation
 - Optimize overall mission time and execution efficiency  
 
-
 ---
 
-## 4) Operational Guide
+## Operational Guide
 
 See the [Operational Guide](../01_Core_Guides/Operational_Guide.md) for the step-by-step mission workflow and the operational constraints for valid pickup, vehicle-to-vehicle package transfer, delivery, and mission execution for both QCar2 and QDrone2 in the virtual stage
 
 ---
 
-## 5) Scoring and Ranking
+## Scoring and Ranking
 
 This section defines how team performance is scored and how rankings are determined in the Virtual Stage
 
@@ -104,7 +102,7 @@ Bonus by floor level:
 ---
 
 
-## 6) Resources
+## Resources
 
 
 [All Competition Resources](../04_Resources/All_Competition_Resources.md)
