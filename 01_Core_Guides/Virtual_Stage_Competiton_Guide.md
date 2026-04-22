@@ -3,7 +3,6 @@
 Welcome to the Virtual Stage of the SMC AICA 2026.  
 This guide explains what teams should prepare for Virtual Stage competition.
 
----
 
 ## Navigation
 
@@ -14,7 +13,6 @@ This guide explains what teams should prepare for Virtual Stage competition.
 - [Scoring and Ranking](#scoring-and-ranking)
 - [Resources](#resources)
 
----
 
 ## Virtual Stage Submission
 
@@ -22,7 +20,6 @@ The objective of the Virtual Stage is to create a video that demonstrates a team
 
 For the full submission details, see the [Virtual Stage Submission Guide](../02_Participation/Submission_Guide.md)
 
----
 
 ## Virtual Stage Detailed Scenario
 
@@ -36,7 +33,6 @@ This document includes:
 - Delivery Options
 - Pickup and Delivery Locations
 
----
 
 ## Core Principles for Multimodal Delivery
 
@@ -56,13 +52,10 @@ This document includes:
 - Set an appropriate level of autonomy, ranging from fully manual control to fully autonomous operation
 - Optimize overall mission time and execution efficiency  
 
----
 
 ## Operational Guide
 
 See the [Operational Guide](../01_Core_Guides/Operational_Guide.md) for the step-by-step mission workflow and the operational constraints for valid pickup, vehicle-to-vehicle package transfer, delivery, and mission execution for both QCar2 and QDrone2 in the virtual stage
-
----
 
 ## Scoring and Ranking
 
@@ -98,15 +91,11 @@ Bonus by floor level:
 Teams are ranked according to their total score, where a higher score corresponds to a higher rank.
 
 
----
-
-
 ## Resources
 
 
 [All Competition Resources](../04_Resources/All_Competition_Resources.md)
 
----
 
 
 #### Back to: 
