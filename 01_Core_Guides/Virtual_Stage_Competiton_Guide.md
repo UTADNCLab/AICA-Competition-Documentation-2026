@@ -1,7 +1,7 @@
 # Virtual Stage Competition Guide 
 
 Welcome to the Virtual Stage of the SMC AICA 2026.  
-This guide explains what teams should prepare for virtual-stage evaluation.
+This guide explains what teams should prepare for Virtual Stage competition.
 
 ---
 
@@ -18,7 +18,7 @@ This guide explains what teams should prepare for virtual-stage evaluation.
 
 ## Virtual Stage Submission
 
-The objective of the Virtual Stage is to create a video that demonstrates teams' ability to implement algorithms for the multimodal autonomous delivery system in the QLabs simulation environment.
+The objective of the Virtual Stage is to create a video that demonstrates a team's ability to implement algorithms for the multimodal autonomous delivery system in the QLabs simulation environment.
 
 For the full submission details, see the [Virtual Stage Submission Guide](../02_Participation/Submission_Guide.md)
 
@@ -68,17 +68,11 @@ See the [Operational Guide](../01_Core_Guides/Operational_Guide.md) for the step
 
 This section defines how teams performance is scored and how rankings are determined in the Virtual Stage
 
-### Scoring Method
-
-- Mission time begins at the mission start time
-- When a delivery is successfully completed, a delivery score is calculated using the scoring formula
-- The total score is displayed at the top of the QLabs window
 
 ### Scoring Formula
 
 - Score for each completed delivery = 1000 − delivery completion time + window delivery bonus
 - Total Score = Sum of all delivery scores
-
 
 
 Delivery Completion Time is the time taken to complete a delivery, measured from the mission start time until the package is successfully delivered
@@ -93,11 +87,16 @@ Bonus by floor level:
 - Floor 2 → +200
 
 
+### Score Display
+
+- When a delivery is successfully completed, a delivery score is calculated using the scoring formula
+- The total score is displayed at the top of the QLabs window
+
 
 ### Ranking
 
-- Teams are ranked based on their total score
-- The team with the highest total score ranks first
+Teams are ranked according to their total score, where a higher score corresponds to a higher rank.
+
 
 ---
 
