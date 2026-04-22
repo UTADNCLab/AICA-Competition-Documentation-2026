@@ -1,6 +1,6 @@
 # All Competition Resources
 
-This page lists all documentation and resources for the competition.
+This page lists all documentation and resources for the SMC AICA 2026 Competition.
 
 ## Competition Documentation
 
