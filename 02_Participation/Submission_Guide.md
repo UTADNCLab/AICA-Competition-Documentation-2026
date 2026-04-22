@@ -1,8 +1,8 @@
 # Submission Guide 
 
-This guide outlines the format and submission expectations for the final video in the AICA Challenge virtual stage.
+This guide outlines the format and submission expectations for the final video in the SMC AICA 2026 Virtual Stage.
 
-<a href="https://forms.gle/6hzAKAqrSUkrrmTa8" class="submission-link">Submission Link for Virtual Stage</a>
+<a href="https://forms.gle/6hzAKAqrSUkrrmTa8" class="submission-link">Submission Link for Virtual Stage</a> 
 
 ## Requirements
 
