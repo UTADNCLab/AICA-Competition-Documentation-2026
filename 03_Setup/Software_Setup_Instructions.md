@@ -1,6 +1,6 @@
 # Software Setup & Installation
 
-This page provides the AICA-specific software setup steps required before running the competition files.
+This page provides the software setup and installation steps required before running the IEEE SMC AICA 2026 competition files.
 
 If you are using both **MATLAB / Simulink** and **Python**, follow both sections below.  
 If you are using only one workflow, follow the corresponding section only.
