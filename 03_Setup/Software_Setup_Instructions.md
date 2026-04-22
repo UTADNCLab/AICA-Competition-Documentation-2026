@@ -6,14 +6,12 @@ If you are using both **MATLAB / Simulink** and **Python**, follow both sections
 If you are using only one workflow, follow the corresponding section only.
 
 
----
 
 ## Step 1 -- Initial Download 
 
 Before software installation, 
 On your system, create a folder called _Quanser_ under _Documents_. This should look like `C:/Users/user/Documents/Quanser`. download the documentation and competition runtime files into your local `Documents/Quanser` workspace.
 
----
 
 ### 1A) Download Competition Files 
 
@@ -35,7 +33,6 @@ A separate folder for actual competition files.
 C:\Users\<YourUsername>\Documents\Quanser
 ```
 
----
 
 ### 1B) Expected Local Layout
 
@@ -47,7 +44,7 @@ C:\Users\<YourUsername>\Documents\Quanser\
 
 For detailed installation guide for Quanser resources, see the [Quanser_Academic_Resources](https://github.com/quanser/Quanser_Academic_Resources)
 
----
+
 
 ## Step 2 -- Install Required Software
 
@@ -56,7 +53,11 @@ For detailed installation guide for Quanser resources, see the [Quanser_Academic
 - Download: [MATLAB for Windows](https://www.mathworks.com/downloads/)
 - In MATLAB, install **Quanser Interactive Labs for MATLAB** via Add-On Explorer.
 
+
+<p align="center">
 <img src="../images/Matlab_Get_Add_on.png" class="img-small" alt="MATLAB Get Add-On Explorer">
+</p>
+
 
 ![Quanser Interactive Labs for MATLAB](../images/Quanser_Interactive_lab_for_matlab_.png)
 
@@ -80,13 +81,15 @@ For detailed installation guide for Quanser resources, see the [Quanser_Academic
 - Install via MATLAB Add-On Explorer (MATLAB workflow), or
 - Install standalone: [QLabs Getting Started](https://qlabs.quanserdocs.com/en/latest/Get%20Started.html)
 
-<img src="../images/Qlabs_install_link.png">
 
+<p align="center">
+<img src="../images/Qlabs_install_link.png" class="img-small" alt="MATLAB Get Add-On Explorer">
+</p>
 
 
 ### **Note:** If you are using both MATLAB / Simulink and Python, QLabs only needs to be installed once using either of the methods above.
 
----
+
 
 ## Step 3 -- Check System Requirements
 
@@ -119,7 +122,7 @@ In a successful setup check:
 - installed software versions are shown
 - the system diagnosis completes without missing required tools
 
----
+
 
 ## Step 4 -- Configure Environment
 
@@ -137,7 +140,7 @@ configure_matlab.bat
 
 > Restart your system after running setup scripts before continuing.
 
----
+
 
 ### Back to [ AICA Portal](../00_Portal/AICA_PORTAL.md)
 
