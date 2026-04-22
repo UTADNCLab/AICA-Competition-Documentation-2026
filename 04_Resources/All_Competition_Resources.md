@@ -4,8 +4,7 @@ This page lists all documentation and resources for the SMC AICA 2026 Competitio
 
 ## Competition Documentation
 
-- [Registration](../02_Participation/Registration.md)
-- [Timeline](../04_Resources/Timeline.md)
+- [Registration and Important Dates](../04_Resources/Timeline.md)
 - [Competition Guide](../01_Core_Guides/Competition_Objective.md)
 - [Virtual Stage Competition Guide](../01_Core_Guides/Virtual_Stage_Competiton_Guide.md)
 - [Software Setup Instructions](../03_Setup/Software_Setup_Instructions.md)
