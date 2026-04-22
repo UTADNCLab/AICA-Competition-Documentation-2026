@@ -18,7 +18,7 @@ This guide explains what teams should prepare for virtual-stage evaluation.
 
 ## Virtual Stage Submission
 
-The objective of the Virtual Stage is to create a video that demonstrates each team’s ability to implement algorithms for the multimodal autonomous delivery system in the QLabs simulation environment.
+The objective of the Virtual Stage is to create a video that demonstrates teams' ability to implement algorithms for the multimodal autonomous delivery system in the QLabs simulation environment.
 
 For the full submission details, see the [Virtual Stage Submission Guide](../02_Participation/Submission_Guide.md)
 
@@ -66,7 +66,7 @@ See the [Operational Guide](../01_Core_Guides/Operational_Guide.md) for the step
 
 ## Scoring and Ranking
 
-This section defines how team performance is scored and how rankings are determined in the Virtual Stage
+This section defines how teams performance is scored and how rankings are determined in the Virtual Stage
 
 ### Scoring Method
 
