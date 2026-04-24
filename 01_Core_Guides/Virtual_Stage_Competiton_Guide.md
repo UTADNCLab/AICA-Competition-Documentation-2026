@@ -27,11 +27,10 @@ For the complete scenario description, see the [Virtual Stage Detailed Scenario]
 
 This document includes:
 
-- System Setup
-- Central Pickup Operations
-- Vehicle-to-Vehicle Package Transfer
-- Delivery Options
+- Scenario Summary
+- Scenario Setup
 - Pickup and Delivery Locations
+- Scenario Rules
 
 
 ## Core Principles for Multimodal Delivery
@@ -55,7 +54,8 @@ This document includes:
 
 ## Operational Guide
 
-See the [Operational Guide](../01_Core_Guides/Operational_Guide.md) for the step-by-step mission workflow and the operational constraints for valid pickup, vehicle-to-vehicle package transfer, delivery, and mission execution for both QCar2 and QDrone2 in the virtual stage
+See the [Operational Guide](../01_Core_Guides/Operational_Guide.md) for the step-by-step mission execution for both QCar2 and QDrone2 in the virtual stage
+
 
 ## Scoring and Ranking
 
@@ -89,6 +89,8 @@ Bonus by floor level:
 ### Ranking
 
 Teams are ranked according to their total score, where a higher score corresponds to a higher rank.
+
+
 
 
 ## Resources
