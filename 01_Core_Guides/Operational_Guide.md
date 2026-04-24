@@ -85,7 +85,7 @@ To pick up the first packages:
 
 ### 3.1 QCar2 Navigator
 
-The QCar2 Navigator is the high-level controller responsible for decision-making and motion planning of the QCar2. Its inputs and outputs are illustrated in Figure 2.
+The QCar2 Navigator is the high-level controller responsible for decision-making and motion planning of the QCar2. Its inputs and outputs are illustrated in Figure 1.
 
 <p align="center">
 <figure class="navigator-figure">
@@ -169,7 +169,7 @@ If camera support is enabled in Python, the following ports are used:
 
 ### 3.3 QDrone2 Navigator
 
-The QDrone2 Navigator is the high-level controller responsible for decision-making and motion planning of the QDrone2. Its inputs and outputs are illustrated in Figure 1.
+The QDrone2 Navigator is the high-level controller responsible for decision-making and motion planning of the QDrone2. Its inputs and outputs are illustrated in Figure 2.
 
 <p align="center">
 <figure class="navigator-figure">
