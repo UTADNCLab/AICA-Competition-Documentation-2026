@@ -132,8 +132,8 @@ body {
 
 .markdown-body a.submission-link {
   color: #ff4d4d;
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 500;
   display: inline-block;
   margin: 0;
   text-decoration: none;
@@ -288,6 +288,60 @@ body {
 
 .markdown-body img.img-small {
   width: min(100%, 520px);
+}
+
+.small-ui-figure {
+  text-align: center;
+  margin: 28px 0;
+}
+
+.small-ui-figure img {
+  display: inline-block;
+  width: auto;
+  max-width: min(100%, 420px);
+  height: auto;
+  background: #ffffff;
+  padding: 8px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+  image-rendering: auto;
+}
+
+.small-ui-figure figcaption {
+  margin-top: 10px;
+  font-size: 0.96rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.markdown-body img.flowchart-img {
+  width: min(100%, 360px);
+  max-width: 360px;
+  height: auto;
+  image-rendering: auto;
+}
+
+.navigator-figure {
+  text-align: center;
+  margin: 28px 0;
+}
+
+.navigator-figure img {
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  background: #ffffff;
+  padding: 6px;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+}
+
+.navigator-figure figcaption {
+  margin-top: 10px;
+  font-size: 0.98rem;
+  color: var(--text-muted);
+  text-align: center;
 }
 
 .markdown-body img.hero-banner,
