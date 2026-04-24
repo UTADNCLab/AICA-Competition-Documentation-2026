@@ -7,159 +7,205 @@ This page provides details of the virtual stage scenario that simulates a multim
 ## Navigation
 
 - [Scenario Summary](#scenario-summary)
-    - [System Setup](#1-system-setup)
-    - [Central Pickup Operations](#2-central-pickup-operations)
-    - [Vehicle-to-Vehicle Package Transfer](#3-vehicle-to-vehicle-package-transfer)
-    - [Delivery Options](#4-delivery-options)
-    - [Pick up and Delivery Locations](#5-pick-up-and-delivery-locations)
+- [Scenario Setup](#scenario-setup)
+- [Pickup and Delivery Locations](#pickup-and-delivery-locations)
+- [Scenario Rules](#scenario-rules)
 
 ---
 
 ## Scenario Summary
 
-- AICA Challenge Virtual Stage is a collaborative autonomy challenge where teams design, implement, and demonstrate a multimodal autonomous delivery system using a QCar2 and a QDrone2 operating in a shared mission environment.
-- The scenario focuses on demonstrating the ability to perform multimodal delivery through package pickup, navigation, and final delivery using either window delivery or shared drop-off methods.
-- Vehicle-to-vehicle package transfer is supported as an optional coordination feature and may be used if it benefits the team’s delivery strategy.
+Urban logistics is undergoing a rapid transformation, driven by the rise of e-commerce and increasing expectations for fast and reliable deliveries. In dense urban environments, ensuring timely delivery, especially for safety-critical items, remains a significant challenge. To address these demands, cities are exploring innovative multimodal autonomous delivery systems that leverage the complementary strengths of different vehicle types.
 
-*Figure: The image presents an overview of the scenario, while the details are described in the following sections.*
+The IEEE SMC AICA Challenge 2026 brings this vision to life through a realistic urban scenario, where a QCar2 and a QDrone2 cooperate to deliver packages from a central pickup location to customers. Deliveries can be completed in two ways: 
 
-### <img src= "../images/central_pickup.png">
+- Dropped off at a shared building location by either vehicle.
+- Delivered directly to a customer’s window by the QDrone2, which is valuable for customers on higher floors, especially elderly individuals or people with limited mobility.
 
----
+Customer satisfaction is reflected through a scoring system that considers both delivery time and delivery type, with higher rewards for faster service and window deliveries, especially for high-rise locations.
 
-## 1) System Setup
+Each vehicle offers distinct advantages and limitations:
 
-In the virtual stage scenario, one QCar2 and one QDrone2 operate cooperatively to perform deliveries within the city.
+- The QCar2 is faster and can carry heavier loads but is restricted to road networks and shared drop-off locations
+- The QDrone2 offers greater mobility and can access vertical spaces for window deliveries, but operates at lower speeds with limited payload capacity
 
-The QCar2 can pick up packages from the central pickup location, deliver them to shared drop-off locations, and transfer packages to and from the QDrone2.
+To enhance cooperation, vehicle-to-vehicle package transfer is also available as an operational option. To maximize customer satisfaction, participants must design strategies that effectively coordinate both vehicles. This includes making decisions such as:
 
-Similarly, the QDrone2 can pick up packages from the central pickup location, deliver them to shared drop-off or window delivery locations, and transfer packages to and from the QCar2.
+- Selecting shared drop-off or window delivery for each task
+- Assigning pickup, vehicle-to-vehicle transfer, and drop-off responsibilities between vehicles
+- Determining service order and grouping of deliveries
 
+Success in this challenge requires developing effective delivery strategies and implementing efficient path-planning and control algorithms.
 
----
+### <img src= "../images/overview.png">
 
-## 2) Central Pickup Operations
-
-At mission start:
-
-- All packages are located at the central pickup location,
-- There are 5 delivery tasks: 4 small-package deliveries and 1 large-package delivery,
-- The QCar2 can pick up both small and large packages,
-- The QDrone2 can only pick up small packages,
-- The central pickup location is indicated by the green pad in QLabs screen.
-
-
-### Carry Constraints
-
-Current carry limits at a time are:
-
-- **QCar2:** 2 small packages or 1 large package
-- **QDrone2:** 1 small package
-
-#### Example for Qcar2 with 2 packages
-
-<img src="../images/Car_carry_limit.png">
+<p align="center">
+<strong>Figure 1:</strong> Overview of cityscape scenario map
+</p>
 
 ---
 
-## 3) Vehicle-to-Vehicle Package Transfer
+## Scenario Setup
 
-To enable collaborative autonomy, vehicle-to-vehicle package transfer is allowed in both directions:
+### Delivery Information
 
-- QCar2 → QDrone2
-- QDrone2 → QCar2
+- The scenario includes 5 delivery tasks: 4 small-package deliveries and 1 large-package delivery.
+- All packages are initially located at the central pickup location. 
+- Two delivery options are available: shared drop-off and window delivery.
 
-#### Example Vehicle-to-Vehicle Package Transfer
+#### Shared Drop-Off
 
-QCar2 → QDrone2
+- Shared drop-off refers to delivering packages to the designated drop-off location in front of each apartment building.
+- This delivery option is available for all packages.
+- Both the QCar2 and the QDrone2 can perform shared drop-off deliveries.
+- Shared drop-off locations are indicated by red pads for small-package deliveries and a blue pad for the large-package delivery in the cityscape map.
 
-<img src="../images/Qcar_to_qdrone.png">
 
-QDrone2 → QCar2
+#### Window Delivery
 
-<img src="../images/drone_to_Car.png">
+- Window delivery refers to delivering packages directly to the apartment window.
+- This option is available only for selected deliveries.
+- Only the QDrone2 can perform window deliveries.
+- Window delivery locations are indicated by yellow pads in the cityscape map.
+- This delivery mode provides bonus points, with the score determined by the customer’s floor level.
+
+
+### Vehicle Information
+
+One QCar2 and one QDrone2 operate cooperatively to complete deliveries.
+
+The QCar2 can perform five different actions:
+
+- Pick up a small package from the central pickup location
+- Pick up a large package from the central pickup location
+- Drop off packages at shared drop-off locations
+- Receive a small package from the QDrone2 (QDrone2-to-QCar2 package transfer)
+- Transfer a small package to the QDrone2  (QCar2-to-QDrone2 package transfer)
+
+QDrone2 can four different actions:
+
+- Pick up a small package from the central pickup location
+- Drop off packages at shared drop-off locations or at window delivery locations
+- Receive a small package from the QCar2 (QCar2-to-QDrone2 package transfer)
+- Transfer a small package to the QCar2  (QDrone2-to-QCar2 package transfer)
+
+
+Both vehicles have limited payload capacity:
+
+- QCar2 can carry either 2 small packages or 1 large package at a time
+- QDrone2 can carry 1 small package at a time
+---
+
+## Pickup and Delivery Locations
+
+<img src="../images/locations_cityscape.png">
+
+<p align="center">
+<strong>Figure 2:</strong> Central pickup and delivery locations for the 5 packages.
+</p>
+
+
+Table 1 lists the pickup and delivery locations. Any location within the city is represented using coordinates, expressed as a 3-dimensional vector.
+In addition, specific locations in the road network are represented as nodes indexed by integers. Node numbering differs between Python and MATLAB/Simulink: Python uses zero-based indexing as shown in Figure 3, whereas MATLAB/Simulink uses one-based indexing as shown in Figure 4.
+
+
+<p align="center">
+<strong>Table 1:</strong> Central pickup and delivery location coordinates and nodes for the 5 packages.
+</p>
+
+### Pickup and Delivery Table
+
+| Location | Package Type | Shared Drop-Off <br> Location `[x y z]` | Shared Drop-off <br> Python Node | Shared Drop-off <br> Matlab Node | Floor | Window Delivery <br> Location `[x y z]` |
+|---|---|---|---:|---:|---:|---|
+| Central pickup | Pickup | [-2.50305 29.6703 0.05] | 24 | 25 | - | None |
+| Delivery 1 | Small | [11.2739 -10.84655 0.05] | 2 | 3 | 4 | [15.1739 -18.04655 9.65] |
+| Delivery 2 | Small | [22.5478 29.6703 0.05] | 14 | 15 | 3 | [26.0478 16.7703 9.65] |
+| Delivery 3 | Small | [0.0 44.9735 0.05] | 20 | 21 | 2 | [1.3 46.9735 4.85] |
+| Delivery 4 | Small | [-19.84125 29.6703 0.05] | 22 | 23 | 1 | None |
+| Delivery 5 | Large | [-12.8205 -4.5991 0.05] | 10 | 11 | 1 | None |
 
 ---
 
-## 4) Delivery Options
-
-Each delivery has two options.
-
-### A) Window Delivery (QDrone2 Only)
-
-- Delivery is performed directly to the apartment window.
-- This delivery mode provides bonus points.
-- Window delivery locations are indicated by yellow pads.
-
-
-<img src="../images/Drone_window_delivery.png">
-
-
-
-### B) Shared Drop-Off Location
-
-- A Shared Drop-Off point is provided for each apartment building.
-- QCar2 or QDrone2 can deliver to this location.
-- Shared drop-off locations are indicated by red pads for small-package deliveries and a blue pad for the large-package delivery.
-
-
-<img src="../images/common_drop_by_car_or_drone.png">
-
-
----
-
-## 5) Pick up and Delivery Locations
-
-- Central pickup: *(Green Pad)* P
-- Small package delivery locations: *(Red Pad)* D1, D2, D3, D4
-- Large package delivery location: *(Blue Pad)* D5
-
-
-### Note
-
-- QCar2 uses node numbers for route planning and location coordinates for control.
-- QCar2 node numbering is different in Python and MATLAB / Simulink: Python starts from 0, while MATLAB / Simulink starts from 1.
-- The QDrone2 uses location coordinates for both path planning and control.
-
-
-*Figure: QCar2 node numbering reference showing the Python mapping*
-
+<p align="center">
 <img src="../images/roadmap_Python.png">
+</p>
+
+<p align="center">
+<strong>Figure 3:</strong> Road network with node numbering in Python.
+</p>
 
 ---
 
-*Figure: QCar2 node numbering reference showing the MATLAB / Simulink mapping*
-
+<p align="center">
 <img src="../images/roadmap_Matlab.png">
+</p>
 
-### QCar2 Pickup and Delivery Reference
-
-| Location | Package Type | Python Node | MATLAB / Simulink Node | Shared Drop-Off Location `[x y]` |
-|---|---|---:|---:|---|
-| Central pickup (P) | Pickup | 24 | 25 | `[-2.50305 29.6703]` |
-| Drop Location 1 (D1) | Small | 2 | 3 | `[11.2739 -10.84655]` |
-| Drop Location 2 (D2) | Small | 14 | 15 | `[22.5478 29.6703]` |
-| Drop Location 3 (D3) | Small | 20 | 21 | `[0.0 44.9735]` |
-| Drop Location 4 (D4) | Small | 22 | 23 | `[-19.84125 29.6703]` |
-| Drop Location 5 (D5) | Large | 10 | 11 | `[-12.8205 -4.5991]` |
-
-### QDrone2 Pickup and Delivery Reference
-
-| Location | Package Type | Shared Drop-Off Location `[x y z]` | Floor | Window Delivery Location `[x y z]` |
-|---|---|---|---:|---|
-| Central pickup (P) | Pickup | `[-2.50305 29.6703 0.05]` | - | None |
-| Drop Location 1 (D1) | Small | `[11.2739 -10.84655 0.05]` | 4 | `[15.1739 -18.04655 9.65]` |
-| Drop Location 2 (D2) | Small | `[22.5478 29.6703 0.05]` | 3 | `[26.0478 16.7703 9.65]` |
-| Drop Location 3 (D3) | Small | `[0.0 44.9735 0.05]` | 2 | `[1.3 46.9735 4.85]` |
-| Drop Location 4 (D4) | Small | `[-19.84125 29.6703 0.05]` | 1 | None |
-| Drop Location 5 (D5) | Large | `[-12.8205 -4.5991 0.05]` | 1 | None |
-
-
-### Strategy Note
-
-Teams are free to choose delivery order, task allocation, and delivery method based on their own mission strategy.
+<p align="center">
+<strong>Figure 4:</strong> Road network with node numbering in MATLAB/Simulink.
+</p>
 
 ---
+
+## Scenario Rules
+
+The scenario rules regulates pickup, vehicle-to-vehicle package transfer, and drop-off operations. Action intention is the integer representation of the action that a vehicle plans to perform.
+
+QCar2 Intention List:
+
+    0: Nothing
+
+    1: Pickup Small
+
+    2: Pickup Large
+
+    3: Drop-off
+
+    4: Transfer from QDrone2
+
+    5: Transfer to QDrone2
+
+QDrone2 Action Intention List:
+
+    0: Nothing
+
+    1: Pickup Small
+
+    2: Drop-off
+
+    3: Transfer from QCar2
+
+    4: Transfer to QCar2
+
+
+- The QDrone2 picks up a small package after setting its action intention to 1 and maintaining, for at least 3 seconds, a horizontal distance of 2.0 m or less and a vertical distance between 0.0 m and 4.0 m relative to the central pickup location.
+
+- The QDrone2 drops off a small package after setting its action intention to 2 and maintaining, for at least 3 seconds, a horizontal distance of 2.0 m or less and a vertical distance between 0.0 m and 4.0 m relative to a shared drop-off or a window delivery location.
+
+<p align="center">
+  <img src="../images/Drone_window_delivery.png" alt="QDrone2 Window Delivery" width="520">
+</p>
+
+<p align="center">
+  <strong>Figure 5:</strong> QDrone2 window delivery
+</p>
+
+- The QCar2 transfers a small package to QDrone2 when QDrone2 sets its action intention to 3 and QCar2 sets its action intention to 5. In addition, they must maintain, for at least 3 seconds, a horizontal distance of 2.0 m or less and a vertical distance between 0.0 m and 4.0 m relative to each other.
+
+- The Drone2 transfers a small package to QCar2 when QDrone2 sets its action intention to 4 and QCar2 sets its action intention to 4. In addition, they must maintain, for at least 3 seconds, a horizontal distance of 2.0 m or less and a vertical distance between 0.0 m and 4.0 m relative to each other.
+
+- The QCar2 picks up a small package after setting its action intention to 1 and maintaining, for at least 3 seconds, a horizontal distance of 2.0 m or less relative to the central pickup location.
+
+- The QCar2 picks up a large package after setting its action intention to 2 and maintaining, for at least 3 seconds, a horizontal distance of 2.0 m or less relative to the central pickup location.
+
+- The QCar2 drops off a small or large package after setting its action intention to 3 and maintaining, for at least 3 seconds, a horizontal distance of 2.0 m or less relative to a shared drop-off location.
+
+<p align="center">
+  <img src="../images/common_drop_by_car_or_drone.png" alt="QCar2 Shared Drop-Off" width="520">
+</p>
+
+<p align="center">
+  <strong>Figure 6:</strong> QCar2 shared drop-off delivery
+</p>
 
 Back to:
 
