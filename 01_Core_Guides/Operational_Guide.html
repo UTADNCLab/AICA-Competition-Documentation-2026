@@ -5,22 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Operational Guide</title>
   <link rel="stylesheet" href="../styles.css" />
-  <style>
-    .package-pickup {
-      color: #2e9b47;
-      font-weight: 700;
-    }
-
-    .package-small {
-      color: #c83a3a;
-      font-weight: 700;
-    }
-
-    .package-large {
-      color: #2f66d0;
-      font-weight: 700;
-    }
-  </style>
 </head>
 <body>
   <div class="page-wrap">
@@ -32,76 +16,18 @@
         </div>
       </header>
       <section class="content markdown-body">
-        <p>This guide explains how to run the AICA Challenge Virtual Stage and defines the operational conditions that must be satisfied during execution. It combines system startup, navigator usage, pickup/drop/Vehicle-to-vehicle package transfer behavior, runtime checks, communication channels, and mission constraints.</p>
-<hr />
-<h2 id="navigation">Navigation</h2>
+        <p>This guide explains the simulation environment, scenario rule implementation, and the development of a multimodal autonomous delivery solution within the simulation environment.</p>
+<!-- This guide explains how to run the SMC AICA 2026 Virtual Stage and defines the operational conditions that must be satisfied during execution. It combines system startup, navigator usage, pickup/drop/vehicle-to-vehicle package transfer behavior, runtime checks, communication channels, and mission constraints. -->
+
+<p>You can follow steps below for partcipating in this competition. </p>
 <ol>
-<li><a href="#1-system-execution-flow">System Execution Flow</a></li>
-<li><a href="#2-before-you-start">Before You Start</a><ul>
-<li><a href="#open-qlabs-and-load-the-cityscape-map-manually">Open QLabs and Load the Cityscape Map Manually</a></li>
-</ul>
-</li>
-<li><a href="#3-automated-system-startup">Automated System Startup</a></li>
-<li><a href="#4-game-file">Game File</a></li>
-<li><a href="#5-navigator-information">Navigator Information</a><ul>
-<li><a href="#51-qdrone2-navigator">QDrone2 Navigator</a></li>
-<li><a href="#511-qdrone2-communication-channels-and-ports">QDrone2 Communication Channels and Ports</a></li>
-<li><a href="#52-qcar2-navigator">QCar2 Navigator</a></li>
-<li><a href="#521-qcar2-communication-channels-and-ports">QCar2 Communication Channels and Ports</a></li>
-</ul>
-</li>
-<li><a href="#6-example-navigator-files-in-competition-folders">Example Navigator Files in Competition Folders</a><ul>
-<li><a href="#61-qcar2-navigator">QCar2 Navigator</a></li>
-<li><a href="#62-qdrone2-navigator">QDrone2 Navigator</a></li>
-</ul>
-</li>
-<li><a href="#7-pickup-and-delivery-operations-and-conditions">Pickup and Delivery Operations and Conditions</a><ul>
-<li><a href="#71-drone-pickup">Drone Pickup</a></li>
-<li><a href="#72-car-pickup">Car Pickup</a></li>
-<li><a href="#73-drone-delivery">Drone Delivery</a></li>
-<li><a href="#74-car-delivery">Car Delivery</a></li>
-</ul>
-</li>
-<li><a href="#8-vehicle-to-vehicle-package-transfer-operation-and-conditions">Vehicle-to-Vehicle Package Transfer Operation and Conditions</a><ul>
-<li><a href="#81-car-to-drone-transfer">Car to Drone Transfer</a></li>
-<li><a href="#82-drone-to-car-transfer">Drone to Car Transfer</a></li>
-</ul>
-</li>
-<li><a href="#9-final-runtime-check-mission-completion-and-file-reference">Final Runtime Check, Mission Completion, and File Reference</a><ul>
-<li><a href="#mission-timing-and-completion">Mission Timing and Completion</a></li>
-<li><a href="#final-runtime-check">Final Runtime Check</a></li>
-<li><a href="#file-structure">File Structure</a></li>
-</ul>
-</li>
+<li><a href="#1-preparation">Preparation</a>: Complete system and software setup, open QLabs, and load the cityscape map. </li>
+<li><a href="#2-automated-startup">Automated Startup</a>: As an initial exercise, pick up your first packages with QDrone2 and QCar2 using the example implementation in the SMC AICA 2026 Competition Files Package.</li>
+<li><a href="#3-navigator-files">Navigator Files</a>: Develop/modify QCar2 and QDrone2 navigator files to begin developing your own autonomous delivery solutions.</li>
+<li><a href="#4-for-advanced-development">For Advanced Development</a>: Understand the simulation environment details and modify the vehicle spawn locations.</li>
 </ol>
-<hr />
-<h2 id="1-system-execution-flow">1) System Execution Flow</h2>
-<p><img src="../images/block_diagram.png" alt="Block Diagram Workflow" width="286"></p>
-<p>The overall execution flow is as follows.</p>
-<ul>
-<li>QLabs loads the required map and serves as the simulation environment.</li>
-<li><code>setup_env.py</code> runs once at the start to load the vehicles and their corresponding real-time models (RT models). This file should NOT be modified.  Competitors only need to run this file.</li>
-</ul>
-<p><strong>Note:</strong> The setup environment file reads the initial positions and headings of the vehicles from <code>spawn_locations.txt</code>. Competitors may modify <code>spawn_locations.txt</code> to set custom spawn locations.</p>
-<ul>
-<li>RT Model QDrone2 simulates the actuators and sensors of the QDrone2. Competitors only need to load this model.</li>
-<li>Virtual FlightStack executes the controllers, sensor fusion algorithms, and core drone functions. Competitors only need to load this model.</li>
-<li>QDrone2 Navigator sends waypoints to the Virtual FlightStack, reads vehicle states from it, and sends the QDrone2 intention to <code>game.py</code>.</li>
-</ul>
-<p><strong>Note:</strong> Competitors are expected to develop the QDrone2 Navigator. Specifically, they must send the correct waypoints and intentions to execute their delivery plan. Example implementations in both Python and MATLAB/Simulink are provided in the <code>9_AICA_Competition_Files</code> folder and may be used as a reference or modified as needed. </p>
-<ul>
-<li>RT Model QCar2 simulates the actuators and sensors of the QCar2. Competitors only need to load this model.</li>
-<li>Virtual DriveStack executes the sensor fusion algorithms and core car functions. Competitors only need to load this model.</li>
-<li>QCar2 Navigator sends velocity and steering commands to the Virtual DriveStack, reads vehicle states from it, and sends the QCar2 intention to <code>game.py</code>.</li>
-</ul>
-<p><strong>Note:</strong> Competitors are expected to develop the QCar2 Navigator. Specifically, they must send the correct velocity commands, steering commands, and intentions to execute their delivery plan. A controller for autonomous driving must be implemented within the QCar2 Navigator. Example implementations in both Python and MATLAB/Simulink are provided in the <code>9_AICA_Competition_Files</code> folder and may be used as a reference or modified as needed.</p>
-<ul>
-<li>The QDrone2 Navigator and QCar2 Navigator can each be developed in Python or MATLAB/Simulink.</li>
-<li><code>game.py</code> enforces the game rules, handles pickup, vehicle-to-vehicle package transfer, and drop-off logic, and tracks scoring. This file should NOT be modified.</li>
-<li>All components must be loaded and run continuously until the mission is complete. A batch file <code>run_all.bat</code> is provided to load all components for Python-based Navigator implementations, and <code>run_all.m</code> is provided for MATLAB/Simulink implementations.</li>
-</ul>
-<hr />
-<h2 id="2-before-you-start">2) Before You Start</h2>
+<h2 id="1-preparation">1) Preparation</h2>
+<h3 id="system-and-software-setup">System and Software Setup</h3>
 <p>Before running the system, make sure:</p>
 <ul>
 <li>all required software is installed,</li>
@@ -111,301 +37,74 @@
 <li>the software setup steps have already been completed.</li>
 </ul>
 <p>For setup details, see the <a href="../03_Setup/System_and_Software_setup.html">System and Software Setup</a></p>
-<h3 id="open-qlabs-and-load-the-cityscape-map-manually">Open QLabs and Load the Cityscape Map Manually</h3>
+<h3 id="open-qlabs-and-load-the-cityscape-map">Open QLabs and Load the Cityscape Map</h3>
 <ol>
-<li>Open Quanser Interactive Labs from the Windows Start menu, or go to <code>C:\Program Files\Quanser\Quanser Interactive Labs</code> and run the application.</li>
+<li>Open Quanser Interactive Labs (QLabs) from the Windows Start menu, or go to <code>C:\Program Files\Quanser\Quanser Interactive Labs</code> and run the application.</li>
 <li>Wait for QLabs to fully launch.</li>
 <li>In QLabs, open Self-Driving Car Studio.</li>
 <li>Select and load the Cityscape map.</li>
 <li>Wait until the Cityscape environment finishes loading completely.</li>
 <li>After the map is open, continue with <code>run_all.BAT</code> or <code>run_all.m</code> or run the required files manually.</li>
 </ol>
-<h3 id="important">Important</h3>
+<hr />
+<h2 id="2-automated-startup">2) Automated Startup</h2>
+<p>A batch file (<code>run_all.bat</code>) is provided to start the simulation for Python-based Navigator implementations, while a MATLAB script (<code>run_all.m</code>) is provided for Simulink-based Navigator implementations.</p>
+<h3 id="python-workflow">Python Workflow</h3>
+<p>The batch file can be executed from a command window as follows:</p>
+<p>Run:
+<code>run_all.bat</code></p>
+<p>This script automatically:</p>
 <ul>
-<li>The virtual stage is designed to run in the Cityscape map.</li>
-<li>Make sure the Cityscape map is loaded.</li>
-<li>If the wrong map is open, the spawn locations, nodes, and delivery locations will not match the competition scenario.</li>
+<li>Runs the setup environment (<code>setup_env.py</code>)</li>
+<li>Starts the RT models (<code>Virtual_DriveStack.rt-win64</code>, <code>Virtual_FlightStack.rt-win64</code>)</li>
+<li>Starts the game (<code>game.py</code>)</li>
+<li>Launches the Python-based Navigators (<code>QCar2_Navigator.py</code>, <code>QDrone2_Navigator.py</code>)</li>
+</ul>
+<p>To pick up the first packages:</p>
+<ul>
+<li>Type <code>task1</code> in QCar2_Navigator command window. It commands the QCar2 to drive to the Central Pickup location and pick up two small packages.</li>
+<li>Type <code>task1</code> in QDrone2_Navigator command window. It commands the QDrone2 to fly to the Central Pickup location and pick up one small package.</li>
+</ul>
+<h3 id="matlab-simulink-workflow">MATLAB / Simulink Workflow</h3>
+<p>The MATLAB script can be executed from the MATLAB command window as follows:</p>
+<p>Run:
+<code>run_all.m</code></p>
+<p>This script automatically:</p>
+<ul>
+<li>Runs the setup environment (<code>setup_env.py</code>)</li>
+<li>Starts the RT models (<code>Virtual_DriveStack.rt-win64</code>, <code>Virtual_FlightStack.rt-win64</code>)</li>
+<li>Starts the game (<code>game.py</code>)</li>
+<li>Launches the Simulink-based Navigators (<code>QCar2_Navigator.slx</code>, <code>QDrone2_Navigator.slx</code>)</li>
+</ul>
+<p>To pick up the first packages:</p>
+<ul>
+<li>Set Task_Constant to <code>1</code> in QCar2_Navigator Simulink screen. It commands the QCar2 to drive to the Central Pickup location and pick up two small packages.</li>
+<li>Set Task_Constant to <code>1</code> in QDrone2_Navigator Simulink screen. It commands the QDrone2 to fly to the Central Pickup location and pick up one small package.</li>
 </ul>
 <hr />
-<h2 id="3-automated-system-startup">3) Automated System Startup</h2>
-<p>A complete BAT launcher is provided for one-click startup.</p>
-<p>Example: <code>run_all.bat</code></p>
-<p>This file is intended to:</p>
-<ol>
-<li>run the setup environment file <code>setup_env.py</code></li>
-<li>start the models <ul>
-<li><code>virtual_DriveStack.rt-win64</code></li>
-<li><code>virtual_FlightStack.rt-win64</code> </li>
-</ul>
-</li>
-<li>start the models <ul>
-<li><code>QCar2_Navigator.py</code></li>
-<li><code>QDrone2_Navigator.py</code></li>
-</ul>
-</li>
-<li>run the game file <code>game.py</code></li>
-</ol>
-<p>Example: <code>run_all.m</code></p>
-<p>This file is intended to:</p>
-<ol>
-<li>run the setup environment file <code>setup_env.py</code></li>
-<li>start the models <ul>
-<li><code>virtual_DriveStack.rt-win64</code></li>
-<li><code>virtual_FlightStack.rt-win64</code> </li>
-</ul>
-</li>
-<li>start the models <ul>
-<li><code>QCar2_Navigator.slx</code></li>
-<li><code>QDrone2_Navigator.slx</code></li>
-</ul>
-</li>
-<li>run the game file <code>game.py</code></li>
-</ol>
-<hr />
-<h2 id="4-game-file">4) Game File</h2>
-<p>Run:</p>
-<pre><code>python game.py
-</code></pre>
-<p><strong>Note:</strong> If you have several Python versions, you can use <code>py -3.12 game.py</code> which specifies the version.</p>
-<p>The game file is required for the scenario to work properly.</p>
-<p>It handles:</p>
-<ul>
-<li>pickup,</li>
-<li>vehicle-to-vehicle package transfer,</li>
-<li>drop-off,</li>
-<li>package movement and visualization in QLabs,</li>
-<li>score display in the QLabs window.</li>
-</ul>
-<p>The game file logs key information in the command window, including pickup timer, drop-off timer, and vehicle-to-vehicle package transfer timer.</p>
-<h3 id="important">Important</h3>
-<p>Without <code>game.py</code>:</p>
-<ul>
-<li>package pickup will not work correctly,</li>
-<li>vehicle-to-vehicle package transfer operations will fail,</li>
-<li>deliveries will not be tracked correctly,</li>
-<li>scoring will not update.</li>
-</ul>
-<hr />
-<h2 id="5-navigator-information">5) Navigator Information</h2>
-<h3 id="performance-note">Performance Note</h3>
-<p>Commenting out unnecessary video subsystems can improve runtime performance and reduce computing resource requirements.</p>
-<hr />
-<h3 id="51-qdrone2-navigator">5.1 QDrone2 Navigator</h3>
-<p>To enable QDrone2 to carry out its delivery plan, the QDrone2 Navigator should support:</p>
-<ul>
-<li>waypoint generation for controllers</li>
-<li>intention publishing</li>
-</ul>
-<p>The QDrone2 Navigator has access to:</p>
+<h2 id="3-navigator-files">3) Navigator Files</h2>
+<h3 id="31-qcar2-navigator">3.1 QCar2 Navigator</h3>
+<p>The QCar2 Navigator is the high-level controller responsible for decision-making and motion planning of the QCar2. Its inputs and outputs are illustrated in Figure 2.</p>
+<figure class="navigator-figure">
+  <img src="../images/QCar2_Navigator_Block.png" alt="QDrone2 Navigator block diagram">
+  <figcaption><strong>Figure 1:</strong> QCar2 Navigator inputs and outputs</figcaption>
+</figure>
+
+<p>To execute a delivery plan, the QCar2 Navigator must generate appropriate velocity and steering commands and publish the correct action intentions at each stage of the mission.</p>
+<p>Velocity and steering commands can be generated by a low-level controller implementation or assigning a manual control keys. Sensor data can be used to support command generation and action intention decisions. The QCar2 Navigator has access to the following information:</p>
 <ul>
 <li>camera streams (disabled by default and enabled as needed in the provided code and model)</li>
-<li>sensor readings (IMU, angular position, angular rates, angular acceleration, and Pose [x, y, z, yaw])</li>
+<li>sensor readings (Motor power consumption, battery level, car speed, IMU, pose [x, y, yaw])</li>
 </ul>
-<h3 id="qdrone2-intention-list">QDrone2 Intention List</h3>
-<pre><code>0: Nothing
-
-1: Pickup Small
-
-2: Drop-off
-
-3: Transfer from QCar2
-
-4: Transfer to QCar2
-</code></pre>
-<h3 id="511-qdrone2-communication-channels-and-ports">5.1.1 QDrone2 Communication Channels and Ports</h3>
-<p>QDrone2 uses fixed communication ports for the simulator, cameras, and game connection.</p>
-<hr />
-<h4 id="camera-and-sensor-ports">Camera and Sensor Ports</h4>
-<p>If camera support is enabled in Python, the following ports are used:</p>
-<table>
-<thead>
-<tr>
-<th>Camera</th>
-<th>Address</th>
-<th>Camera ID</th>
-<th>Resolution</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>RealSense RGB + Depth</td>
-<td><code>tcpip://localhost:18986</code></td>
-<td><code>0@tcpip://localhost:18986</code></td>
-<td><code>640 x 480</code> (RGB + Depth)</td>
-</tr>
-<tr>
-<td>Right Camera</td>
-<td><code>tcpip://localhost:18982</code></td>
-<td><code>0@tcpip://localhost:18982</code></td>
-<td><code>640 x 480</code></td>
-</tr>
-<tr>
-<td>Back Camera</td>
-<td><code>tcpip://localhost:18983</code></td>
-<td><code>1@tcpip://localhost:18983</code></td>
-<td><code>640 x 480</code></td>
-</tr>
-<tr>
-<td>Left Camera</td>
-<td><code>tcpip://localhost:18984</code></td>
-<td><code>2@tcpip://localhost:18984</code></td>
-<td><code>640 x 480</code></td>
-</tr>
-<tr>
-<td>Downward Camera</td>
-<td><code>tcpip://localhost:18985</code></td>
-<td><code>3@tcpip://localhost:18985</code></td>
-<td><code>640 x 480</code></td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p><strong>Note:</strong> The RealSense camera operates in <code>RGB &amp; DEPTH</code> mode and provides both RGB and Depth streams on the same port.</p>
-</blockquote>
-<hr />
-<p><strong>Data and Intention Ports</strong></p>
-<p>Drone Data Stream:</p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Address</td>
-<td><code>tcpip://localhost:18373</code></td>
-</tr>
-<tr>
-<td>Agent Mode</td>
-<td><code>C</code></td>
-</tr>
-<tr>
-<td>Send Buffer Size</td>
-<td><code>1460</code></td>
-</tr>
-<tr>
-<td>Receive Buffer Shape</td>
-<td><code>(1, 16)</code> — <code>float64</code></td>
-</tr>
-<tr>
-<td>Receive Buffer Size</td>
-<td><code>1460</code></td>
-</tr>
-</tbody>
-</table>
-<p>Received Data Layout:</p>
-<table>
-<thead>
-<tr>
-<th>Index</th>
-<th>Description</th>
-<th>Unit</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>[0]</code></td>
-<td>Stream connection flag</td>
-<td>—</td>
-</tr>
-<tr>
-<td><code>[1:4]</code></td>
-<td>IMU gyroscope data</td>
-<td>rad/s</td>
-</tr>
-<tr>
-<td><code>[4:7]</code></td>
-<td>IMU accelerometer data</td>
-<td>m/s²</td>
-</tr>
-<tr>
-<td><code>[7:10]</code></td>
-<td>Estimated angular position</td>
-<td>rad</td>
-</tr>
-<tr>
-<td><code>[10:13]</code></td>
-<td>Estimated angular rates</td>
-<td>rad/s</td>
-</tr>
-<tr>
-<td><code>[13:16]</code></td>
-<td>Estimated angular acceleration</td>
-<td>rad/s²</td>
-</tr>
-<tr>
-<td><code>[16:20]</code></td>
-<td>Pose — x, y, z, yaw</td>
-<td>m, m, m, rad</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Sent Data:</strong> Waypoint as <code>[x, y, z, yaw]</code> vector.</p>
-<hr />
-<p><strong>QDrone2 Intention Stream</strong></p>
-<table>
-<thead>
-<tr>
-<th>Parameter</th>
-<th>Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Address</td>
-<td><code>tcpip://127.0.0.1:19001</code></td>
-</tr>
-<tr>
-<td>Agent Mode</td>
-<td><code>C</code></td>
-</tr>
-<tr>
-<td>Send Buffer Size</td>
-<td><code>8</code></td>
-</tr>
-<tr>
-<td>Receive Buffer Shape</td>
-<td><code>(1, 1)</code> — <code>float64</code></td>
-</tr>
-<tr>
-<td>Receive Buffer Size</td>
-<td><code>24</code></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Received Data:</strong> None.</p>
-<p><strong>Sent Data:</strong> QDrone2 intention value.</p>
-<hr />
-<h3 id="52-qcar2-navigator">5.2 QCar2 Navigator</h3>
-<p>To enable QCar2 to carry out its delivery plan, the QCar2 Navigator should support:</p>
+<h3 id="32-qcar2-communication-channels-and-ports">3.2 QCar2 Communication Channels and Ports</h3>
+<p>QCar2 uses several fixed communication ports for:</p>
 <ul>
-<li>generation of velocity and steering commands, potentially via a controller implementation</li>
-<li>intention publishing</li>
+<li>Send velocity and steering commands</li>
+<li>Send action intention</li>
+<li>Read cameras, sensors, and sensor fusion outputs</li>
 </ul>
-<p>The QCar2 Navigator has access to:</p>
-<ul>
-<li>camera streams (disabled by default and enabled as needed in the provided code and model)</li>
-<li>sensor readings (Motor power consumption, battery level, car speed, IMU, Pose [x, y, yaw])</li>
-</ul>
-<h3 id="qcar2-intention-list">QCar2 Intention List</h3>
-<pre><code>0: Nothing
-
-1: Pickup Small
-
-2: Pickup Large
-
-3: Drop-off
-
-4: Transfer from QDrone2
-
-5: Transfer to QDrone2
-</code></pre>
-<h3 id="521-qcar2-communication-channels-and-ports">5.2.1 QCar2 Communication Channels and Ports</h3>
-<p>QCar2 uses fixed communication ports for the simulator, cameras, and game connection.</p>
 <hr />
-<h4 id="camera-and-sensor-ports">Camera and Sensor Ports</h4>
+<h4 id="ports-to-read-cameras">Ports to read cameras</h4>
 <p>If camera support is enabled in Python, the following ports are used:</p>
 <table>
 <thead>
@@ -447,8 +146,7 @@
 <p><strong>Note:</strong> All cameras operate at a frame rate of <code>30 fps</code> with a resolution of <code>640 x 480</code>.</p>
 </blockquote>
 <hr />
-<h4 id="data-and-intention-ports"><strong>Data and Intention Ports</strong></h4>
-<hr />
+<h4 id="ports-to-read-sensors-and-send-velocity-and-steering-commands">Ports to read sensors and send velocity and steering commands</h4>
 <p><strong>QCar2 Data Stream</strong></p>
 <table>
 <thead>
@@ -463,8 +161,8 @@
 <td><code>tcpip://localhost:18375</code></td>
 </tr>
 <tr>
-<td>Agent Mode</td>
-<td><code>C</code></td>
+<td>Role</td>
+<td><code>Client</code></td>
 </tr>
 <tr>
 <td>Send Buffer Size</td>
@@ -524,7 +222,7 @@
 </table>
 <p><strong>Sent Data:</strong> Velocity and steering commands as <code>[velocity, steering]</code> vector.</p>
 <hr />
-<p><strong>QCar2 Intention Stream</strong></p>
+<h4 id="port-to-read-position-and-heading-and-to-send-action-intention">Port to read position and heading and to send action intention</h4>
 <table>
 <thead>
 <tr>
@@ -538,8 +236,8 @@
 <td><code>tcpip://localhost:19000</code></td>
 </tr>
 <tr>
-<td>Agent Mode</td>
-<td><code>C</code></td>
+<td>Role</td>
+<td><code>Client</code></td>
 </tr>
 <tr>
 <td>Send Buffer Size</td>
@@ -557,32 +255,210 @@
 </table>
 <p><strong>Received Data:</strong> Vehicle pose as <code>[x, y, yaw]</code>.</p>
 <p><strong>Sent Data:</strong> QCar2 intention value.</p>
+<h3 id="33-qdrone2-navigator">3.3 QDrone2 Navigator</h3>
+<p>The QDrone2 Navigator is the high-level controller responsible for decision-making and motion planning of the QDrone2. Its inputs and outputs are illustrated in Figure 1.</p>
+<figure class="navigator-figure">
+  <img src="../images/QDrone2_Navigator_Block.png" alt="QDrone2 Navigator block diagram">
+  <figcaption><strong>Figure 2:</strong> QDrone2 Navigator inputs and outputs</figcaption>
+</figure>
+
+<p>To execute a delivery plan, the QDrone2 Navigator must generate appropriate waypoints and publish the correct action intentions at each stage of the mission.</p>
+<p>Sensor data can be used to support waypoint generation and action intention decisions. The QDrone2 Navigator has access to the following information:</p>
+<ul>
+<li>camera streams (disabled by default and you can enable if needed)</li>
+<li>sensor readings (IMU, angular position, angular rates, angular acceleration, and pose)</li>
+</ul>
+<h3 id="34-qdrone2-communication-channels-and-ports">3.4 QDrone2 Communication Channels and Ports</h3>
+<p>QDrone2 uses several fixed communication ports for:</p>
+<ul>
+<li>Read camera, sensors, and sensor fusion outputs</li>
+<li>Send waypoints</li>
+<li>Send action intention</li>
+</ul>
 <hr />
-<h2 id="6-example-navigator-files-in-competition-folders">6) Example Navigator Files in Competition Folders</h2>
-<p>This section describes the example navigator files provided in the package and demonstrates how they are executed.</p>
-<h3 id="61-qcar2-navigator">6.1 QCar2 Navigator</h3>
-<p>A Stanley controller is implemented in the example navigator to autonomously drive QCar2 from a specified start node to a target node.</p>
-<p>Users can provide:</p>
-<ul>
-<li>start node</li>
-<li>target node</li>
-<li>desired velocity</li>
-<li>intention</li>
-</ul>
-<p>A route list is available that stores routes between any pair of nodes. The route between the start and target nodes is fetched from the routes list and passed to the Stanley controller, which computes:</p>
-<ul>
-<li>steering commands</li>
-<li>velocity commands</li>
-</ul>
-<p>to enable autonomous driving toward the target node.</p>
-<h4 id="qcar2-node-map-for-python">QCar2 Node Map for Python</h4>
-<p>The following node map shows the node numbers that can be used for QCar2 autonomous route planning in the Python version.</p>
-<p><strong>Pickup location:</strong> Node 24</p>
-<p><img src="../images/roadmap_Python.png" alt="QCar2 Python node map" width="520"></p>
-<h4 id="qcar2-node-map-for-matlabsimulink">QCar2 Node Map for MATLAB/Simulink</h4>
-<p>The following node map shows the node numbers that can be used for QCar2 autonomous route planning in the MATLAB/Simulink version.</p>
-<p><strong>Pickup location:</strong> Node 2</p>
-<p><img src="../images/roadmap_Matlab.png" alt="QCar2 MATLAB/Simulink node map" width="520"></p>
+<h4 id="ports-to-read-cameras">Ports to Read Cameras</h4>
+<table>
+<thead>
+<tr>
+<th>Camera</th>
+<th>Address</th>
+<th>Camera ID</th>
+<th>Resolution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RealSense RGB + Depth</td>
+<td><code>tcpip://localhost:18986</code></td>
+<td><code>0@tcpip://localhost:18986</code></td>
+<td><code>640 x 480</code> (RGB + Depth)</td>
+</tr>
+<tr>
+<td>Right Camera</td>
+<td><code>tcpip://localhost:18982</code></td>
+<td><code>0@tcpip://localhost:18982</code></td>
+<td><code>640 x 480</code></td>
+</tr>
+<tr>
+<td>Back Camera</td>
+<td><code>tcpip://localhost:18983</code></td>
+<td><code>1@tcpip://localhost:18983</code></td>
+<td><code>640 x 480</code></td>
+</tr>
+<tr>
+<td>Left Camera</td>
+<td><code>tcpip://localhost:18984</code></td>
+<td><code>2@tcpip://localhost:18984</code></td>
+<td><code>640 x 480</code></td>
+</tr>
+<tr>
+<td>Downward Camera</td>
+<td><code>tcpip://localhost:18985</code></td>
+<td><code>3@tcpip://localhost:18985</code></td>
+<td><code>640 x 480</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Note:</strong> The RealSense camera operates in <code>RGB &amp; DEPTH</code> mode and provides both RGB and Depth streams on the same port.</p>
+</blockquote>
+<hr />
+<h4 id="port-to-read-sensors-and-send-waypoints">Port to read sensors and send waypoints</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Address</td>
+<td><code>tcpip://localhost:18373</code></td>
+</tr>
+<tr>
+<td>Role</td>
+<td><code>Client</code></td>
+</tr>
+<tr>
+<td>Send Buffer Size</td>
+<td><code>1460</code></td>
+</tr>
+<tr>
+<td>Receive Buffer Shape</td>
+<td><code>(1, 20)</code> — <code>float64</code></td>
+</tr>
+<tr>
+<td>Receive Buffer Size</td>
+<td><code>1460</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Received Data:</strong> Sensor data as </p>
+<table>
+<thead>
+<tr>
+<th>Index</th>
+<th>Description</th>
+<th>Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[0]</code></td>
+<td>Stream connection flag</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>[1:4]</code></td>
+<td>IMU gyroscope data</td>
+<td>rad/s</td>
+</tr>
+<tr>
+<td><code>[4:7]</code></td>
+<td>IMU accelerometer data</td>
+<td>m/s²</td>
+</tr>
+<tr>
+<td><code>[7:10]</code></td>
+<td>Estimated angular position</td>
+<td>rad</td>
+</tr>
+<tr>
+<td><code>[10:13]</code></td>
+<td>Estimated angular rates</td>
+<td>rad/s</td>
+</tr>
+<tr>
+<td><code>[13:16]</code></td>
+<td>Estimated angular acceleration</td>
+<td>rad/s²</td>
+</tr>
+<tr>
+<td><code>[16:20]</code></td>
+<td>Pose — x, y, z, yaw</td>
+<td>m, m, m, rad</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Sent Data:</strong> Waypoint as <code>[x, y, z, yaw]</code> vector.</p>
+<hr />
+<h4 id="port-to-send-action-intenion">Port to send action intenion</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Address</td>
+<td><code>tcpip://127.0.0.1:19001</code></td>
+</tr>
+<tr>
+<td>Role</td>
+<td><code>Client</code></td>
+</tr>
+<tr>
+<td>Send Buffer Size</td>
+<td><code>8</code></td>
+</tr>
+<tr>
+<td>Receive Buffer Shape</td>
+<td><code>(1, 1)</code> — <code>float64</code></td>
+</tr>
+<tr>
+<td>Receive Buffer Size</td>
+<td><code>24</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Received Data:</strong> None.</p>
+<p><strong>Sent Data:</strong> QDrone2 action intention value.</p>
+<h4 id="performance-note">Performance Note</h4>
+<p>Commenting out unnecessary video subsystems can improve runtime performance and reduce computing resource requirements.</p>
+<hr />
+<h3 id="35-example-qcar2-navigator">3.5 Example QCar2 Navigator</h3>
+<p>The example QCar2 Navigator demonstrates autonomous driving using a Stanley controller. It enables the QCar2 to travel from a specified start node to a target node on the road network while maintaining a desired velocity and publishing appropriate action intentions.</p>
+<p>To support this implementation, several tools are provided. In particular, a list stores feasible routes between all pairs of nodes, as illustrated in Figures 3 and 4. The route corresponding to the selected start and target nodes is retrieved from this list and provided to the Stanley controller.</p>
+<p>Using this route information, the controller computes the required steering and velocity commands, allowing the QCar2 to follow the path and reach the target node autonomously.</p>
+<p align="center">
+  <img src="../images/roadmap_Python.png" alt="QCar2 Python node map" width="520">
+</p>
+
+<p align="center">
+  <strong>Figure 3:</strong> QCar2 node numbering reference showing the Python mapping. The green trajectories show the routes. Central pickup is located at Node 24.
+</p>
+
+<p align="center">
+  <img src="../images/roadmap_Matlab.png" alt="QCar2 MATLAB/Simulink node map" width="520">
+</p>
+
+<p align="center">
+  <strong>Figure 4:</strong> QCar2 node numbering reference showing the MATLAB / Simulink mapping. The green trajectories show the routes. Central pickup is located at Node 25.
+</p>
+
 <h4 id="tools-to-support-example-navigator">Tools to support Example Navigator</h4>
 <p>Sample tools are also provided in the <code>tools\QCar2_PathPlanning\</code> folder, including:</p>
 <table>
@@ -595,14 +471,14 @@
 </thead>
 <tbody>
 <tr>
-<td>Path Planning Script</td>
-<td><code>paths2pathposes.py</code></td>
-<td><code>paths2pathposes.m</code></td>
-</tr>
-<tr>
 <td>Route List</td>
 <td><code>qcar2_paths.npy</code></td>
 <td><code>qcar2_paths.mat</code></td>
+</tr>
+<tr>
+<td>Path Planning Script</td>
+<td><code>paths2pathposes.py</code></td>
+<td><code>paths2pathposes.m</code></td>
 </tr>
 <tr>
 <td>Pose Route List</td>
@@ -616,15 +492,22 @@
 </tr>
 </tbody>
 </table>
-<p>Paths2pathposes converts prerecorded routes containing only position data into posed routes (position + heading) suitable for use with the Stanley controller. The converted routes are saved as <code>qcar2_pathposes.*</code> file (.npy for Python and .mat for MATLAB).</p>
-<hr />
-<h3 id="62-qdrone2-navigator">6.2 QDrone2 Navigator</h3>
-<p>No controller is implemented in the QDrone2 Navigator, as the Virtual FlightStack already provides a built-in position controller for QDrone2. Instead, the example navigator sends time-parameterized waypoints to smoothly guide the QDrone2 to its target.</p>
-<p>Users can provide:</p>
 <ul>
-<li>time-parameterized waypoints</li>
-<li>intention</li>
+<li><strong>Route List:</strong> All routes shown in Figures 3 and 4 are saved in this file.</li>
+<li><strong>Path Planning Script:</strong> It converts the routes (position) data into posed routes (position + heading) suitable for use with the Stanley controller. The converted routes are saved as <code>qcar2_pathposes.*</code> file (.npy for Python and .mat for MATLAB).</li>
+<li><strong>Roadmap Image:</strong> This is Figures 3 and 4.</li>
 </ul>
+<h3 id="36-example-qdrone2-navigator">3.6 Example QDrone2 Navigator</h3>
+<p>The example QDrone2 Navigator generates waypoints from a start location to a target location while avoiding obstacles. To regulate the motion of the QDrone2, these waypoints are time-parameterized to produce smooth velocity profiles.</p>
+<p>To support this implementation, several tools are provided. In particular, an occupancy list defines whether regions in the environment are free or occupied by obstacles or buildings. Based on this information, a voxel map is constructed, as shown in Figure 5. A path-planning algorithm is then applied to this voxel map to generate waypoints from the start location to the target location. Finally, a first-order interpolation with a ramp-type profiler is used to time-parameterize the generated waypoints.</p>
+<p align="center">
+  <img src="../images/voxel_map.png" alt="Voxel Map" width="520">
+</p>
+
+<p align="center">
+  <strong>Figure 5:</strong> Voxel map of the Cityscape map.
+</p>
+
 <h4 id="tools-to-support-example-navigator">Tools to support Example Navigator</h4>
 <p>Sample tools are also provided in the <code>tools\QDrone_PathPlanning\</code> folder, including:</p>
 <table>
@@ -681,71 +564,53 @@
 <li><strong>Example:</strong> This file demonstrates how to use the provided tools and saves the resulting plan as <code>qdrone2_plans.*</code>.</li>
 </ul>
 <hr />
-<h2 id="7-pickup-and-delivery-operations-and-conditions">7) Pickup and Delivery Operations and Conditions</h2>
-<h3 id="71-qdrone2-pickup">7.1 QDrone2 Pickup</h3>
-<p>The QDrone2 picks up a small package when all of the following are satisfied relative to the central pickup location: </p>
-<ul>
-<li>horizontal distance must be 2.0 m or less </li>
-<li>vertical distance must be between 0.0 m and 4.0 m </li>
-<li>the distance conditions must be maintained for 3 seconds </li>
-<li>QDrone2 intention must be set to 1 </li>
-</ul>
-<p><strong>Note:</strong> A pickup timer (counting up to 3 seconds) is displayed in the game file command window once the distance and intention conditions are satisfied.</p>
-<h3 id="72-qdrone2-drop-off">7.2 QDrone2 Drop-off</h3>
-<p>The QDrone2 drops a package off when all of the following are satisfied relative to the delivery location: </p>
-<ul>
-<li>horizontal distance must be 2.0 m or less </li>
-<li>vertical distance must be between 0.0 m and 4.0 m </li>
-<li>the distance conditions must be maintained for 3 seconds </li>
-<li>QDrone2 intention must be set to 2 </li>
-</ul>
-<p><strong>Note:</strong> A drop-off timer (counting up to 3 seconds) is displayed in the game file command window once the distance and intention conditions are satisfied.</p>
-<h3 id="73-transfer-from-qcar2-to-qdrone2">7.3 Transfer from QCar2 to QDrone2</h3>
-<p>The QDrone2 takes a small package from QCar2  when all of the following are satisfied for the relative distance between the QDrone2 and QCar2: </p>
-<ul>
-<li>horizontal distance must be 2.0 m or less </li>
-<li>vertical distance must be between 0.0 m and 4.0 m </li>
-<li>the distance conditions must be maintained for 3 seconds </li>
-<li>QDrone2 intention must be set to 3 and QCar2 intention is set to 5 </li>
-</ul>
-<p><strong>Note:</strong> A vehicle-to-vehicle package transfer timer (counting up to 3 seconds) is displayed in the game file command window once the distance and intention conditions are satisfied.</p>
-<h3 id="74-transfer-from-qdrone2-to-qcar2">7.4 Transfer from QDrone2 to QCar2</h3>
-<p>The QCar2 takes a small package from QDrone2  when all of the following are satisfied for the relative distance between the QDrone2 and QCar2: </p>
-<ul>
-<li>horizontal distance must be 2.0 m or less </li>
-<li>vertical distance must be between 0.0 m and 4.0 m </li>
-<li>the distance conditions must be maintained for 3 seconds </li>
-<li>QDrone2 intention must be set to 4 and QCar2 intention is set to 4 </li>
-</ul>
-<p><strong>Note:</strong> A vehicle-to-vehicle package transfer timer (counting up to 3 seconds) is displayed in the game file command window once the distance and intention conditions are satisfied.</p>
-<h3 id="75-transfer-from-qdrone2-to-qcar2">7.5 Transfer from QDrone2 to QCar2</h3>
-<p>The QCar2 takes a small package from QDrone2  when all of the following are satisfied for the relative distance between the QDrone2 and QCar2: </p>
-<ul>
-<li>horizontal distance must be 2.0 m or less </li>
-<li>vertical distance must be between 0.0 m and 4.0 m </li>
-<li>the distance conditions must be maintained for 3 seconds </li>
-<li>QDrone2 intention must be set to 4 and QCar2 intention is set to 4 </li>
-</ul>
-<p><strong>Note:</strong> A vehicle-to-vehicle package transfer timer (counting up to 3 seconds) is displayed in the game file command window once the distance and intention conditions are satisfied.</p>
-<h3 id="76-qcar2-pickup">7.6 QCar2 Pickup</h3>
-<p>The QCar2 picks up a package when all of the following are satisfied relative to the central pickup location: </p>
-<ul>
-<li>horizontal distance must be 2.0 m or less  </li>
-<li>the distance conditions must be maintained for 3 seconds </li>
-<li>QCar2 intention must be set to 1 for a small package pickup and to 2 for a large package pickup </li>
-</ul>
-<p><strong>Note:</strong> A QCar2 pickup timer (counting up to 3 seconds) is displayed in the game file command window once the distance and intention conditions are satisfied.</p>
-<h3 id="77-qcar2-drop-off">7.7 QCar2 Drop-off</h3>
-<p>The QCar2 drops off a package when all of the following are satisfied relative to the central pickup location: </p>
-<ul>
-<li>horizontal distance must be 2.0 m or less  </li>
-<li>the distance conditions must be maintained for 3 seconds </li>
-<li>QCar2 intention must be set to 3</li>
-</ul>
-<p><strong>Note:</strong> A QCar2 drop-off timer (counting up to 3 seconds) is displayed in the game file command window once the distance and intention conditions are satisfied.</p>
+<h2 id="4-for-advanced-development">4) For Advanced Development</h2>
+<p>The scenario in the SMC AICA Challenge 2026 is simulated through the interaction of multiple application blocks operating together. These blocks and their interactions are illustrated in Figure 6.</p>
+<p align="center">
+  <img src="../images/block_diagram.png" alt="Block Diagram" width="600"/>
+</p>
+
+<p align="center">
+<strong>Figure 6:</strong> System workflow block diagram for the SMC AICA 2026 Virtual Stage.
+</p>
+
 <hr />
+<p>The roles of each application block are described below. Some application blocks may be modified, while others must not be modified.</p>
+<ul>
+<li><strong>Quanser Interactive Labs (QLabs)</strong> application serves as the main simulation environment, where the required map is loaded, physical dynamics are simulated, and the scenario is visualized in 3D.</li>
+<li>The <strong>Setup Environment</strong> script (<code>setup_env.py</code>) is executed once at the start to spawn vehicles, pickup and delivery location pads at the QLabs, and to load the corresponding real-time (RT) models for each vehicle. This script <strong>must not be modified</strong>.</li>
+<li>
+<p>Initial vehicle positions and headings are defined in the <strong>Spawn Locations</strong> (<code>spawn_locations.txt</code>), which <strong>can be modified</strong> to set custom spawn locations.</p>
+</li>
+<li>
+<p>The <strong>QDrone2 RT Model</strong> (<code>QDrone2_Open_Workspace.rt-win64</code>) simulates the QDrone2’s sensors and actuators. The contents of this component are inaccessible to competitors and <strong>must not be modified</strong>.</p>
+</li>
+<li>The <strong>Virtual FlightStack</strong> (<code>virtual_FlightStack.rt-win64</code>) executes low-level control, sensor fusion, and core flight functionalities. The contents of this component are inaccessible to competitors and <strong>must not be modified</strong>.</li>
+<li>The <strong>QDrone2 Navigator</strong> acts as the high-level controller responsible for decision-making and motion planning of the QDrone2:<ul>
+<li>Sends waypoints to the Virtual FlightStack,</li>
+<li>Receives vehicle sensor data and sensor fusion outputs from the Virtual FlightStack,</li>
+<li>Sends action intentions to Game (<code>game.py</code>).</li>
+</ul>
+</li>
+</ul>
+<p>Competitors are required to develop the QDrone2 Navigator to generate appropriate waypoints and action intentions in accordance with the delivery strategy. Example implementations are provided in the Competition Files Package, including a Python version (<code>QDrone2_Navigator.py</code>) and a Simulink version (<code>QDrone2_Navigator.slx</code>).</p>
+<ul>
+<li>The <strong>QCar2 RT Model</strong> (<code>QCar2_Workspace.rt-win64</code>) simulates the QCar2’s sensors and actuators. The contents of this component are inaccessible to competitors and <strong>must not be modified</strong>.</li>
+<li><strong>Virtual DriveStack</strong> (<code>virtual_DriveStack.rt-win64</code>) executes sensor fusion and core driving functionalities. The contents of this component are inaccessible to competitors and <strong>must not be modified</strong>.</li>
+<li>The <strong>QCar2 Navigator</strong> acts as the high-level controller responsible for decision-making and motion planning of the QCar2:<ul>
+<li>Sends velocity and steering commands to the Virtual DriveStack,</li>
+<li>Receives vehicle sensor data and sensor fusion outputs from the Virtual DriveStack,</li>
+<li>Sends action intentions to Game (<code>game.py</code>).</li>
+</ul>
+</li>
+</ul>
+<p>Competitors are required to develop the QDrone2 Navigator to generate velocity and steering commands and set action intentions in accordance with the delivery strategy. Since the Virtual DriveStack does not include low-level controllers, participants may implement their own low-level controller or use manual control inputs for velocity and steering commands to support development. Example implementations are provided in the SMC AICA 2026 Competition Files Package, including a Python version (<code>QCar2_Navigator.py</code>) and a Simulink version (<code>QCar2_Navigator.slx</code>).</p>
+<ul>
+<li>The Game (<code>game.py</code>) application block manages the scenario rules, handles pickup, vehicle-to-vehicle transfer, and drop-off operations, tracks scoring and mission time, and updates the score and mission time displayed in QLabs. This script <strong>must not be modified</strong>.</li>
+</ul>
+<p>All components must run continuously until the mission is complete.</p>
 <h3 id="file-structure">File Structure</h3>
-<pre><code class="language-text">9_AICA_Competition_Files\
+<pre><code class="language-text">9_SMC_AICA_2026_Competition_Files\
     setup_env.py                  
     QDrone2_Navigator.slx
     QDrone2_Navigator.py
