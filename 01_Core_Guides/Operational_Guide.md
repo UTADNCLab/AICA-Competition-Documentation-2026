@@ -87,11 +87,12 @@ To pick up the first packages:
 
 The QCar2 Navigator is the high-level controller responsible for decision-making and motion planning of the QCar2. Its inputs and outputs are illustrated in Figure 2.
 
+<p align="center">
 <figure class="navigator-figure">
   <img src="../images/QCar2_Navigator_Block.png" alt="QDrone2 Navigator block diagram">
   <figcaption><strong>Figure 1:</strong> QCar2 Navigator inputs and outputs</figcaption>
 </figure>
-
+</p>
 
 To execute a delivery plan, the QCar2 Navigator must generate appropriate velocity and steering commands and publish the correct action intentions at each stage of the mission.
 
@@ -170,11 +171,12 @@ If camera support is enabled in Python, the following ports are used:
 
 The QDrone2 Navigator is the high-level controller responsible for decision-making and motion planning of the QDrone2. Its inputs and outputs are illustrated in Figure 1.
 
+<p align="center">
 <figure class="navigator-figure">
   <img src="../images/QDrone2_Navigator_Block.png" alt="QDrone2 Navigator block diagram">
   <figcaption><strong>Figure 2:</strong> QDrone2 Navigator inputs and outputs</figcaption>
 </figure>
-
+</p>
 To execute a delivery plan, the QDrone2 Navigator must generate appropriate waypoints and publish the correct action intentions at each stage of the mission.
 
 Sensor data can be used to support waypoint generation and action intention decisions. The QDrone2 Navigator has access to the following information:
@@ -261,6 +263,7 @@ The example QCar2 Navigator demonstrates autonomous driving using a Stanley cont
 To support this implementation, several tools are provided. In particular, a list stores feasible routes between all pairs of nodes, as illustrated in Figures 3 and 4. The route corresponding to the selected start and target nodes is retrieved from this list and provided to the Stanley controller.
 
 Using this route information, the controller computes the required steering and velocity commands, allowing the QCar2 to follow the path and reach the target node autonomously.
+
 
 <p align="center">
   <img src="../images/roadmap_Python.png" alt="QCar2 Python node map" width="520">
