@@ -5,22 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>System and Software Setup</title>
   <link rel="stylesheet" href="../styles.css" />
-  <style>
-    .package-pickup {
-      color: #2e9b47;
-      font-weight: 700;
-    }
-
-    .package-small {
-      color: #c83a3a;
-      font-weight: 700;
-    }
-
-    .package-large {
-      color: #2f66d0;
-      font-weight: 700;
-    }
-  </style>
 </head>
 <body>
   <div class="page-wrap">
@@ -33,7 +17,7 @@
       </header>
       <section class="content markdown-body">
         <h2 id="hardware-requirements">Hardware Requirements</h2>
-<p>Recommended hardware specifications for participating teams.</p>
+<p>Recommended hardware specifications for the SMC AICA 2026 competition.</p>
 <table>
 <thead>
 <tr>
@@ -65,74 +49,65 @@
 </tbody>
 </table>
 <h2 id="software-setup-amp-installation">Software Setup &amp; Installation</h2>
-<p>Required software installation and configuration before running the AICA competition files.</p>
+<p>Required software installation and configuration before running the SMC AICA 2026 Competition Files Package.</p>
 <p>If you are using both MATLAB / Simulink and Python, follow both sections below.<br />
 If you are using only one workflow, follow the corresponding section only.</p>
-<h2 id="step-1-initial-download">Step 1 -- Initial Download</h2>
-<p>Before software installation, 
-On your system, create a folder called <em>Quanser</em> under <em>Documents</em>. This should look like <code>C:/Users/user/Documents/Quanser</code>. download the documentation and competition runtime files into your local <code>Documents/Quanser</code> workspace.</p>
-<h3 id="1a-download-competition-files">1A) Download Competition Files</h3>
-<p>A separate folder for actual competition files.</p>
-<h4 id="with-git">With Git</h4>
+<h2 id="step-1-download">Step 1 - Download</h2>
+<p>The first step is to download the SMC AICA 2026 Competition Files Package to the system. This can be done using <code>Git</code> or by downloading the files as a <code>.zip</code> archive. It is recommended to store the files in <code>C:\Users\&lt;Username&gt;\Documents\Quanser</code>.</p>
+<h3 id="with-git">With Git</h3>
 <ol>
 <li>Install <a href="https://git-scm.com/downloads">Git</a>.</li>
-<li>Open a terminal in <code>C:\Users\&lt;YourUsername&gt;\Documents\Quanser\</code>.</li>
-<li>Clone the repository: <a href="https://github.com/UTADNCLab/IEEE-SMC-AICA-Competition-2026.git">IEEE SMC AICA Competition 2026</a></li>
+<li>Open a windows terminal in <code>C:\Users\&lt;YourUsername&gt;\Documents</code>.</li>
+<li>Run the following command to create the Quanser directory and copy the contents of this repo in there.</li>
 </ol>
-<h4 id="without-git-zip">Without Git (ZIP)</h4>
+<blockquote>
+<p>git clone https://github.com/UTADNCLab/IEEE-SMC-AICA-Competition-2026.git Quanser</p>
+</blockquote>
+<h3 id="without-git-zip">Without Git (ZIP)</h3>
 <ol>
-<li>Open the repository on GitHub.</li>
-<li>Click Code -&gt; Download ZIP.</li>
-<li>Extract the ZIP and place it at:</li>
+<li>Create a folder named Quanser under Documents on the system. The directory should be <code>C:\Users\&lt;Username&gt;\Documents\Quanser</code>. Then open the repository on GitHub: <a href="https://github.com/UTADNCLab/IEEE-SMC-AICA-Competition-2026.git">IEEE SMC AICA Competition 2026</a>.</li>
+<li>Click the green Code button at the top of the GitHub page, then select Download ZIP from the menu.</li>
+<li>Unzip the folder in the system.</li>
+<li>Open <code>IEEE-SMC-AICA-Competition-2026-main</code> (containing folders<code>0_libraries</code>, <code>1_setup</code>...). Copy all contents into the newly created <code>C:\Users\&lt;Username&gt;\Documents\Quanser</code> folder.</li>
 </ol>
-<pre><code class="language-text">C:\Users\&lt;YourUsername&gt;\Documents\Quanser
-</code></pre>
-<h3 id="1b-expected-local-layout">1B) Expected Local Layout</h3>
-<pre><code class="language-text">C:\Users\&lt;YourUsername&gt;\Documents\Quanser\
+<h3 id="expected-local-layout">Expected Local Layout</h3>
+<pre><code class="language-text">
+C:\Users\&lt;YourUsername&gt;\Documents\Quanser\
     0_libraries, 1_setup ..\
-    9_AICA_Competition_Files\
+    9_SMC_AICA_2026_Competition_Files\
+
 </code></pre>
-<p>For detailed installation guide for Quanser resources refer: <a href="https://github.com/quanser/Quanser_Academic_Resources">Quanser_Academic_Resources</a></p>
-<h2 id="step-2-install-required-software">Step 2 -- Install Required Software</h2>
-<h3 id="matlab-2023a-or-later">MATLAB (2023a or later)</h3>
-<ul>
-<li>Download: <a href="https://www.mathworks.com/downloads/">MATLAB for Windows</a></li>
-<li>In MATLAB, install Quanser Interactive Labs for MATLAB via Add-On Explorer.</li>
-</ul>
-<p align="center">
-<img src="../images/Matlab_Get_Add_on.png" class="img-small" alt="MATLAB Get Add-On Explorer">
-</p>
+<p>For detailed information on Quanser Academic resources refer: <a href="https://github.com/quanser/Quanser_Academic_Resources">Quanser_Academic_Resources</a></p>
+<h2 id="step-2-install-required-software">Step 2 - Install Required Software</h2>
+<h3 id="if-using-matlabsimulink">If using  MATLAB/Simulink</h3>
+<p>Download MATLAB (2023a or later): <a href="https://www.mathworks.com/downloads/">MATLAB for Windows</a></p>
+<p>In MATLAB, download Quanser Interactive Labs for MATLAB via Add-On Explorer.</p>
+<figure class="small-ui-figure">
+  <img src="../images/Matlab_Get_Add_on.png" alt="MATLAB Add-Ons menu">
+</figure>
 
 <p><img alt="Quanser Interactive Labs for MATLAB" src="../images/Quanser_Interactive_lab_for_matlab_.png" /></p>
-<h3 id="c-compiler-required-for-simulink-workflows">C Compiler (required for Simulink workflows)</h3>
-<ul>
-<li>Download: <a href="https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&amp;channel=Stable&amp;version=VS18&amp;source=VSLandingPage&amp;cid=2500&amp;passive=false">Visual Studio Community</a></li>
-</ul>
-<h3 id="python-312-recommended">Python (3.12 recommended)</h3>
-<ul>
-<li>Download from: <a href="https://www.python.org/downloads/">Python Official Downloads</a><blockquote>
-<p>WARNING
-⚠️❗Make sure to click on  the <em>Add Python to PATH</em> option in the first screen of the installer.</p>
-</blockquote>
-</li>
-</ul>
+<p><strong>Note:</strong> Follow the instructions in the Getting Started section of Quanser Interactive Labs for MATLAB to properly install Quanser Interactive Labs. Run <code>QLabs.setup</code> and complete the installation process before continuing with this guide.</p>
+<p><strong>Download C Compiler</strong> (required for Simulink workflows): <a href="https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&amp;channel=Stable&amp;version=VS18&amp;source=VSLandingPage&amp;cid=2500&amp;passive=false">Visual Studio Community</a></p>
+<h3 id="if-using-python">If using Python</h3>
+<p>Download Python (3.12 recommended): <a href="https://www.python.org/downloads/">Python Official Downloads</a></p>
 <blockquote>
-<p><strong>NOTE:</strong>
-IF YOU DOWNLOAD FROM THE PYTHON WEBSITE, DO NOT USE THE PYTHON INSTALL MANAGER</p>
+<p>Make sure to click on  the <em>Add Python to PATH</em> option in the first screen of the installer.</p>
 </blockquote>
+<p><strong>Note:</strong> If downloaded from the python website, do not use the python install manager.</p>
 <h3 id="quanser-interactive-labs-qlabs">Quanser Interactive Labs (QLabs)</h3>
 <ul>
-<li>Install via MATLAB Add-On Explorer (MATLAB workflow), or</li>
-<li>Install standalone: <a href="https://qlabs.quanserdocs.com/en/latest/Get%20Started.html">QLabs Getting Started</a></li>
+<li>Installs via MATLAB Add-On Explorer (MATLAB workflow), or</li>
+<li>Install standalone version for Python Only: <a href="https://qlabs.quanserdocs.com/en/latest/Get%20Started.html">QLabs Getting Started</a></li>
 </ul>
 <p align="center">
 <img src="../images/Qlabs_install_link.png" class="img-small" alt="MATLAB Get Add-On Explorer">
 </p>
 
 <h3 id="note-if-you-are-using-both-matlab-simulink-and-python-qlabs-only-needs-to-be-installed-once-using-either-of-the-methods-above"><strong>Note</strong>: If you are using both MATLAB / Simulink and Python, QLabs only needs to be installed once using either of the methods above.</h3>
-<h2 id="step-3-check-system-requirements">Step 3 -- Check System Requirements</h2>
+<h2 id="step-3-check-system-requirements">Step 3 - Check System Requirements</h2>
 <p>Navigate to:</p>
-<pre><code class="language-text">C:\Users\&lt;YourUsername&gt;\Documents\Quanser\5_research\1_setup\
+<pre><code class="language-text">C:\Users\&lt;YourUsername&gt;\Documents\Quanser\1_setup\
 </code></pre>
 <p>Run <code>step_1_check_requirements</code> and select your mode:</p>
 <table>
@@ -194,18 +169,15 @@ IF YOU DOWNLOAD FROM THE PYTHON WEBSITE, DO NOT USE THE PYTHON INSTALL MANAGER</
 <li>installed software versions are shown</li>
 <li>the system diagnosis completes without missing required tools</li>
 </ul>
-<h2 id="step-4-configure-environment">Step 4 -- Configure Environment</h2>
-<p>From <code>1_setup</code>, run:</p>
-<pre><code class="language-bat">configure_python.bat
-configure_matlab.bat
-</code></pre>
+<h2 id="step-4-configure-environment">Step 4 - Configure Environment</h2>
+<p>From <code>C:\Users\&lt;YourUsername&gt;\Documents\Quanser\1_setup\</code>:</p>
 <ul>
 <li>Run <code>configure_python.bat</code> for Python workflow only</li>
 <li>
 <p>Run <code>configure_matlab.bat</code> for MATLAB workflow only</p>
 </li>
 <li>
-<p>Run both files when using both Python + MATLAB</p>
+<p>Run both files when using Python and MATLAB</p>
 </li>
 </ul>
 <blockquote>
