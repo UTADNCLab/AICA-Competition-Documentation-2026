@@ -132,5 +132,5 @@ From `C:\Users\<YourUsername>\Documents\Quanser\1_setup\`:
 Restart your system after all configuration steps are complete.
 
 
-### Back to [ AICA Portal](../00_Portal/AICA_PORTAL.md)
+### Back to [ AICA Home Portal](../00_Portal/AICA_PORTAL.md)
 
