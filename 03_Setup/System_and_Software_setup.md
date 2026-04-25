@@ -24,7 +24,7 @@ If you are using only one workflow, follow the corresponding section only.
 
 ## Step 1 - Download 
 
-The first step is to download the SMC AICA 2026 Competition Files Package to the system. This can be done using `Git` or by downloading the files as a `.zip` archive. It is recommended to store the files in `C:\Users\<Username>\Documents\Quanser`.
+The first step is to download the SMC AICA 2026 Competition Files Package to the system. This can be done using `Git` or by downloading the files as a `.zip` archive. It is recommended to store the files in `C:\Users\<YourUsername>\Documents\Quanser`.
 
 
 ### With Git
@@ -76,14 +76,23 @@ In MATLAB, download Quanser Interactive Labs for MATLAB via Add-On Explorer.
 **Download C Compiler** (required for Simulink workflows): [Visual Studio Community](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&channel=Stable&version=VS18&source=VSLandingPage&cid=2500&passive=false)
 
 
-### If using Python
+### If Using Python
 
-Download Python (3.12 recommended): [Python Official Downloads](https://www.python.org/downloads/)
+Download Python (Python 3.12 recommended): [Python Official Downloads](https://www.python.org/downloads/)
 
-> Make sure to click on  the _Add Python to PATH_ option in the first screen of the installer.
+> On the first screen of the installer, make sure to check **Add Python to PATH**.
 
-**Note:** If downloaded from the python website, do not use the python install manager.
+**Note:** If you download Python from the official Python website, do not use the Python Install Manager.
 
+Download the Quanser SDK for Windows from the following GitHub repository: [Quanser SDK](https://github.com/quanser/quanser_sdk_win64)
+
+Install NumPy using the following command:
+
+> python -m pip install numpy
+
+**Note:** To install a specific NumPy version, use:
+
+> py -3.12 -m pip install numpy==<version>
 
 ### Quanser Interactive Labs (QLabs)
 
@@ -140,7 +149,6 @@ From `C:\Users\<YourUsername>\Documents\Quanser\1_setup\`:
 - Run both files when using Python and MATLAB
 
 > Restart your system after running setup scripts before continuing.
-
 
 
 ### Back to [ AICA Portal](../00_Portal/AICA_PORTAL.md)
