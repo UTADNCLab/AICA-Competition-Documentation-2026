@@ -117,9 +117,6 @@ QCar2 uses several fixed communication ports for:
 | Front Camera | `tcpip://localhost:18963` | `2@tcpip://localhost:18963` | `640 x 480` | 30|
 | Left Camera | `tcpip://localhost:18964` | `3@tcpip://localhost:18964` | `640 x 480` | 30 |
 
-
-
-
 ---
 
 #### Ports to read sensors and send velocity and steering commands
@@ -375,7 +372,7 @@ Competitors are required to develop the QCar2 Navigator to generate velocity and
 ### File Structure
 
 ```text
-9_SMC_AICA_2026_Competition_Files\
+4_SMC_AICA_2026_Competition_Files\
     setup_env.py                  
     QDrone2_Navigator.slx
     QDrone2_Navigator.py
@@ -383,7 +380,7 @@ Competitors are required to develop the QCar2 Navigator to generate velocity and
     QCar2_Navigator.py
     run_all.bat
     run_all.m
-    spawn_location.txt
+    spawn_locations.txt
     Virtual_DriveStack.rt-win64   
     Virtual_FlightStack.rt-win64  
     game.py
