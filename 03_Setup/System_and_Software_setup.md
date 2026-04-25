@@ -35,7 +35,7 @@ Download the SMC AICA 2026 Competition Files Package to the system. This can be 
 1. Create a folder named Quanser under Documents on the system. The directory should be `C:\Users\<Username>\Documents\Quanser`. Then open the repository on GitHub: [IEEE SMC AICA Competition 2026](https://github.com/UTADNCLab/IEEE-SMC-AICA-Competition-2026.git).
 2. Click the green Code button at the top of the GitHub page, then select Download ZIP from the menu.
 3. Unzip the folder in the system.
-4. Open `IEEE-SMC-AICA-Competition-2026-main` (containing folders`0_libraries`, `1_setup`...). Copy all contents into the newly created `C:\Users\<Username>\Documents\Quanser` folder.
+4. Open `IEEE-SMC-AICA-Competition-2026-main` (containing folders`0_libraries`, `1_setup`, `2_SMC_AICA_2026_Competition_Files`). Copy all contents into the newly created `C:\Users\<Username>\Documents\Quanser` folder.
 
 
 ### Expected Local Layout
@@ -43,8 +43,9 @@ Download the SMC AICA 2026 Competition Files Package to the system. This can be 
 ```text
 
 C:\Users\<YourUsername>\Documents\Quanser\
-    0_libraries, 1_setup ..\
-    4_SMC_AICA_2026_Competition_Files\
+    0_libraries\
+    1_setup\
+    2_SMC_AICA_2026_Competition_Files\
 
 ```
 
