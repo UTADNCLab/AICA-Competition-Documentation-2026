@@ -56,6 +56,12 @@ This document includes:
 
 See the [Operational Guide](../01_Core_Guides/Operational_Guide.md) for the step-by-step mission execution for both QCar2 and QDrone2 in the virtual stage
 
+This document includes:
+
+- Preparation
+- Automated Startup
+- Navigator Files
+- Additional Information for Advanced Development
 
 ## Scoring and Ranking
 
