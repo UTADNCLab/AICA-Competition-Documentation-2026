@@ -78,14 +78,14 @@ The QCar2 can perform five different actions:
 
 - Pick up a small package from the central pickup location
 - Pick up a large package from the central pickup location
-- Drop off packages at shared drop-off locations
+- Drop-off packages at shared drop-off locations
 - Receive a small package from the QDrone2 (QDrone2-to-QCar2 package transfer)
 - Transfer a small package to the QDrone2  (QCar2-to-QDrone2 package transfer)
 
-QDrone2 can four different actions:
+QDrone2 can perform four different actions:
 
 - Pick up a small package from the central pickup location
-- Drop off packages at shared drop-off locations or at window delivery locations
+- Drop-off packages at shared drop-off locations or at window delivery locations
 - Receive a small package from the QCar2 (QCar2-to-QDrone2 package transfer)
 - Transfer a small package to the QCar2  (QDrone2-to-QCar2 package transfer)
 
@@ -150,7 +150,7 @@ In addition, specific locations in the road network are represented as nodes ind
 
 The scenario rules regulates pickup, vehicle-to-vehicle package transfer, and drop-off operations. Action intention is the integer representation of the action that a vehicle plans to perform.
 
-QCar2 Intention List:
+QCar2 Action Intention List:
 
     0: Nothing
 
@@ -191,7 +191,7 @@ QDrone2 Action Intention List:
 
 - The QCar2 transfers a small package to QDrone2 when QDrone2 sets its action intention to 3 and QCar2 sets its action intention to 5. In addition, they must maintain, for at least 3 seconds, a horizontal distance of 2.0 m or less and a vertical distance between 0.0 m and 4.0 m relative to each other.
 
-- The Drone2 transfers a small package to QCar2 when QDrone2 sets its action intention to 4 and QCar2 sets its action intention to 4. In addition, they must maintain, for at least 3 seconds, a horizontal distance of 2.0 m or less and a vertical distance between 0.0 m and 4.0 m relative to each other.
+- The QDrone2 transfers a small package to QCar2 when QDrone2 sets its action intention to 4 and QCar2 sets its action intention to 4. In addition, they must maintain, for at least 3 seconds, a horizontal distance of 2.0 m or less and a vertical distance between 0.0 m and 4.0 m relative to each other.
 
 - The QCar2 picks up a small package after setting its action intention to 1 and maintaining, for at least 3 seconds, a horizontal distance of 2.0 m or less relative to the central pickup location.
 
