@@ -2,6 +2,6 @@
 
 This competition is organized as part of SMC 2026 and is designed jointly by Quanser and The University of Texas at Arlington (UTA). We sincerely thank all supporting partners, organizers, and contributors for making this initiative possible.
 
-For details, see the [IEEE SMC AICA Challenge 2026](https://utadnclab.github.io/AICA-Competition-Documentation-2026/).
+For details, see the [IEEE SMC AICA Challenge 2026](https://github.com/UTADNCLab/AICA-Competition-Documentation-2026.git).
 
 ---
