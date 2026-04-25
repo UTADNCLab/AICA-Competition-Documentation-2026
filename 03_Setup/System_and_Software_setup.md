@@ -28,7 +28,9 @@ Download the SMC AICA 2026 Competition Files Package to the system. This can be 
 2. Open a windows terminal in `C:\Users\<YourUsername>\Documents`.
 3. Run the following command to create the Quanser directory and copy the contents of this repo in there.
 
-> git clone https://github.com/UTADNCLab/IEEE-SMC-AICA-Competition-2026.git Quanser
+```text
+git clone https://github.com/UTADNCLab/IEEE-SMC-AICA-Competition-2026.git Quanser
+```
 
 ### Without Git (ZIP)
 
@@ -60,7 +62,9 @@ Download Python (Python 3.12 recommended): [Python Official Downloads](https://w
 
 Install NumPy using the following command:
 
-> python -m pip install numpy
+```text
+python -m pip install numpy
+```
 
 ### Install Quanser SDK
 
