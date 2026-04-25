@@ -10,7 +10,7 @@ The IEEE SMC AICA Challenge 2026 is a competition focused on the development of 
 
 The competition is conducted in two stages:
 
-- **Virtual Stage** – Teams develop, implement, and test solutions in Quanser Interactive Lab (QLabs) simulation environment based on the provided virtual stage scenario, and submit a video link demonstrating strategy and mission execution.
+- **Virtual Stage** – Teams develop, implement, and test solutions in Quanser Interactive Labs (QLabs) simulation environment based on the provided virtual stage scenario, and submit a video link demonstrating strategy and mission execution.
 
 - **On-Site Finals** – The top teams from the virtual stage will be invited to compete at the 2026 IEEE International Conference on Systems, Man, and Cybernetics (SMC 2026) (October 4–7, Bellevue, Washington). In this stage, teams will execute and demonstrate solutions in the same QLabs simulation environment based on the On-Site Finals scenario.
 
