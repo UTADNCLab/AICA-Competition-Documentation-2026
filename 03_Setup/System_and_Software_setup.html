@@ -53,7 +53,7 @@
 <p>If you are using both MATLAB / Simulink and Python, follow both sections below.<br />
 If you are using only one workflow, follow the corresponding section only.</p>
 <h2 id="step-1-download">Step 1 - Download</h2>
-<p>The first step is to download the SMC AICA 2026 Competition Files Package to the system. This can be done using <code>Git</code> or by downloading the files as a <code>.zip</code> archive. It is recommended to store the files in <code>C:\Users\&lt;Username&gt;\Documents\Quanser</code>.</p>
+<p>The first step is to download the SMC AICA 2026 Competition Files Package to the system. This can be done using <code>Git</code> or by downloading the files as a <code>.zip</code> archive. It is recommended to store the files in <code>C:\Users\&lt;YourUsername&gt;\Documents\Quanser</code>.</p>
 <h3 id="with-git">With Git</h3>
 <ol>
 <li>Install <a href="https://git-scm.com/downloads">Git</a>.</li>
@@ -89,12 +89,21 @@ C:\Users\&lt;YourUsername&gt;\Documents\Quanser\
 <p><img alt="Quanser Interactive Labs for MATLAB" src="../images/Quanser_Interactive_lab_for_matlab_.png" /></p>
 <p><strong>Note:</strong> Follow the instructions in the Getting Started section of Quanser Interactive Labs for MATLAB to properly install Quanser Interactive Labs. Run <code>QLabs.setup</code> and complete the installation process before continuing with this guide.</p>
 <p><strong>Download C Compiler</strong> (required for Simulink workflows): <a href="https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&amp;channel=Stable&amp;version=VS18&amp;source=VSLandingPage&amp;cid=2500&amp;passive=false">Visual Studio Community</a></p>
-<h3 id="if-using-python">If using Python</h3>
-<p>Download Python (3.12 recommended): <a href="https://www.python.org/downloads/">Python Official Downloads</a></p>
+<h3 id="if-using-python">If Using Python</h3>
+<p>Download Python (Python 3.12 recommended): <a href="https://www.python.org/downloads/">Python Official Downloads</a></p>
 <blockquote>
-<p>Make sure to click on  the <em>Add Python to PATH</em> option in the first screen of the installer.</p>
+<p>On the first screen of the installer, make sure to check <strong>Add Python to PATH</strong>.</p>
 </blockquote>
-<p><strong>Note:</strong> If downloaded from the python website, do not use the python install manager.</p>
+<p><strong>Note:</strong> If you download Python from the official Python website, do not use the Python Install Manager.</p>
+<p>Download the Quanser SDK for Windows from the following GitHub repository: <a href="https://github.com/quanser/quanser_sdk_win64">Quanser SDK</a></p>
+<p>Install NumPy using the following command:</p>
+<blockquote>
+<p>python -m pip install numpy</p>
+</blockquote>
+<p><strong>Note:</strong> To install a specific NumPy version, use:</p>
+<blockquote>
+<p>py -3.12 -m pip install numpy==<version></p>
+</blockquote>
 <h3 id="quanser-interactive-labs-qlabs">Quanser Interactive Labs (QLabs)</h3>
 <ul>
 <li>Installs via MATLAB Add-On Explorer (MATLAB workflow), or</li>
