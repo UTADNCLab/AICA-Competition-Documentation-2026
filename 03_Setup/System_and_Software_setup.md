@@ -92,7 +92,7 @@ Install NumPy using the following command:
 
 **Note:** To install a specific NumPy version, use:
 
-> py -3.12 -m pip install numpy==<version>
+> py -3.12 -m pip install numpy (Example code for Python 3.12 version)
 
 ### Quanser Interactive Labs (QLabs)
 
