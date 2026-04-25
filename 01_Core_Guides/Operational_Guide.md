@@ -372,7 +372,7 @@ Competitors are required to develop the QCar2 Navigator to generate velocity and
 ### File Structure
 
 ```text
-3_SMC_AICA_2026_Competition_Files\
+2_SMC_AICA_2026_Competition_Files\
     setup_env.py                  
     QDrone2_Navigator.slx
     QDrone2_Navigator.py
