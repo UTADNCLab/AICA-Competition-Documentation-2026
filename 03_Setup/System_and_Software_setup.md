@@ -44,7 +44,7 @@ Download the SMC AICA 2026 Competition Files Package to the system. This can be 
 
 C:\Users\<YourUsername>\Documents\Quanser\
     0_libraries, 1_setup ..\
-    9_SMC_AICA_2026_Competition_Files\
+    4_SMC_AICA_2026_Competition_Files\
 
 ```
 
