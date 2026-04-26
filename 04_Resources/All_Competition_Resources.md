@@ -18,7 +18,6 @@ This page lists all documentation and resources for the SMC AICA 2026 Competitio
 - [Quanser QUARC Blocks for MALTAB/Simulink Documentation](https://docs.quanser.com/quarc/documentation/quarc_block_categories.html)
 - [MATLAB Downloads](https://www.mathworks.com/downloads/)
 - [Python Downloads](https://www.python.org/downloads/windows/)
-- [Visual Studio](https://visualstudio.microsoft.com/)
 
 
 ---
