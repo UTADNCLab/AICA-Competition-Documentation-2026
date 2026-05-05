@@ -5,6 +5,23 @@
 
 ## Overview
 
+
+<!-- <img src="../images/overview_image.png"
+     alt="Overview"
+     style="width: 580px; float: right; margin: 0 0 12px 16px;">
+<figcaption><strong>Figure 1:</strong> QCar2 Navigator inputs and outputs</figcaption> -->
+
+
+<figure style="float: right; width: 43%; margin: 0 0 12px 16px;">
+<img src="../images/overview_image.png"
+       alt="Overview"
+       style="width: 100%; height: auto;">
+<figcaption style="text-align: center;">
+<strong>Figure 1:</strong> AICA Challenge 2026 Overview
+</figcaption>
+</figure>
+
+
 The IEEE SMC AICA Challenge 2026 is a competition focused on the development of innovative solutions for collaborative autonomous systems. In this first year of the competition, the scenario features a multimodal autonomous delivery system consisting of a QCar2 (ground vehicle) and a QDrone2 (aerial vehicle) in an urban environment. Participants will have an opportunity to design and implement delivery strategies, path planning, and control algorithms.
 
 
